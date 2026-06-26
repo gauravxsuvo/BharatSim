@@ -1,43 +1,67 @@
-# 🇮🇳 BharatSim
+# BharatSim
 
-**BharatSim** is an AI-powered digital twin of India for environmental and climate simulations. It provides an interactive simulation platform with district-level datasets, ML-driven predictions, and a modular engine for visualizing environmental impacts.
+BharatSim is an AI powered digital twin of India designed for environmental and climate simulations. It provides an interactive simulation platform that integrates district level datasets, machine learning driven predictions, and a modular engine for visualizing various environmental impacts across the country.
 
-## ✨ Features
+## Architecture
 
-- **Interactive India Map**: Explore district-level data with an interactive Mapbox-powered visualization.
-- **District-Level Datasets**: Access weather, river, population, and satellite data at the district level.
-- **Simulation Engine**: Run simulations for Flood Risk, Heatwaves, Crop Yield, and Air Quality using predictive models.
-- **AI Assistant**: Interact with an AI assistant that can answer questions about simulation results and environmental trends.
-- **Dashboard**: View heatmaps and time-series graphs of environmental metrics.
+The system follows a modern decoupled architecture, separating the client facing visualization layer from the computationally intensive simulation and data processing backend.
 
-## 🛠️ Technology Stack
+```mermaid
+graph TD
+    A[Frontend Client] -->|REST API| B[FastAPI Backend]
+    B --> C[Simulation Engine]
+    B --> D[Machine Learning Models]
+    B --> E[(PostgreSQL + PostGIS)]
+    C --> D
+    E --> C
+```
 
-- **Frontend**: Next.js 15, TypeScript, Mapbox GL JS, Recharts, Vanilla CSS (Dark Glassmorphism UI)
-- **Backend**: FastAPI, Python, PostgreSQL, PostGIS
-- **AI & ML**: PyTorch, XGBoost, LightGBM, Scikit-learn
-- **Infrastructure**: Docker, Redis, Celery
+## Features
 
-## 🚀 Getting Started
+The application supports multiple core functionalities aimed at providing comprehensive environmental insights.
+
+| Feature | Description |
+|---|---|
+| Interactive Mapping | District level visualization powered by Mapbox GL JS |
+| Simulation Engine | Modular architecture supporting custom simulation parameters |
+| Predictive Analytics | Machine learning models for forecasting environmental metrics |
+| AI Assistant | Context aware assistant to interpret simulation results |
+| Data Dashboard | Time series analysis and heatmap visualizations |
+
+## Technology Stack
+
+The project relies on a robust stack of open source technologies.
+
+| Component | Technologies |
+|---|---|
+| Frontend | Next.js, TypeScript, Mapbox GL JS, Recharts |
+| Backend | FastAPI, Python, Celery |
+| Database | PostgreSQL, PostGIS, Redis |
+| Machine Learning | PyTorch, XGBoost, LightGBM, Scikit-learn |
+
+## Getting Started
 
 ### Prerequisites
-- Node.js 18+
-- Python 3.11+
-- Docker & Docker Compose (for PostgreSQL + PostGIS + Redis)
 
-### Quick Start
+Please ensure the following dependencies are installed on your system:
+* Node.js version 18 or higher
+* Python version 3.11 or higher
+* Docker and Docker Compose
 
-1. **Clone the repository:**
+### Installation and Setup
+
+1. Clone the repository:
    ```bash
    git clone https://github.com/gauravxsuvo/BharatSim.git
    cd BharatSim
    ```
 
-2. **Start Infrastructure (Database & Redis):**
+2. Start the infrastructure services:
    ```bash
    docker-compose up -d
    ```
 
-3. **Backend Setup:**
+3. Configure the backend:
    ```bash
    cd backend
    pip install -e .
@@ -45,29 +69,21 @@
    uvicorn app.main:app --reload
    ```
 
-4. **Frontend Setup:**
+4. Configure the frontend:
    ```bash
    cd frontend
    npm install
    npm run dev
    ```
 
-5. Open your browser and navigate to `http://localhost:3000`.
+5. Access the application by navigating to `http://localhost:3000` in your web browser.
 
-## 📂 Project Structure
+## Project Structure
 
-```
-BharatSim/
-├── backend/               # FastAPI backend, ML models, and Simulation Engine
-├── frontend/              # Next.js web application
-├── data/                  # Sample datasets and SQL init scripts
-└── docker-compose.yml     # Infrastructure services
-```
+* `/backend` : Contains the FastAPI application, simulation modules, and machine learning models.
+* `/frontend` : Contains the Next.js web application and UI components.
+* `/data` : Stores sample datasets and database initialization scripts.
 
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome!
-
-## 📝 License
+## License
 
 This project is licensed under the MIT License.
