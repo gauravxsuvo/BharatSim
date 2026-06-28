@@ -76,8 +76,21 @@ Please ensure the following dependencies are installed on your system:
    npm run dev
    ```
 
-5. Access the application by navigating to `http://localhost:3000` in your web browser.
+5. Configure environment variables:
+   Create a `.env` file in the `backend` directory:
+   ```env
+   DATABASE_URL=postgresql+asyncpg://bharatsim:bharatsim@localhost:5432/bharatsim
+   REDIS_URL=redis://localhost:6379/0
+   OPENAI_API_KEY=your_openai_api_key
+   ```
+   
+   Create a `.env.local` file in the `frontend` directory:
+   ```env
+   NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_public_token
+   NEXT_PUBLIC_API_URL=http://localhost:8000
+   ```
 
+6. Access the application by navigating to `http://localhost:3000` in your web browser.
 ## Project Structure
 
 * `/backend` : Contains the FastAPI application, simulation modules, and machine learning models.
