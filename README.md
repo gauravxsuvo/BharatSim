@@ -96,7 +96,3 @@ Please ensure the following dependencies are installed on your system:
 * `/backend` : Contains the FastAPI application, simulation modules, and machine learning models.
 * `/frontend` : Contains the Next.js web application and UI components.
 * `/data` : Stores sample datasets and database initialization scripts.
-
-## License
-
-This project is licensed under the MIT License
