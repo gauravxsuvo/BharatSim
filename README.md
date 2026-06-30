@@ -99,4 +99,4 @@ Please ensure the following dependencies are installed on your system:
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License
