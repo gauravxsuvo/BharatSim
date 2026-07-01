@@ -22,11 +22,20 @@ The application supports multiple core functionalities aimed at providing compre
 
 | Feature | Description |
 |---|---|
-| Interactive Mapping | District level visualization powered by Mapbox GL JS |
-| Simulation Engine | Modular architecture supporting custom simulation parameters |
-| Predictive Analytics | Machine learning models for forecasting environmental metrics |
-| AI Assistant | Context aware assistant to interpret simulation results |
-| Data Dashboard | Time series analysis and heatmap visualizations |
+| Interactive Mapping | District level visualization powered by Mapbox GL JS with choropleth layers |
+| Simulation Engine | Modular architecture supporting custom simulation parameters (e.g. adjusting rainfall multipliers or temperature offsets) |
+| Predictive Analytics | Machine learning models forecasting Flood Risk, Heatwaves, Crop Yields, and Air Quality |
+| AI Assistant | Context aware chatbot to interpret simulation results and explain environmental trends |
+| Data Dashboard | Interactive time series analysis and heatmap visualizations of environmental metrics |
+| Graceful Fallback | UI gracefully falls back to generated demo data if the backend server is unreachable |
+
+## Machine Learning Models
+
+BharatSim includes 4 core predictive models built using modern ML frameworks:
+1. **Flood Risk Model**: Predicts the likelihood of floods based on rainfall, river levels, and soil saturation (XGBoost).
+2. **Heatwave Predictor**: Assesses heatwave severity using temperature, humidity, and urban heat island effects (LightGBM).
+3. **Crop Yield Estimator**: Estimates agricultural yield changes based on weather fluctuations and irrigation (Scikit-learn).
+4. **Air Quality Index**: Models AQI based on emissions, wind speed, and industrial activity (PyTorch).
 
 ## Technology Stack
 
@@ -34,10 +43,10 @@ The project relies on a robust stack of open source technologies.
 
 | Component | Technologies |
 |---|---|
-| Frontend | Next.js, TypeScript, Mapbox GL JS, Recharts |
-| Backend | FastAPI, Python, Celery |
+| Frontend | Next.js (App Router), TypeScript, Mapbox GL JS, Recharts, Vanilla CSS (Glassmorphism) |
+| Backend | FastAPI, Python 3.11, SQLAlchemy, GeoAlchemy2 |
 | Database | PostgreSQL, PostGIS, Redis |
-| Machine Learning | PyTorch, XGBoost, LightGBM, Scikit-learn |
+| Machine Learning | PyTorch, XGBoost, LightGBM, Scikit-learn, Pandas, GeoPandas |
 
 ## Getting Started
 
@@ -56,27 +65,12 @@ Please ensure the following dependencies are installed on your system:
    cd BharatSim
    ```
 
-2. Start the infrastructure services:
+2. Start the infrastructure services (PostgreSQL/PostGIS & Redis):
    ```bash
    docker-compose up -d
    ```
 
-3. Configure the backend:
-   ```bash
-   cd backend
-   pip install -e .
-   python -m app.seed
-   uvicorn app.main:app --reload
-   ```
-
-4. Configure the frontend:
-   ```bash
-   cd frontend
-   npm install
-   npm run dev
-   ```
-
-5. Configure environment variables:
+3. Configure environment variables:
    Create a `.env` file in the `backend` directory:
    ```env
    DATABASE_URL=postgresql+asyncpg://bharatsim:bharatsim@localhost:5432/bharatsim
@@ -90,9 +84,29 @@ Please ensure the following dependencies are installed on your system:
    NEXT_PUBLIC_API_URL=http://localhost:8000
    ```
 
+4. Configure the backend and seed the database:
+   ```bash
+   cd backend
+   pip install -e .
+   python -m app.seed
+   uvicorn app.main:app --reload
+   ```
+
+5. Configure and run the frontend:
+   ```bash
+   cd frontend
+   npm install
+   npm run dev
+   ```
+
 6. Access the application by navigating to `http://localhost:3000` in your web browser.
+
 ## Project Structure
 
-* `/backend` : Contains the FastAPI application, simulation modules, and machine learning models.
-* `/frontend` : Contains the Next.js web application and UI components.
-* `/data` : Stores sample datasets and database initialization scripts.
+* `/backend` : Contains the FastAPI application, simulation modules, and machine learning pipelines.
+* `/frontend` : Contains the Next.js web application, Mapbox components, and dashboard logic.
+* `/data` : Stores sample datasets, GeoJSON definitions, and database initialization scripts.
+
+## License
+
+This project is licensed under the MIT License.
