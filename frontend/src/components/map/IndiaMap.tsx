@@ -2,8 +2,7 @@
 'use client';
 
 import { useState, useCallback, useRef, useEffect } from 'react';
-// @ts-expect-error - react-map-gl types may not resolve during CI; works at runtime
-import Map, { Source, Layer, NavigationControl, ScaleControl } from 'react-map-gl';
+import Map, { Source, Layer, NavigationControl, ScaleControl } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { INDIA_CENTER, DEFAULT_ZOOM, METRICS } from '@/lib/constants';
 
