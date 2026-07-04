@@ -62,12 +62,7 @@ class District(Base):
     )
 
     __table_args__ = (
-        Index(
-            "idx_districts_geometry",
-            "geometry",
-            postgresql_using="gist",
-            postgresql_ops={"geometry": "gist"},
-        ),
+        Index("idx_districts_geometry", "geometry", postgresql_using="gist"),
     )
 
     def __repr__(self) -> str:
