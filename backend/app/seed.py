@@ -186,8 +186,9 @@ async def seed():
     """Main seed function."""
     logger.info("Starting BharatSim database seed...")
 
-    # Ensure all tables are created
+    # Drop and recreate all tables for a clean seed
     async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
 
     async with async_session() as session:

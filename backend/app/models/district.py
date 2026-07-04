@@ -36,7 +36,7 @@ class District(Base):
     state_code = Column(String(10))
     district_code = Column(String(10), unique=True)
     geometry = Column(
-        Geometry("MULTIPOLYGON", srid=4326),
+        Geometry("MULTIPOLYGON", srid=4326, spatial_index=False),
         nullable=False,
     )
     area_sq_km = Column(Float)
