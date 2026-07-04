@@ -17,7 +17,7 @@ router = APIRouter(tags=["Dashboard"])
 # ---------------------------------------------------------------------------
 @router.get("/heatmap")
 async def heatmap(
-    metric: str = Query(..., regex="^(temperature|rainfall|aqi|flood_risk)$"),
+    metric: str = Query(..., pattern="^(temperature|rainfall|aqi|flood_risk)$"),
     db: AsyncSession = Depends(get_db),
 ):
     if metric == "aqi":
@@ -44,8 +44,8 @@ async def heatmap(
             select(
                 District.id.label("district_id"),
                 District.name.label("district_name"),
-                District.latitude.label("lat"),
-                District.longitude.label("lon"),
+                District.centroid_lat.label("lat"),
+                District.centroid_lon.label("lon"),
                 value_col.label("value"),
             )
             .join(WeatherObservation, WeatherObservation.district_id == District.id)
@@ -82,8 +82,8 @@ async def heatmap(
             select(
                 District.id.label("district_id"),
                 District.name.label("district_name"),
-                District.latitude.label("lat"),
-                District.longitude.label("lon"),
+                District.centroid_lat.label("lat"),
+                District.centroid_lon.label("lon"),
                 (
                     RiverObservation.water_level_m / RiverObservation.danger_level_m
                 ).label("value"),
@@ -117,7 +117,7 @@ async def heatmap(
 @router.get("/timeseries")
 async def timeseries(
     district_id: int = Query(...),
-    metric: str = Query(..., regex="^(temperature|rainfall|humidity|water_level)$"),
+    metric: str = Query(..., pattern="^(temperature|rainfall|humidity|water_level)$"),
     date_from: DateType | None = Query(default=None),
     date_to: DateType | None = Query(default=None),
     db: AsyncSession = Depends(get_db),

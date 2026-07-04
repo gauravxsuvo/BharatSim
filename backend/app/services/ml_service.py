@@ -15,7 +15,7 @@ from fastapi import HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.config import get_settings
+from app.config import settings
 from app.ml.flood_model import FloodPredictor
 from app.ml.heatwave_model import HeatwavePredictor
 from app.ml.crop_yield_model import CropYieldPredictor
@@ -29,8 +29,6 @@ from app.models import (
 )
 
 logger = logging.getLogger(__name__)
-
-settings = get_settings()
 
 # Mapping of model types to their trainer classes
 MODEL_TRAINERS: dict[str, type] = {
@@ -159,7 +157,6 @@ async def _load_training_data(db: AsyncSession, model_type: str) -> pd.DataFrame
                 "humidity": r.humidity,
                 "wind_speed": r.wind_speed,
                 "pressure": r.pressure,
-                "aqi": r.aqi,
             }
             for r in records
         ])
@@ -221,7 +218,7 @@ async def train_model(
         metrics = trainer.train(X, y)
 
         # Save model file
-        models_dir = os.path.join(settings.DATA_DIR, "models", model_type)
+        models_dir = os.path.join(settings.ML_MODELS_DIR, model_type)
         os.makedirs(models_dir, exist_ok=True)
 
         version = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
@@ -249,10 +246,10 @@ async def train_model(
             accuracy=metrics.get("accuracy"),
             precision_score=metrics.get("precision"),
             recall=metrics.get("recall"),
-            f1=metrics.get("f1"),
+            f1_score=metrics.get("f1"),
             rmse=metrics.get("rmse"),
             mae=metrics.get("mae"),
-            r2=metrics.get("r2"),
+            r2_score=metrics.get("r2"),
             is_active=True,
             created_at=datetime.utcnow(),
         )
@@ -398,10 +395,10 @@ async def list_models(
                 "accuracy": m.accuracy,
                 "precision": m.precision_score,
                 "recall": m.recall,
-                "f1": m.f1,
+                "f1": m.f1_score,
                 "rmse": m.rmse,
                 "mae": m.mae,
-                "r2": m.r2,
+                "r2": m.r2_score,
             },
             "is_active": m.is_active,
             "created_at": m.created_at.isoformat() if m.created_at else None,

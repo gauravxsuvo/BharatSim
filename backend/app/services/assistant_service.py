@@ -14,12 +14,10 @@ from fastapi import HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.config import get_settings
+from app.config import settings
 from app.models import SimulationResult, SimulationRun
 
 logger = logging.getLogger(__name__)
-
-settings = get_settings()
 
 BHARATSIM_SYSTEM_PROMPT = """You are BharatSim AI Assistant, an expert in environmental \
 science, climate analysis, and geospatial data for India. You help users understand \
