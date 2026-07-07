@@ -2,8 +2,8 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 async function fetchAPI<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const res = await fetch(`${API_BASE}${endpoint}`, {
-    headers: { 'Content-Type': 'application/json', ...options?.headers },
     ...options,
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
   });
   if (!res.ok) {
     const errorText = await res.text();
@@ -18,7 +18,6 @@ export const api = {
       fetchAPI<any[]>(`/api/districts${state ? `?state=${state}` : ''}`),
     geojson: () => fetchAPI<any>('/api/districts/geojson'),
     get: (id: number) => fetchAPI<any>(`/api/districts/${id}`),
-    getData: (id: number) => fetchAPI<any>(`/api/districts/${id}/data`),
   },
   dashboard: {
     heatmap: (metric: string) =>
@@ -31,7 +30,7 @@ export const api = {
   },
   simulations: {
     run: (params: any) =>
-      fetchAPI<any>('/api/simulations/run', {
+      fetchAPI<any>('/api/simulations', {
         method: 'POST',
         body: JSON.stringify(params),
       }),
@@ -45,11 +44,6 @@ export const api = {
   },
   models: {
     list: () => fetchAPI<any[]>('/api/models'),
-    train: (params: any) =>
-      fetchAPI<any>('/api/models/train', {
-        method: 'POST',
-        body: JSON.stringify(params),
-      }),
   },
   assistant: {
     chat: (message: string, context?: any) =>

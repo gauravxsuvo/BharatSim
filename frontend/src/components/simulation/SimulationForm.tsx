@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { SIMULATION_TYPES } from '@/lib/constants';
 
 interface SimulationFormProps {
@@ -15,8 +16,6 @@ const DEMO_DISTRICTS = [
   { id: 7, name: 'Jaipur' }, { id: 8, name: 'Jodhpur' }, { id: 9, name: 'Kolkata' },
   { id: 10, name: 'Darjeeling' },
 ];
-
-import { useState } from 'react';
 
 export default function SimulationForm({ simulationType, onSubmit, onCancel, loading }: SimulationFormProps) {
   const defaultParams = Object.fromEntries(simulationType.params.map(p => [p.key, p.default]));

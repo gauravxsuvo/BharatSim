@@ -29,8 +29,11 @@ class TrainingMetrics:
 class BaseTrainer(ABC):
     """Abstract base class for all ML model trainers."""
     model_type: str = ""
-    algorithm: str = ""
-    model: Any = None
+
+    def __init__(self, algorithm: str = "", hyperparameters: dict | None = None):
+        self.algorithm = algorithm or self.__class__.algorithm
+        self.hyperparameters = hyperparameters or {}
+        self.model = None
 
     @abstractmethod
     def prepare_features(self, data: pd.DataFrame) -> tuple[np.ndarray, np.ndarray]:

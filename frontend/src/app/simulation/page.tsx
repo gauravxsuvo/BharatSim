@@ -50,7 +50,7 @@ export default function SimulationPage() {
     setSimName(formData.name);
 
     try {
-      const res = await fetch('http://localhost:8000/api/simulations/run', {
+      const res = await fetch((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000') + '/api/simulations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

@@ -57,7 +57,6 @@ class FloodPredictor(BaseTrainer):
             learning_rate=0.1,
             random_state=42,
             eval_metric="logloss",
-            use_label_encoder=False,
         )
         self.model.fit(X_train, y_train)
 

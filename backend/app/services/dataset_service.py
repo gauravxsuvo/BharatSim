@@ -30,8 +30,8 @@ async def import_weather_data(db: AsyncSession, file: UploadFile) -> int:
     Import weather observation data from a CSV file.
 
     Expected CSV columns: district_id, date, temperature_max, temperature_min,
-    temperature_avg, humidity, rainfall_mm, wind_speed, pressure, aqi,
-    weather_condition.
+    temperature_avg, humidity, rainfall_mm, wind_speed, pressure, wind_direction,
+    visibility, cloud_cover, solar_radiation.
 
     Args:
         db: Async database session.
@@ -51,7 +51,7 @@ async def import_weather_data(db: AsyncSession, file: UploadFile) -> int:
         required_columns = [
             "district_id", "date", "temperature_max", "temperature_min",
             "temperature_avg", "humidity", "rainfall_mm", "wind_speed",
-            "pressure", "aqi", "weather_condition",
+            "pressure", "wind_direction", "visibility", "cloud_cover", "solar_radiation",
         ]
         missing = set(required_columns) - set(df.columns)
         if missing:
@@ -70,8 +70,10 @@ async def import_weather_data(db: AsyncSession, file: UploadFile) -> int:
                 rainfall_mm=float(row["rainfall_mm"]) if pd.notna(row["rainfall_mm"]) else None,
                 wind_speed=float(row["wind_speed"]) if pd.notna(row["wind_speed"]) else None,
                 pressure=float(row["pressure"]) if pd.notna(row["pressure"]) else None,
-                aqi=float(row["aqi"]) if pd.notna(row["aqi"]) else None,
-                weather_condition=str(row["weather_condition"]) if pd.notna(row["weather_condition"]) else None,
+                wind_direction=float(row["wind_direction"]) if pd.notna(row["wind_direction"]) else None,
+                visibility=float(row["visibility"]) if pd.notna(row["visibility"]) else None,
+                cloud_cover=float(row["cloud_cover"]) if pd.notna(row["cloud_cover"]) else None,
+                solar_radiation=float(row["solar_radiation"]) if pd.notna(row["solar_radiation"]) else None,
             )
             for _, row in df.iterrows()
         ]

@@ -73,7 +73,9 @@ async def create_simulation(
 
     db.add(run)
     await db.commit()
-    await db.refresh(run)
+    
+    result = await db.execute(select(SimulationRun).options(selectinload(SimulationRun.results)).where(SimulationRun.id == run.id))
+    run = result.scalar_one()
 
     return _serialize_simulation(run)
 

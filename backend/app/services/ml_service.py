@@ -8,7 +8,7 @@ crop yield, and air quality predictors.
 
 import logging
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 
 import pandas as pd
 from fastapi import HTTPException
@@ -102,6 +102,7 @@ async def _load_training_data(db: AsyncSession, model_type: str) -> pd.DataFrame
                 "humidity": r.humidity,
                 "wind_speed": r.wind_speed,
                 "pressure": r.pressure,
+                "solar_radiation": r.solar_radiation,
             }
             for r in records
         ])
@@ -215,13 +216,13 @@ async def train_model(
 
         # Prepare features and train
         X, y = trainer.prepare_features(training_data)
-        metrics = trainer.train(X, y)
+        metrics = trainer.train(X, y).to_dict()
 
         # Save model file
         models_dir = os.path.join(settings.ML_MODELS_DIR, model_type)
         os.makedirs(models_dir, exist_ok=True)
 
-        version = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+        version = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
         model_filename = f"{model_type}_{algorithm}_{version}.joblib"
         model_path = os.path.join(models_dir, model_filename)
         trainer.save(model_path)
@@ -251,7 +252,7 @@ async def train_model(
             mae=metrics.get("mae"),
             r2_score=metrics.get("r2"),
             is_active=True,
-            created_at=datetime.utcnow(),
+            created_at=datetime.now(timezone.utc),
         )
 
         db.add(ml_model)
@@ -343,7 +344,7 @@ async def get_prediction(
     trainer = trainer_class(algorithm=active_model.algorithm)
     trainer.load(active_model.file_path)
 
-    prediction = trainer.predict(features)
+    prediction = trainer.predict(pd.DataFrame([features]).values)
 
     return {
         "model_type": model_type,

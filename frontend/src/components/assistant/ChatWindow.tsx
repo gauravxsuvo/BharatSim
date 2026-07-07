@@ -35,12 +35,13 @@ export default function ChatWindow({ messages, loading }: ChatWindowProps) {
 
       {messages.map((msg, i) => (
         <div
-          key={i}
+          key={`${msg.role}-${i}-${msg.timestamp}`}
           style={{ display: 'flex', flexDirection: 'column', alignItems: msg.role === 'user' ? 'flex-end' : 'flex-start' }}
           className="animate-fadeIn"
         >
           <div
             className={`message-bubble ${msg.role === 'user' ? 'message-user' : 'message-assistant'}`}
+            style={{ whiteSpace: 'pre-wrap' }}
           >
             {msg.content}
           </div>

@@ -70,6 +70,39 @@ async def list_districts(
     )
 
 
+@router.get("/geojson", response_model=dict)
+async def get_all_districts_geojson(
+    db: AsyncSession = Depends(get_db),
+) -> dict:
+    """Get all districts as a GeoJSON FeatureCollection."""
+    result = await db.execute(select(District))
+    districts = result.scalars().all()
+
+    from geoalchemy2.shape import to_shape
+    from shapely.geometry import mapping
+
+    features = []
+    for district in districts:
+        geom = to_shape(district.geometry)
+        features.append({
+            "type": "Feature",
+            "properties": {
+                "id": district.id,
+                "name": district.name,
+                "state_name": district.state_name,
+                "state_code": district.state_code,
+                "district_code": district.district_code,
+                "area_sq_km": district.area_sq_km,
+            },
+            "geometry": mapping(geom),
+        })
+
+    return {
+        "type": "FeatureCollection",
+        "features": features,
+    }
+
+
 @router.get("/{district_id}", response_model=DistrictResponse)
 async def get_district(
     district_id: int,
@@ -110,7 +143,7 @@ async def create_district(
     Returns:
         The newly created district.
     """
-    import json
+
 
     from geoalchemy2.shape import from_shape
     from shapely.geometry import shape

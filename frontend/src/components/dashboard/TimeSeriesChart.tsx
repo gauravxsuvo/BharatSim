@@ -63,6 +63,14 @@ export default function TimeSeriesChart({ data, title, color = '#00d4aa', type =
             <Tooltip content={<CustomTooltip unit={unit} />} />
             <Bar dataKey="value" fill={`url(#barGrad-${color.replace('#', '')})`} radius={[3, 3, 0, 0]} />
           </BarChart>
+        ) : type === 'line' ? (
+          <LineChart data={data} margin={{ top: 4, right: 8, left: -20, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(148,163,184,0.08)" />
+            <XAxis dataKey="date" tickFormatter={tickFormatter} tick={{ fill: '#64748b', fontSize: 11 }} axisLine={false} tickLine={false} />
+            <YAxis tick={{ fill: '#64748b', fontSize: 11 }} axisLine={false} tickLine={false} />
+            <Tooltip content={<CustomTooltip unit={unit} />} />
+            <Line type="monotone" dataKey="value" stroke={color} strokeWidth={2} dot={false} activeDot={{ r: 4, fill: color }} />
+          </LineChart>
         ) : (
           <AreaChart data={data} margin={{ top: 4, right: 8, left: -20, bottom: 0 }}>
             <defs>

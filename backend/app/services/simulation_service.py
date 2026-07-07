@@ -7,14 +7,14 @@ execution, result storage, and comparison of simulation runs.
 
 import json
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 
 from fastapi import HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.models import SimulationResult, SimulationRun
-from app.schemas import SimulationParams
+from app.models import SimulationResult as SimulationResultModel, SimulationRun
+from app.schemas.simulation import SimulationParams
 from app.simulation.runner import SimulationRunner
 
 logger = logging.getLogger(__name__)
@@ -47,7 +47,7 @@ async def run_simulation(db: AsyncSession, params: SimulationParams) -> dict:
         district_ids=json.dumps(params.district_ids) if params.district_ids else "[]",
         date_range_start=params.date_range_start,
         date_range_end=params.date_range_end,
-        created_at=datetime.utcnow(),
+        created_at=datetime.now(timezone.utc),
     )
 
     try:
@@ -60,21 +60,19 @@ async def run_simulation(db: AsyncSession, params: SimulationParams) -> dict:
         )
 
         # Execute simulation
-        runner = SimulationRunner(
-            simulation_type=params.simulation_type,
-            parameters=params.parameters or {},
-        )
+        runner = SimulationRunner()
         results = await runner.run(
             db=db,
+            simulation_type=params.simulation_type,
             district_ids=params.district_ids or [],
-            date_range_start=params.date_range_start,
-            date_range_end=params.date_range_end,
+            date_range=(params.date_range_start, params.date_range_end),
+            params=params.parameters or {},
         )
 
         # Store simulation results
         result_records = []
-        for result in results:
-            result_record = SimulationResult(
+        for result in results.district_results:
+            result_record = SimulationResultModel(
                 simulation_run_id=simulation_run.id,
                 district_id=result.get("district_id"),
                 metric_name=result.get("metric_name"),
@@ -91,7 +89,7 @@ async def run_simulation(db: AsyncSession, params: SimulationParams) -> dict:
 
         # Update run status
         simulation_run.status = "completed"
-        simulation_run.completed_at = datetime.utcnow()
+        simulation_run.completed_at = datetime.now(timezone.utc)
         await db.commit()
 
         logger.info(
@@ -111,7 +109,7 @@ async def run_simulation(db: AsyncSession, params: SimulationParams) -> dict:
 
     except Exception as e:
         simulation_run.status = "failed"
-        simulation_run.completed_at = datetime.utcnow()
+        simulation_run.completed_at = datetime.now(timezone.utc)
         await db.commit()
         logger.error("Simulation run %d failed: %s", simulation_run.id, str(e))
         raise
@@ -145,8 +143,8 @@ async def get_simulation_results(db: AsyncSession, simulation_id: int) -> dict:
 
     # Fetch associated results
     results_query = await db.execute(
-        select(SimulationResult).where(
-            SimulationResult.simulation_run_id == simulation_id
+        select(SimulationResultModel).where(
+            SimulationResultModel.simulation_run_id == simulation_id
         )
     )
     results = results_query.scalars().all()
@@ -217,8 +215,8 @@ async def compare_simulations(
 
         # Fetch associated results
         results_query = await db.execute(
-            select(SimulationResult).where(
-                SimulationResult.simulation_run_id == sim_id
+            select(SimulationResultModel).where(
+                SimulationResultModel.simulation_run_id == sim_id
             )
         )
         results = results_query.scalars().all()

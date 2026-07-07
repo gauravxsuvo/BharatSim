@@ -88,7 +88,7 @@ export default function ResultsPanel({ results, simulationName, simulationType, 
               const sev = r.severity_level?.toLowerCase() || 'low';
               const conf = r.confidence || 0.85;
               return (
-                <tr key={i} className="animate-fadeIn" style={{ animationDelay: `${i * 50}ms` }}>
+                <tr key={`${r.district_id}-${r.metric_name}-${i}`} className="animate-fadeIn" style={{ animationDelay: `${i * 50}ms` }}>
                   <td style={{ fontWeight: 500 }}>{name}</td>
                   <td style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{r.metric_name}</td>
                   <td style={{ fontFamily: 'JetBrains Mono, monospace', color: 'var(--accent-primary)' }}>

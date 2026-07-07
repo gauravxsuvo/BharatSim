@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import StatsCard from '@/components/dashboard/StatsCard';
 import TimeSeriesChart from '@/components/dashboard/TimeSeriesChart';
 import HeatmapChart from '@/components/dashboard/HeatmapChart';
@@ -21,27 +21,22 @@ const DISTRICTS = ['Mumbai', 'Pune', 'Chennai', 'Lucknow', 'Jaipur', 'Kolkata', 
 
 export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
-  const [stats, setStats] = useState({ total_districts: 0, total_weather_records: 0, total_simulations: 0, latest_data_date: null as string | null });
+  const [stats, setStats] = useState({ total_districts: 0, total_weather_records: 0, total_river_records: 0, total_simulations: 0, latest_data_date: null as string | null });
   const [selectedDistrict, setSelectedDistrict] = useState('Mumbai');
   const [range, setRange] = useState(30);
-  const [tempSeries, setTempSeries] = useState<{ date: string; value: number }[]>([]);
-  const [rainSeries, setRainSeries] = useState<{ date: string; value: number }[]>([]);
-  const [aqiSeries, setAqiSeries] = useState<{ date: string; value: number }[]>([]);
+  const tempSeries = useMemo(() => generateDemoSeries(25, 8, range), [range, selectedDistrict]);
+  const rainSeries = useMemo(() => generateDemoSeries(20, 30, range), [range, selectedDistrict]);
+  const aqiSeries = useMemo(() => generateDemoSeries(150, 80, range), [range, selectedDistrict]);
 
   useEffect(() => {
     // Try real API, fall back to demo
-    fetch('http://localhost:8000/api/dashboard/stats')
+    fetch((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000') + '/api/dashboard/stats')
       .then(r => r.json())
       .then(data => setStats(data))
-      .catch(() => setStats({ total_districts: 10, total_weather_records: 3650, total_simulations: 7, latest_data_date: '2024-01-30' }))
+      .catch(() => setStats({ total_districts: 10, total_weather_records: 3650, total_river_records: 0, total_simulations: 7, latest_data_date: '2024-01-30' }))
       .finally(() => setLoading(false));
   }, []);
 
-  useEffect(() => {
-    setTempSeries(generateDemoSeries(25, 8, range));
-    setRainSeries(generateDemoSeries(20, 30, range));
-    setAqiSeries(generateDemoSeries(150, 80, range));
-  }, [selectedDistrict, range]);
 
   return (
     <div className="animate-fadeIn">

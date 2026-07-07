@@ -10,9 +10,7 @@ from app.services import assistant_service
 router = APIRouter(tags=["AI Assistant"])
 
 
-class ChatRequest(BaseModel):
-    message: str
-    context: dict | None = None
+from app.schemas.assistant import ChatRequest
 
 
 @router.post("/chat")
