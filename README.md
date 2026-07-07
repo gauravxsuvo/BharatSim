@@ -87,6 +87,13 @@ Please ensure the following dependencies are installed on your system:
 4. Configure the backend and seed the database:
    ```bash
    cd backend
+   python -m venv venv
+   
+   # On Windows:
+   .\venv\Scripts\activate
+   # On macOS/Linux:
+   # source venv/bin/activate
+   
    pip install -e .
    python -m app.seed
    uvicorn app.main:app --reload
