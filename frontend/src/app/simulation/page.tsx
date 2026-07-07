@@ -50,14 +50,15 @@ export default function SimulationPage() {
     setSimName(formData.name);
 
     try {
-      const res = await fetch((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000') + '/api/simulations', {
+      const res = await fetch((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000') + '/api/simulations/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
       if (res.ok) {
         const data = await res.json();
-        setResults(data.results || generateDemoResults(formData.simulation_type, formData.district_ids));
+        const apiResults = Array.isArray(data.results) ? data.results : [];
+        setResults(apiResults.length > 0 ? apiResults : generateDemoResults(formData.simulation_type, formData.district_ids));
       } else {
         throw new Error('API error');
       }

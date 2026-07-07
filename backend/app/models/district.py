@@ -4,12 +4,22 @@ Represents an administrative district of India, storing its name, state,
 boundary geometry (as a MultiPolygon), and centroid coordinates.
 """
 
-from sqlalchemy import Column, DateTime, Float, Index, Integer, String, func
+from sqlalchemy import Column, DateTime, Float, Index, Integer, String, Text, func
 from sqlalchemy.orm import relationship
 
-from geoalchemy2 import Geometry
-
 from app.database import Base
+from app.geo import IS_SQLITE
+
+# On PostgreSQL we use a real PostGIS geometry column; on SQLite (the
+# no-Docker demo/test mode) we fall back to portable WKT text storage.
+if IS_SQLITE:
+    _GEOMETRY_COLUMN = Column(Text, nullable=False)
+else:
+    from geoalchemy2 import Geometry
+    _GEOMETRY_COLUMN = Column(
+        Geometry("MULTIPOLYGON", srid=4326, spatial_index=False),
+        nullable=False,
+    )
 
 
 class District(Base):
@@ -35,10 +45,7 @@ class District(Base):
     state_name = Column(String(255), nullable=False, index=True)
     state_code = Column(String(10))
     district_code = Column(String(10), unique=True)
-    geometry = Column(
-        Geometry("MULTIPOLYGON", srid=4326, spatial_index=False),
-        nullable=False,
-    )
+    geometry = _GEOMETRY_COLUMN
     area_sq_km = Column(Float)
     centroid_lat = Column(Float)
     centroid_lon = Column(Float)
@@ -61,8 +68,11 @@ class District(Base):
         cascade="all, delete-orphan",
     )
 
+    # The PostGIS GiST spatial index only applies on PostgreSQL.
     __table_args__ = (
-        Index("idx_districts_geometry", "geometry", postgresql_using="gist"),
+        ()
+        if IS_SQLITE
+        else (Index("idx_districts_geometry", "geometry", postgresql_using="gist"),)
     )
 
     def __repr__(self) -> str:

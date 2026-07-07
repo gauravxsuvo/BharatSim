@@ -53,6 +53,7 @@ async def client(test_db):
     async with AsyncClient(
         transport=ASGITransport(app=app),
         base_url="http://test",
+        follow_redirects=True,
     ) as ac:
         yield ac
 

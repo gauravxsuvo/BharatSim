@@ -33,6 +33,23 @@ DISTRICT_DATA = [
 ]
 
 
+_COMPASS_DEG = {
+    "N": 0, "NNE": 22.5, "NE": 45, "ENE": 67.5, "E": 90, "ESE": 112.5,
+    "SE": 135, "SSE": 157.5, "S": 180, "SSW": 202.5, "SW": 225, "WSW": 247.5,
+    "W": 270, "WNW": 292.5, "NW": 315, "NNW": 337.5,
+}
+
+
+def _wind_dir_to_deg(value) -> float:
+    """Parse a wind direction that may be numeric degrees or a compass string."""
+    if value is None or value == "":
+        return 0.0
+    try:
+        return float(value)
+    except (ValueError, TypeError):
+        return _COMPASS_DEG.get(str(value).strip().upper(), 0.0)
+
+
 def _make_bbox_wkt(lon: float, lat: float, offset: float = 0.05) -> str:
     """Create a simple bounding box polygon WKT around a centroid."""
     x1, y1 = lon - offset, lat - offset
@@ -53,7 +70,7 @@ async def _seed_districts(session):
         return
 
     logger.info("Seeding %d districts...", len(DISTRICT_DATA))
-    from geoalchemy2 import WKTElement
+    from app.geo import storage_from_wkt
 
     for name, state_name, state_code, district_code, lon, lat, area in DISTRICT_DATA:
         wkt = _make_bbox_wkt(lon, lat)
@@ -62,7 +79,7 @@ async def _seed_districts(session):
             state_name=state_name,
             state_code=state_code,
             district_code=district_code,
-            geometry=WKTElement(wkt, srid=4326),
+            geometry=storage_from_wkt(wkt),
             area_sq_km=area,
             centroid_lat=lat,
             centroid_lon=lon,
@@ -73,12 +90,61 @@ async def _seed_districts(session):
     logger.info("Districts seeded successfully.")
 
 
+async def _load_weather_live(session) -> bool:
+    """Populate weather from the live source. Returns True on success."""
+    from datetime import date as _date
+
+    from app.config import settings
+    from app.services.live_data import fetch_district_weather
+
+    if not settings.live_weather_enabled:
+        return False
+
+    districts_result = await session.execute(select(District))
+    districts = list(districts_result.scalars().all())
+    start, end = _date(2024, 1, 1), _date(2024, 4, 30)
+
+    records = []
+    for d in districts:
+        if d.centroid_lat is None or d.centroid_lon is None:
+            continue
+        rows = fetch_district_weather(d.centroid_lat, d.centroid_lon, start, end)
+        if not rows:
+            logger.warning("Live weather unavailable for %s; falling back to CSV.", d.name)
+            return False
+        for r in rows:
+            records.append(WeatherObservation(
+                district_id=d.id,
+                date=datetime.strptime(r["date"], "%Y-%m-%d").date(),
+                temperature_max=r["temperature_max"], temperature_min=r["temperature_min"],
+                temperature_avg=r["temperature_avg"], humidity=r["humidity"],
+                rainfall_mm=r["rainfall_mm"], wind_speed=r["wind_speed"],
+                wind_direction=_wind_dir_to_deg(r["wind_direction"]), pressure=r["pressure"],
+                visibility=r["visibility"], cloud_cover=r["cloud_cover"],
+                solar_radiation=r["solar_radiation"],
+            ))
+
+    if not records:
+        return False
+    session.add_all(records)
+    await session.commit()
+    logger.info("Loaded %d weather observations from LIVE source.", len(records))
+    return True
+
+
 async def _load_weather_csv(session, csv_path: str):
-    """Load weather observations from a CSV file."""
+    """Load weather observations from the live source if enabled, else CSV."""
     result = await session.execute(select(func.count(WeatherObservation.id)))
     if result.scalar_one() > 0:
-        logger.info("Weather data already exists. Skipping CSV import.")
+        logger.info("Weather data already exists. Skipping import.")
         return
+
+    try:
+        if await _load_weather_live(session):
+            return
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("Live weather seeding failed (%s); using sample CSV.", exc)
+        await session.rollback()
 
     # Build district_code -> id mapping
     districts_result = await session.execute(select(District))
@@ -100,7 +166,7 @@ async def _load_weather_csv(session, csv_path: str):
                 humidity=float(row.get("humidity", 0) or 0),
                 rainfall_mm=float(row.get("rainfall_mm", 0) or 0),
                 wind_speed=float(row.get("wind_speed", 0) or 0),
-                wind_direction=float(row.get("wind_direction", 0) or 0),
+                wind_direction=_wind_dir_to_deg(row.get("wind_direction")),
                 pressure=float(row.get("pressure", 0) or 0),
                 visibility=float(row.get("visibility", 0) or 0),
                 cloud_cover=float(row.get("cloud_cover", 0) or 0),
@@ -200,7 +266,7 @@ async def seed():
 
         csv_loaders = [
             ("weather_sample.csv", _load_weather_csv),
-            ("river_sample.csv", _load_river_csv),
+            ("river_flow_sample.csv", _load_river_csv),
             ("population_sample.csv", _load_population_csv),
         ]
 

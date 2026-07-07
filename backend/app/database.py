@@ -15,13 +15,18 @@ from sqlalchemy.orm import declarative_base
 
 from app.config import settings
 
-engine = create_async_engine(
-    settings.DATABASE_URL,
-    echo=settings.DEBUG,
-    pool_size=20,
-    max_overflow=10,
-    pool_pre_ping=True,
-)
+# SQLite (the no-Docker demo/test mode) doesn't accept the Postgres pool
+# tuning args, so only apply them on server-grade drivers.
+if settings.DATABASE_URL.startswith("sqlite"):
+    engine = create_async_engine(settings.DATABASE_URL, echo=settings.DEBUG)
+else:
+    engine = create_async_engine(
+        settings.DATABASE_URL,
+        echo=settings.DEBUG,
+        pool_size=20,
+        max_overflow=10,
+        pool_pre_ping=True,
+    )
 
 async_session = async_sessionmaker(
     engine,

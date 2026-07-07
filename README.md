@@ -1,118 +1,138 @@
 # BharatSim
 
-BharatSim is an AI powered digital twin of India designed for environmental and climate simulations. It provides an interactive simulation platform that integrates district level datasets, machine learning driven predictions, and a modular engine for visualizing various environmental impacts across the country.
+BharatSim is an interactive platform for environmental and climate simulation across India. It brings together district level datasets, a modular simulation engine, and a map based interface so you can explore conditions such as flood risk, heat, air quality, and crop yield at the district level.
+
+## Overview
+
+The project has two parts. A Next.js frontend handles the map, dashboard, simulation screens, and assistant. A FastAPI backend serves district data, runs the simulation engine, and exposes a REST API. They communicate over HTTP, so the frontend can run on its own or connect to the backend for live data.
+
+## Quick start (frontend only)
+
+The frontend runs on its own with no backend, database, or API keys. It ships with an offline vector map of all 759 Indian districts, a dashboard, a working simulation form, and an assistant with built in responses.
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Open http://localhost:3000 in your browser.
+
+When you connect the backend or add credentials later, the same interface moves from sample data to live data without any code changes.
+
+## Running the full stack
+
+There are two ways to run the backend. Option A is the fastest and needs no Docker. Option B uses the full PostgreSQL and PostGIS setup.
+
+### Option A: no Docker (recommended)
+
+The backend runs on SQLite with a small set of dependencies. Docker, PostGIS, and the heavy machine learning packages are not required. This is enough to run the real API, database, and simulation engine.
+
+```bash
+# Backend. The backend/.env file is preset to SQLite and sample data.
+cd backend
+python -m venv venv
+.\venv\Scripts\activate          # Windows. On macOS or Linux: source venv/bin/activate
+pip install -r requirements-lite.txt
+python -m app.seed               # loads the sample data into SQLite
+uvicorn app.main:app --reload    # serves the API on http://localhost:8000
+
+# Frontend, in a second terminal
+cd frontend
+npm install
+npm run dev
+```
+
+Open http://localhost:3000. Interactive API documentation is available at http://localhost:8000/docs.
+
+### Option B: PostgreSQL and PostGIS (Docker)
+
+Use this if you want the spatial database and the full machine learning dependency set.
+
+```bash
+docker-compose up -d             # starts PostgreSQL, PostGIS, and Redis
+cd backend
+python -m venv venv && .\venv\Scripts\activate
+pip install -e .                 # full dependencies, including the ML libraries
+# In backend/.env, switch DATABASE_URL to the PostgreSQL URL. A commented example is provided.
+python -m app.seed
+uvicorn app.main:app --reload
+```
+
+## Data and API modes
+
+BharatSim runs on bundled sample data by default. Supplying a credential switches the relevant feature to a live source, with no code changes.
+
+| Capability | Default (sample or demo) | Live mode |
+|---|---|---|
+| Map basemap | Offline 759 district vector map | Set `NEXT_PUBLIC_MAPBOX_TOKEN` to use Mapbox GL |
+| AI assistant | Built in responses | Set `OPENAI_API_KEY` to use live GPT answers |
+| Weather data | Bundled sample CSVs in `data/sample/` | Set `USE_LIVE_DATA=true` for keyless Open-Meteo, or set `OPENWEATHER_API_KEY` |
+
+Regenerate or extend the sample datasets at any time:
+
+```bash
+python data/generate_sample_data.py
+```
+
+## Features
+
+| Feature | Description |
+|---|---|
+| Interactive mapping | District level choropleth of all 759 districts. The map is a self contained vector map that needs no token, and it upgrades to Mapbox GL JS automatically when a token is provided. |
+| Simulation engine | Modular design with adjustable parameters, for example rainfall multipliers or temperature offsets. |
+| Analytics dashboard | Time series charts, a heatmap, and a ranking of districts by flood, air quality, or heat. |
+| AI assistant | A chat interface that explains simulation results and environmental trends. |
+| Sample or live data | Runs on bundled sample data, and switches to live sources when credentials are supplied. |
+
+## Simulation and analytics
+
+The simulation engine has four modules. Each one loads the relevant observations, applies a domain based model, and returns per district results with a severity level.
+
+1. Flood Risk. Combines rainfall, river water levels, and soil saturation into a risk score.
+2. Heatwave. Applies IMD style thresholds and a heat index calculation over the selected period.
+3. Crop Yield. Estimates yield change from rainfall, temperature, irrigation, and fertilizer inputs.
+4. Air Quality. Estimates an AQI from emissions, wind dispersion, and industrial and vehicle activity.
+
+The repository also includes machine learning predictor modules and a model registry (XGBoost, LightGBM, scikit-learn, and PyTorch) that can back these domains once trained models are supplied.
 
 ## Architecture
-
-The system follows a modern decoupled architecture, separating the client facing visualization layer from the computationally intensive simulation and data processing backend.
 
 ```mermaid
 graph TD
     A[Frontend Client] -->|REST API| B[FastAPI Backend]
     B --> C[Simulation Engine]
-    B --> D[Machine Learning Models]
-    B --> E[(PostgreSQL + PostGIS)]
+    B --> D[ML Model Registry]
+    B --> E[(PostgreSQL + PostGIS, or SQLite)]
     C --> D
     E --> C
 ```
 
-## Features
-
-The application supports multiple core functionalities aimed at providing comprehensive environmental insights.
-
-| Feature | Description |
-|---|---|
-| Interactive Mapping | District level visualization powered by Mapbox GL JS with choropleth layers |
-| Simulation Engine | Modular architecture supporting custom simulation parameters (e.g. adjusting rainfall multipliers or temperature offsets) |
-| Predictive Analytics | Machine learning models forecasting Flood Risk, Heatwaves, Crop Yields, and Air Quality |
-| AI Assistant | Context aware chatbot to interpret simulation results and explain environmental trends |
-| Data Dashboard | Interactive time series analysis and heatmap visualizations of environmental metrics |
-| Graceful Fallback | UI gracefully falls back to generated demo data if the backend server is unreachable |
-
-## Machine Learning Models
-
-BharatSim includes 4 core predictive models built using modern ML frameworks:
-1. **Flood Risk Model**: Predicts the likelihood of floods based on rainfall, river levels, and soil saturation (XGBoost).
-2. **Heatwave Predictor**: Assesses heatwave severity using temperature, humidity, and urban heat island effects (LightGBM).
-3. **Crop Yield Estimator**: Estimates agricultural yield changes based on weather fluctuations and irrigation (Scikit-learn).
-4. **Air Quality Index**: Models AQI based on emissions, wind speed, and industrial activity (PyTorch).
-
-## Technology Stack
-
-The project relies on a robust stack of open source technologies.
+## Technology stack
 
 | Component | Technologies |
 |---|---|
-| Frontend | Next.js (App Router), TypeScript, Mapbox GL JS, Recharts, Vanilla CSS (Glassmorphism) |
-| Backend | FastAPI, Python 3.11, SQLAlchemy, GeoAlchemy2 |
-| Database | PostgreSQL, PostGIS, Redis |
-| Machine Learning | PyTorch, XGBoost, LightGBM, Scikit-learn, Pandas, GeoPandas |
+| Frontend | Next.js (App Router), TypeScript, Recharts, Mapbox GL JS (optional) |
+| Backend | FastAPI, Python, SQLAlchemy, GeoAlchemy2 |
+| Database | SQLite for local runs, or PostgreSQL with PostGIS and Redis for the full stack |
+| Machine learning | XGBoost, LightGBM, scikit-learn, PyTorch, pandas |
 
-## Getting Started
+## Project structure
 
-### Prerequisites
+| Path | Contents |
+|---|---|
+| `/frontend` | Next.js web application, map, dashboard, and assistant |
+| `/backend` | FastAPI application, simulation modules, and data models |
+| `/data` | Sample datasets, the data generator, and database initialization scripts |
 
-Please ensure the following dependencies are installed on your system:
-* Node.js version 18 or higher
-* Python version 3.11 or higher
-* Docker and Docker Compose
+## Testing
 
-### Installation and Setup
+From the `backend` directory, run the test suite:
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/gauravxsuvo/BharatSim.git
-   cd BharatSim
-   ```
-
-2. Start the infrastructure services (PostgreSQL/PostGIS & Redis):
-   ```bash
-   docker-compose up -d
-   ```
-
-3. Configure environment variables:
-   Create a `.env` file in the `backend` directory:
-   ```env
-   DATABASE_URL=postgresql+asyncpg://bharatsim:bharatsim@localhost:5432/bharatsim
-   REDIS_URL=redis://localhost:6379/0
-   OPENAI_API_KEY=your_openai_api_key
-   ```
-   
-   Create a `.env.local` file in the `frontend` directory:
-   ```env
-   NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_public_token
-   NEXT_PUBLIC_API_URL=http://localhost:8000
-   ```
-
-4. Configure the backend and seed the database:
-   ```bash
-   cd backend
-   python -m venv venv
-   
-   # On Windows:
-   .\venv\Scripts\activate
-   # On macOS/Linux:
-   # source venv/bin/activate
-   
-   pip install -e .
-   python -m app.seed
-   uvicorn app.main:app --reload
-   ```
-
-5. Configure and run the frontend:
-   ```bash
-   cd frontend
-   npm install
-   npm run dev
-   ```
-
-6. Access the application by navigating to `http://localhost:3000` in your web browser.
-
-## Project Structure
-
-* `/backend` : Contains the FastAPI application, simulation modules, and machine learning pipelines.
-* `/frontend` : Contains the Next.js web application, Mapbox components, and dashboard logic.
-* `/data` : Stores sample datasets, GeoJSON definitions, and database initialization scripts.
+```bash
+cd backend
+pytest
+```
 
 ## License
 

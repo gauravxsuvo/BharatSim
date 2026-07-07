@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import MapControls from '@/components/map/MapControls';
 import DistrictPopup from '@/components/map/DistrictPopup';
 
@@ -20,12 +20,13 @@ const IndiaMap = dynamic(() => import('@/components/map/IndiaMap'), {
 export default function MapPage() {
   const [selectedMetric, setSelectedMetric] = useState('temperature');
   const [selectedDistrict, setSelectedDistrict] = useState<any>(null);
+  const handleDistrictClick = useCallback((district: any) => setSelectedDistrict(district), []);
 
   return (
     <div style={{ position: 'relative', height: 'calc(100vh - 64px)', margin: '-32px', overflow: 'hidden' }}>
       <IndiaMap
         selectedMetric={selectedMetric}
-        onDistrictClick={(district: any) => setSelectedDistrict(district)}
+        onDistrictClick={handleDistrictClick}
       />
       <MapControls
         selectedMetric={selectedMetric}

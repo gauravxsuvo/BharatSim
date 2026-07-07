@@ -78,12 +78,10 @@ async def get_all_districts_geojson(
     result = await db.execute(select(District))
     districts = result.scalars().all()
 
-    from geoalchemy2.shape import to_shape
-    from shapely.geometry import mapping
+    from app.geo import geojson_from_storage
 
     features = []
     for district in districts:
-        geom = to_shape(district.geometry)
         features.append({
             "type": "Feature",
             "properties": {
@@ -94,7 +92,7 @@ async def get_all_districts_geojson(
                 "district_code": district.district_code,
                 "area_sq_km": district.area_sq_km,
             },
-            "geometry": mapping(geom),
+            "geometry": geojson_from_storage(district.geometry),
         })
 
     return {
@@ -145,16 +143,14 @@ async def create_district(
     """
 
 
-    from geoalchemy2.shape import from_shape
-    from shapely.geometry import shape
+    from app.geo import storage_from_geojson
 
-    geom = shape(payload.geometry)
     district = District(
         name=payload.name,
         state_name=payload.state_name,
         state_code=payload.state_code,
         district_code=payload.district_code,
-        geometry=from_shape(geom, srid=4326),
+        geometry=storage_from_geojson(payload.geometry),
         area_sq_km=payload.area_sq_km,
         centroid_lat=payload.centroid_lat,
         centroid_lon=payload.centroid_lon,
@@ -189,10 +185,8 @@ async def get_district_geojson(
     if not district:
         raise HTTPException(status_code=404, detail="District not found")
 
-    from geoalchemy2.shape import to_shape
-    from shapely.geometry import mapping
+    from app.geo import geojson_from_storage
 
-    geom = to_shape(district.geometry)
     return DistrictGeoJSON(
         type="Feature",
         properties={
@@ -203,7 +197,7 @@ async def get_district_geojson(
             "district_code": district.district_code,
             "area_sq_km": district.area_sq_km,
         },
-        geometry=mapping(geom),
+        geometry=geojson_from_storage(district.geometry),
     )
 
 

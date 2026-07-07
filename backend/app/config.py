@@ -32,9 +32,22 @@ class Settings(BaseSettings):
     CORS_ORIGINS: list[str] = ["http://localhost:3000"]
     DEBUG: bool = True
 
+    # --- Live data sources (optional) ---------------------------------------
+    # Leave blank to run entirely on the bundled sample datasets. Provide a
+    # key (or set USE_LIVE_DATA=true for the keyless Open-Meteo provider) and
+    # the seed pulls live observations instead of the CSVs.
+    OPENWEATHER_API_KEY: str = ""
+    USE_LIVE_DATA: bool = False
+
+    @property
+    def live_weather_enabled(self) -> bool:
+        """True when a live weather source (keyed or keyless) is configured."""
+        return bool(self.OPENWEATHER_API_KEY) or self.USE_LIVE_DATA
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
+        extra="ignore",
     )
 
 

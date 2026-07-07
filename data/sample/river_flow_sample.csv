@@ -1,151 +1,841 @@
 district_code,river_name,station_name,date,water_level_m,discharge_cumecs,flood_status,danger_level_m,warning_level_m
-MH001,Mithi River,Powai Station,2024-01-01,1.82,185.3,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-02,1.78,178.6,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-03,1.85,190.2,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-04,1.90,198.5,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-05,1.75,172.8,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-06,1.95,205.1,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-07,1.88,192.4,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-08,1.80,180.7,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-09,1.72,168.3,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-10,1.85,188.9,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-11,1.92,200.5,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-12,1.78,176.2,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-13,1.70,165.8,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-14,1.88,193.1,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-15,1.95,208.4,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-16,1.82,184.7,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-17,1.75,170.3,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-18,1.90,196.8,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-19,1.85,189.5,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-20,1.78,175.2,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-21,1.92,202.1,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-22,1.88,194.8,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-23,1.80,182.3,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-24,1.72,166.5,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-25,1.85,187.2,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-26,1.90,197.8,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-27,1.82,183.5,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-28,1.78,175.9,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-29,1.88,191.2,normal,4.5,3.5
-MH001,Mithi River,Powai Station,2024-01-30,1.85,188.5,normal,4.5,3.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-01,3.85,1250.5,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-02,3.78,1198.3,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-03,3.92,1310.8,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-04,4.05,1385.2,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-05,3.72,1172.6,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-06,3.65,1128.4,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-07,3.80,1225.7,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-08,3.95,1342.1,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-09,4.10,1420.5,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-10,3.88,1275.8,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-11,3.75,1185.3,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-12,3.68,1145.6,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-13,3.60,1105.2,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-14,3.82,1238.4,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-15,3.98,1358.7,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-16,4.15,1465.3,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-17,3.90,1295.1,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-18,3.78,1198.5,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-19,3.65,1130.2,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-20,3.58,1088.7,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-21,3.75,1182.4,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-22,3.92,1315.8,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-23,4.08,1405.2,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-24,4.18,1482.6,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-25,3.85,1255.3,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-26,3.72,1175.8,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-27,3.62,1115.4,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-28,3.80,1228.1,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-29,3.95,1348.5,normal,8.0,6.5
-UP001,Gomti River,Lucknow Bridge Station,2024-01-30,4.02,1378.2,normal,8.0,6.5
-UP002,Ganges,Varanasi Ghat Station,2024-01-01,4.85,2450.8,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-02,4.78,2385.3,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-03,4.92,2520.5,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-04,5.05,2610.2,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-05,4.72,2342.8,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-06,4.65,2285.1,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-07,4.80,2418.5,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-08,4.95,2548.3,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-09,5.10,2680.7,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-10,4.88,2475.2,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-11,4.75,2358.6,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-12,4.68,2305.4,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-13,4.60,2250.8,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-14,4.82,2435.1,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-15,4.98,2572.5,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-16,5.15,2725.3,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-17,4.92,2510.8,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-18,4.78,2388.2,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-19,4.65,2290.5,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-20,4.58,2235.1,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-21,4.75,2355.8,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-22,4.90,2498.3,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-23,5.08,2658.5,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-24,5.18,2748.2,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-25,4.85,2445.6,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-26,4.72,2340.1,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-27,4.62,2268.5,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-28,4.80,2415.8,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-29,4.95,2545.2,normal,10.0,8.0
-UP002,Ganges,Varanasi Ghat Station,2024-01-30,5.02,2598.5,normal,10.0,8.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-01,4.25,1850.3,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-02,4.18,1792.5,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-03,4.32,1918.8,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-04,4.45,2005.2,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-05,4.12,1758.6,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-06,4.05,1698.4,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-07,4.22,1835.7,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-08,4.38,1965.1,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-09,4.50,2048.5,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-10,4.28,1872.8,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-11,4.15,1775.3,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-12,4.08,1725.6,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-13,4.00,1668.2,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-14,4.25,1852.4,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-15,4.40,1982.7,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-16,4.55,2085.3,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-17,4.32,1920.1,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-18,4.18,1795.5,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-19,4.05,1702.2,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-20,3.98,1655.7,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-21,4.22,1838.4,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-22,4.38,1968.8,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-23,4.48,2035.5,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-24,4.55,2088.2,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-25,4.25,1855.6,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-26,4.12,1762.1,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-27,4.05,1698.5,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-28,4.22,1838.8,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-29,4.38,1965.2,normal,8.5,7.0
-WB001,Hooghly River,Kolkata Port Station,2024-01-30,4.30,1888.5,normal,8.5,7.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-01,2.65,520.3,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-02,2.58,495.8,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-03,2.72,548.5,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-04,2.80,578.2,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-05,2.52,475.6,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-06,2.45,452.1,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-07,2.62,512.8,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-08,2.75,558.4,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-09,2.85,592.1,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-10,2.68,530.5,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-11,2.55,485.2,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-12,2.48,462.8,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-13,2.42,445.3,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-14,2.65,518.5,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-15,2.78,565.2,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-16,2.88,598.8,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-17,2.72,545.1,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-18,2.58,498.5,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-19,2.48,465.2,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-20,2.40,438.7,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-21,2.62,515.4,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-22,2.75,555.8,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-23,2.82,582.3,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-24,2.90,608.5,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-25,2.65,522.1,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-26,2.52,478.5,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-27,2.45,455.8,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-28,2.62,515.2,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-29,2.75,558.8,normal,6.0,5.0
-WB002,Teesta River,Teesta Bazaar Station,2024-01-30,2.68,535.5,normal,6.0,5.0
+MH001,Mithi River,Powai,2024-01-01,6.51,615.6,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-02,6.46,865.8,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-03,6.46,717.3,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-04,6.49,484.2,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-05,6.6,798.8,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-06,6.52,652.9,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-07,6.48,663.8,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-08,6.36,534.3,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-09,6.41,677.4,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-10,6.31,457.5,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-11,6.41,787.6,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-12,6.54,711.6,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-13,6.44,879.3,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-14,6.61,742.2,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-15,6.72,822.4,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-16,6.66,896.6,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-17,6.67,857.1,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-18,6.62,474.0,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-19,6.58,581.1,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-20,6.68,641.1,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-21,6.67,610.2,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-22,6.66,805.7,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-23,6.64,913.0,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-24,6.61,822.5,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-25,6.78,822.8,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-26,6.64,772.5,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-27,6.56,769.7,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-28,6.51,585.1,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-29,6.47,797.6,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-30,6.43,673.8,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-01-31,6.35,490.2,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-01,6.37,818.6,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-02,6.26,497.4,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-03,6.22,611.9,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-04,6.31,615.8,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-05,6.48,412.6,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-06,6.55,753.4,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-07,6.7,663.1,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-08,6.64,720.7,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-09,6.61,450.2,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-10,6.67,547.5,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-11,6.64,889.0,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-12,6.53,462.0,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-13,6.63,569.9,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-14,6.74,627.5,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-15,6.64,478.3,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-16,6.59,500.8,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-17,6.47,515.1,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-18,6.51,787.9,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-19,6.45,661.0,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-20,6.4,395.2,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-21,6.5,425.4,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-22,6.61,772.8,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-23,6.56,841.5,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-24,6.71,641.9,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-25,6.85,511.9,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-26,6.85,663.5,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-27,6.81,777.8,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-28,6.89,554.2,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-02-29,6.99,432.3,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-01,6.88,638.9,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-02,6.86,678.5,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-03,6.73,688.3,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-04,6.88,694.7,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-05,6.74,640.1,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-06,6.6,662.2,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-07,6.71,826.7,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-08,6.72,712.2,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-09,6.78,805.2,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-10,6.82,940.7,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-11,6.93,710.6,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-12,7.04,899.0,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-13,6.92,925.9,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-14,6.97,971.9,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-15,7.07,858.1,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-16,7.06,580.0,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-17,7.06,920.9,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-18,7.15,801.1,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-19,7.02,785.0,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-20,6.98,713.5,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-21,7.06,886.9,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-22,7.05,435.1,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-23,7.09,429.0,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-24,7.21,443.5,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-25,7.13,671.4,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-26,7.07,550.3,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-27,7.14,615.0,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-28,7.14,808.5,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-29,7.24,767.1,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-30,7.21,940.4,normal,9.4,8.3
+MH001,Mithi River,Powai,2024-03-31,7.35,530.7,alert,9.4,8.3
+MH001,Mithi River,Powai,2024-04-01,7.48,572.2,alert,9.4,8.3
+MH001,Mithi River,Powai,2024-04-02,7.42,460.8,alert,9.4,8.3
+MH001,Mithi River,Powai,2024-04-03,7.49,955.5,alert,9.4,8.3
+MH001,Mithi River,Powai,2024-04-04,7.62,786.4,alert,9.4,8.3
+MH001,Mithi River,Powai,2024-04-05,7.81,673.2,alert,9.4,8.3
+MH001,Mithi River,Powai,2024-04-06,7.79,610.8,alert,9.4,8.3
+MH001,Mithi River,Powai,2024-04-07,7.73,651.1,alert,9.4,8.3
+MH001,Mithi River,Powai,2024-04-08,7.75,633.1,alert,9.4,8.3
+MH001,Mithi River,Powai,2024-04-09,7.93,613.6,alert,9.4,8.3
+MH001,Mithi River,Powai,2024-04-10,7.92,562.2,alert,9.4,8.3
+MH001,Mithi River,Powai,2024-04-11,8.09,769.9,alert,9.4,8.3
+MH001,Mithi River,Powai,2024-04-12,8.24,741.7,alert,9.4,8.3
+MH001,Mithi River,Powai,2024-04-13,8.26,987.2,alert,9.4,8.3
+MH001,Mithi River,Powai,2024-04-14,8.38,757.8,warning,9.4,8.3
+MH001,Mithi River,Powai,2024-04-15,8.4,772.2,warning,9.4,8.3
+MH001,Mithi River,Powai,2024-04-16,8.34,754.3,warning,9.4,8.3
+MH001,Mithi River,Powai,2024-04-17,8.48,571.8,warning,9.4,8.3
+MH001,Mithi River,Powai,2024-04-18,8.41,1119.1,warning,9.4,8.3
+MH001,Mithi River,Powai,2024-04-19,8.53,594.9,warning,9.4,8.3
+MH001,Mithi River,Powai,2024-04-20,8.66,603.0,warning,9.4,8.3
+MH001,Mithi River,Powai,2024-04-21,8.7,943.0,warning,9.4,8.3
+MH001,Mithi River,Powai,2024-04-22,8.82,752.8,warning,9.4,8.3
+MH001,Mithi River,Powai,2024-04-23,8.76,1216.0,warning,9.4,8.3
+MH001,Mithi River,Powai,2024-04-24,8.9,790.2,warning,9.4,8.3
+MH001,Mithi River,Powai,2024-04-25,8.86,611.0,warning,9.4,8.3
+MH001,Mithi River,Powai,2024-04-26,8.89,538.6,warning,9.4,8.3
+MH001,Mithi River,Powai,2024-04-27,9.03,831.0,warning,9.4,8.3
+MH001,Mithi River,Powai,2024-04-28,9.19,812.2,warning,9.4,8.3
+MH001,Mithi River,Powai,2024-04-29,9.38,1190.5,warning,9.4,8.3
+MH002,Mula River,Aundh,2024-01-01,3.38,225.6,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-02,3.44,313.6,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-03,3.45,469.6,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-04,3.39,379.0,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-05,3.35,238.7,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-06,3.28,344.9,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-07,3.17,229.7,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-08,3.25,393.2,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-09,3.12,387.5,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-10,3.26,368.0,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-11,3.23,301.0,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-12,3.13,231.0,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-13,3.29,451.5,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-14,3.38,421.9,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-15,3.29,428.8,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-16,3.18,232.1,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-17,3.19,269.5,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-18,3.25,431.3,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-19,3.19,273.3,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-20,3.3,285.5,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-21,3.44,215.8,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-22,3.58,476.4,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-23,3.45,311.1,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-24,3.5,357.1,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-25,3.4,208.1,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-26,3.55,239.2,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-27,3.73,257.3,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-28,3.74,518.6,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-29,3.87,398.4,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-30,3.76,407.1,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-01-31,3.82,324.4,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-01,3.82,505.1,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-02,3.71,417.4,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-03,3.68,401.4,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-04,3.77,370.3,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-05,3.87,496.0,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-06,3.78,293.1,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-07,3.67,496.9,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-08,3.59,239.0,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-09,3.47,320.3,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-10,3.61,247.0,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-11,3.53,263.9,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-12,3.6,310.6,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-13,3.77,427.8,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-14,3.79,402.4,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-15,3.93,474.7,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-16,3.82,358.2,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-17,3.89,413.7,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-18,4.05,254.1,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-02-19,4.2,381.4,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-02-20,4.07,308.6,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-02-21,3.98,284.3,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-22,3.84,474.6,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-23,3.74,320.9,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-24,3.78,373.1,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-25,3.74,412.5,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-26,3.86,409.8,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-27,3.86,297.9,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-28,3.92,406.4,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-02-29,3.81,313.7,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-01,3.91,523.6,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-02,3.87,508.5,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-03,3.8,473.3,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-04,3.81,395.9,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-05,3.88,440.2,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-06,3.84,389.9,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-07,3.71,331.1,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-08,3.77,517.2,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-09,3.66,286.1,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-10,3.66,252.1,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-11,3.69,308.7,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-12,3.83,323.9,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-13,3.82,530.0,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-14,3.7,478.6,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-15,3.72,341.5,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-16,3.88,542.7,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-17,3.79,482.1,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-18,3.71,227.6,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-19,3.8,335.6,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-20,3.85,277.7,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-21,3.98,406.0,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-22,4.09,364.1,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-03-23,4.02,545.8,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-03-24,4.05,364.3,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-03-25,3.93,287.9,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-26,3.99,436.7,normal,6.4,5.0
+MH002,Mula River,Aundh,2024-03-27,4.12,494.8,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-03-28,4.02,544.2,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-03-29,4.07,523.7,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-03-30,4.01,548.3,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-03-31,4.17,349.1,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-01,4.34,597.9,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-02,4.5,438.5,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-03,4.41,595.6,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-04,4.28,342.9,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-05,4.33,367.7,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-06,4.5,490.7,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-07,4.68,303.0,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-08,4.68,334.6,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-09,4.82,584.0,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-10,4.95,673.6,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-11,4.9,602.2,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-12,4.98,454.6,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-13,4.91,622.3,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-14,4.8,657.9,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-15,4.76,625.5,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-16,4.67,556.5,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-17,4.85,349.9,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-18,4.86,553.0,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-19,4.98,303.1,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-20,4.89,415.1,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-21,4.79,528.3,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-22,4.81,542.7,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-23,4.78,334.5,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-24,4.89,471.1,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-25,4.78,661.2,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-26,4.95,432.2,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-27,4.91,682.7,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-28,4.9,643.3,alert,6.4,5.0
+MH002,Mula River,Aundh,2024-04-29,4.81,468.1,alert,6.4,5.0
+TN001,Cooum River,Napier,2024-01-01,3.72,448.9,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-02,3.64,248.4,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-03,3.82,413.6,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-04,3.87,344.4,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-05,4.01,453.9,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-06,4.14,567.4,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-07,4.13,458.6,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-08,4.27,351.9,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-09,4.36,357.8,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-10,4.29,431.7,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-11,4.28,543.1,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-12,4.45,296.6,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-13,4.33,539.0,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-14,4.26,424.3,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-15,4.31,488.1,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-16,4.19,513.2,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-17,4.27,447.7,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-18,4.4,396.3,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-19,4.42,592.4,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-20,4.4,475.8,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-21,4.44,548.3,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-22,4.6,487.8,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-23,4.49,543.8,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-24,4.46,507.6,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-25,4.61,432.2,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-26,4.59,548.7,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-27,4.55,559.9,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-28,4.68,495.5,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-29,4.7,635.5,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-01-30,4.82,531.4,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-01-31,4.93,559.7,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-01,4.79,504.6,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-02-02,4.65,630.9,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-02-03,4.53,605.5,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-02-04,4.64,549.0,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-02-05,4.77,382.9,normal,7.2,5.8
+TN001,Cooum River,Napier,2024-02-06,4.89,428.0,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-07,5.06,404.3,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-08,5.06,322.9,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-09,5.06,704.7,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-10,5.0,617.5,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-11,4.92,598.6,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-12,4.95,424.5,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-13,4.93,433.3,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-14,5.05,644.3,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-15,5.18,449.1,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-16,5.23,623.4,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-17,5.36,419.2,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-18,5.48,373.2,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-19,5.57,619.1,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-20,5.52,550.8,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-21,5.43,492.0,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-22,5.37,626.1,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-23,5.34,664.7,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-24,5.49,660.9,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-25,5.66,485.7,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-26,5.55,591.3,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-27,5.7,661.3,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-28,5.73,690.7,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-02-29,5.76,529.0,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-03-01,5.84,443.2,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-02,5.72,616.8,alert,7.2,5.8
+TN001,Cooum River,Napier,2024-03-03,5.86,541.3,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-04,5.8,680.2,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-05,5.83,534.8,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-06,5.98,408.4,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-07,6.15,769.8,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-08,6.29,525.3,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-09,6.33,421.4,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-10,6.51,621.1,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-11,6.37,661.5,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-12,6.44,527.5,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-13,6.45,817.0,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-14,6.62,527.1,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-15,6.54,731.4,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-16,6.46,394.0,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-17,6.39,394.0,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-18,6.44,818.1,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-19,6.43,669.4,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-20,6.47,601.6,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-21,6.6,702.7,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-22,6.66,873.0,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-23,6.83,817.8,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-24,6.91,957.4,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-25,7.03,570.0,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-26,7.0,924.0,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-27,7.16,613.0,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-28,7.13,974.3,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-29,7.02,904.1,warning,7.2,5.8
+TN001,Cooum River,Napier,2024-03-30,7.2,574.2,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-03-31,7.23,508.3,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-01,7.43,911.9,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-02,7.47,732.5,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-03,7.45,928.1,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-04,7.52,884.4,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-05,7.63,851.5,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-06,7.68,1066.0,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-07,7.71,816.8,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-08,7.6,832.2,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-09,7.64,725.0,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-10,7.83,577.1,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-11,7.89,826.2,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-12,7.78,683.1,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-13,7.94,570.3,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-14,8.04,524.5,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-15,8.15,860.5,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-16,8.33,984.8,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-17,8.44,837.8,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-18,8.54,1156.5,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-19,8.74,674.9,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-20,8.76,902.9,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-21,8.85,765.0,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-22,8.91,1159.0,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-23,9.09,650.3,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-24,9.14,1046.6,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-25,9.12,552.1,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-26,9.19,1074.9,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-27,9.18,638.7,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-28,9.37,1022.3,danger,7.2,5.8
+TN001,Cooum River,Napier,2024-04-29,9.42,1115.6,danger,7.2,5.8
+UP001,Gomti River,Gau Ghat,2024-01-01,5.0,371.7,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-02,4.91,549.7,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-03,4.92,342.2,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-04,4.8,651.3,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-05,4.84,657.9,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-06,4.82,446.4,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-07,4.9,348.3,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-08,4.86,328.9,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-09,4.83,563.1,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-10,4.97,496.9,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-11,4.88,449.5,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-12,4.8,666.5,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-13,4.86,423.7,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-14,4.96,505.5,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-15,4.82,522.9,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-16,4.99,323.0,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-17,4.96,364.5,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-18,5.13,525.0,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-19,4.98,452.1,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-20,4.84,640.9,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-21,4.88,628.3,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-22,5.05,379.1,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-23,5.1,380.2,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-24,5.02,439.9,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-25,5.16,686.3,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-26,5.21,551.8,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-27,5.35,623.3,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-28,5.49,407.4,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-29,5.39,676.6,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-30,5.25,331.3,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-01-31,5.28,721.5,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-01,5.44,677.7,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-02,5.39,449.1,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-03,5.36,399.0,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-04,5.38,710.3,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-05,5.39,583.6,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-06,5.57,744.2,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-07,5.73,769.5,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-08,5.76,524.8,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-09,5.76,399.2,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-10,5.79,504.1,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-11,5.76,455.9,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-12,5.88,441.4,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-13,5.86,519.6,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-14,6.01,803.5,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-15,6.13,813.9,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-16,6.21,789.4,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-17,6.09,618.7,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-18,6.16,527.6,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-19,6.18,655.1,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-20,6.21,568.4,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-21,6.24,474.7,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-22,6.2,594.2,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-23,6.12,829.5,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-24,6.11,579.3,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-25,5.99,370.8,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-26,5.87,615.8,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-27,5.92,500.1,normal,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-28,6.1,742.1,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-02-29,6.2,718.7,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-01,6.22,393.9,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-02,6.38,539.6,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-03,6.42,847.6,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-04,6.45,717.7,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-05,6.54,671.9,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-06,6.41,540.0,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-07,6.32,866.7,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-08,6.19,780.1,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-09,6.33,753.8,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-10,6.35,471.6,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-11,6.32,732.7,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-12,6.47,439.3,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-13,6.63,871.1,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-14,6.72,442.4,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-15,6.64,508.2,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-16,6.7,410.4,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-17,6.85,523.9,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-18,6.93,928.2,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-19,6.78,537.2,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-20,6.9,872.9,alert,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-21,7.07,982.5,warning,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-22,7.19,645.3,warning,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-23,7.32,465.4,warning,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-24,7.22,575.4,warning,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-25,7.29,951.8,warning,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-26,7.28,769.1,warning,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-27,7.42,816.9,warning,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-28,7.34,956.4,warning,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-29,7.43,607.8,warning,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-30,7.51,700.5,warning,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-03-31,7.5,616.9,warning,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-01,7.66,960.1,warning,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-02,7.68,829.5,warning,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-03,7.75,710.2,warning,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-04,7.84,752.1,warning,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-05,7.92,616.5,warning,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-06,7.99,553.1,warning,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-07,8.15,807.5,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-08,8.07,695.6,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-09,8.24,663.5,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-10,8.33,1120.0,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-11,8.32,856.1,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-12,8.28,874.4,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-13,8.18,568.9,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-14,8.31,1086.3,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-15,8.49,886.2,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-16,8.52,597.8,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-17,8.71,849.4,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-18,8.61,674.1,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-19,8.75,654.1,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-20,8.86,1103.2,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-21,8.8,961.2,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-22,8.81,629.2,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-23,8.87,561.3,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-24,9.04,1096.9,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-25,8.96,688.4,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-26,8.93,942.2,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-27,9.11,795.4,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-28,9.29,1242.5,danger,8.0,7.0
+UP001,Gomti River,Gau Ghat,2024-04-29,9.27,705.0,danger,8.0,7.0
+UP002,Ganga,Dashashwamedh,2024-01-01,4.7,305.9,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-02,4.61,348.3,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-03,4.68,445.1,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-04,4.82,316.0,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-05,4.75,485.9,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-06,4.78,341.6,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-07,4.95,319.5,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-08,5.03,466.8,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-09,5.06,554.0,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-10,4.97,669.1,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-11,4.94,353.1,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-12,4.82,379.3,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-13,4.8,504.1,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-14,4.92,597.8,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-15,4.81,375.0,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-16,4.87,511.8,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-17,4.74,530.4,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-18,4.89,660.0,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-19,4.95,408.9,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-20,5.0,479.9,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-21,5.1,584.6,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-22,5.15,451.2,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-23,5.33,513.8,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-24,5.48,395.9,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-25,5.51,489.3,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-26,5.41,600.3,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-27,5.32,730.9,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-28,5.5,718.1,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-29,5.47,337.4,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-30,5.59,399.8,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-01-31,5.59,653.2,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-01,5.62,439.3,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-02,5.6,712.4,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-03,5.57,753.9,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-04,5.56,519.4,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-05,5.65,539.6,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-06,5.63,501.5,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-07,5.59,513.8,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-08,5.68,434.4,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-09,5.6,421.6,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-10,5.51,715.7,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-11,5.58,611.1,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-12,5.73,595.1,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-13,5.83,540.2,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-14,5.89,454.0,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-15,5.79,397.7,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-16,5.86,492.4,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-17,5.98,729.4,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-18,6.04,387.0,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-19,5.96,620.6,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-20,5.86,531.8,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-21,5.88,437.6,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-22,5.88,679.2,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-23,5.86,664.3,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-24,5.8,694.1,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-25,5.84,423.2,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-26,5.82,713.2,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-27,5.74,533.3,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-28,5.74,743.0,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-02-29,5.63,757.2,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-01,5.58,751.3,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-02,5.63,669.0,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-03,5.77,658.3,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-04,5.88,393.1,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-05,5.73,739.1,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-06,5.6,718.0,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-07,5.55,733.4,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-08,5.47,394.1,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-09,5.39,685.9,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-10,5.36,711.5,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-11,5.4,681.8,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-12,5.41,629.1,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-13,5.36,365.1,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-14,5.4,713.2,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-15,5.3,494.0,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-16,5.33,583.4,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-17,5.23,544.9,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-18,5.23,725.2,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-19,5.31,702.5,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-20,5.48,619.8,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-21,5.38,514.3,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-22,5.48,388.2,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-23,5.46,493.3,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-24,5.37,330.8,normal,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-25,5.45,683.6,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-26,5.61,599.1,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-27,5.52,726.0,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-28,5.69,772.3,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-29,5.73,749.8,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-30,5.91,773.7,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-03-31,5.78,409.2,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-01,5.74,525.1,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-02,5.65,787.8,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-03,5.78,656.1,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-04,5.96,510.5,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-05,6.06,823.6,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-06,5.95,643.9,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-07,6.08,372.6,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-08,6.24,582.9,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-09,6.16,789.1,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-10,6.09,501.9,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-11,6.13,817.0,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-12,6.16,816.0,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-13,6.04,477.8,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-14,6.01,576.4,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-15,6.02,380.7,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-16,6.13,740.4,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-17,6.15,408.5,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-18,6.2,436.8,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-19,6.39,702.5,alert,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-20,6.5,400.0,warning,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-21,6.49,859.0,warning,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-22,6.48,407.5,warning,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-23,6.57,760.5,warning,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-24,6.54,812.6,warning,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-25,6.69,821.1,warning,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-26,6.69,584.5,warning,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-27,6.87,807.4,warning,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-28,6.92,685.8,warning,7.5,6.4
+UP002,Ganga,Dashashwamedh,2024-04-29,6.87,914.2,warning,7.5,6.4
+WB001,Hooghly,Palta,2024-01-01,5.99,603.2,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-02,5.88,734.2,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-03,6.0,411.4,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-04,5.87,527.5,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-05,5.77,716.2,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-06,5.88,759.1,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-07,5.73,350.0,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-08,5.85,758.2,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-09,5.9,427.7,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-10,5.96,773.1,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-11,5.96,774.0,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-12,6.07,415.6,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-13,5.96,693.3,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-14,5.88,703.7,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-15,5.76,387.9,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-16,5.92,357.0,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-17,6.03,474.2,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-18,5.9,391.5,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-19,5.86,599.8,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-20,5.87,444.9,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-21,6.05,656.0,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-22,5.96,494.9,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-23,6.03,779.1,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-24,5.9,441.3,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-25,5.75,425.9,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-26,5.67,405.5,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-27,5.7,785.6,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-28,5.78,671.8,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-29,5.66,424.3,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-30,5.62,783.2,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-01-31,5.52,611.7,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-01,5.57,602.3,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-02,5.59,463.0,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-03,5.58,702.8,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-04,5.67,580.9,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-05,5.74,789.0,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-06,5.67,682.3,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-07,5.54,360.2,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-08,5.5,652.5,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-09,5.55,696.1,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-10,5.43,657.9,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-11,5.52,336.5,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-12,5.62,376.9,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-13,5.66,754.5,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-14,5.63,644.6,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-15,5.7,372.0,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-16,5.64,717.3,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-17,5.64,673.3,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-18,5.65,564.9,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-19,5.75,489.2,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-20,5.93,446.1,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-21,5.97,378.6,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-22,5.94,577.3,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-23,5.94,795.2,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-24,6.07,836.3,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-25,6.07,800.8,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-26,6.07,433.2,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-27,6.17,577.3,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-28,6.03,429.1,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-02-29,5.98,832.3,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-01,6.04,555.4,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-02,5.89,726.3,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-03,5.96,440.0,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-04,6.01,449.0,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-05,5.89,537.8,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-06,5.79,503.6,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-07,5.65,516.3,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-08,5.6,763.9,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-09,5.63,440.4,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-10,5.64,664.9,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-11,5.63,764.5,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-12,5.53,760.5,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-13,5.4,739.3,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-14,5.27,452.5,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-15,5.28,439.0,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-16,5.21,705.8,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-17,5.33,497.3,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-18,5.18,438.4,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-19,5.08,561.0,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-20,5.16,486.7,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-21,5.05,355.3,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-22,4.99,588.7,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-23,5.11,659.8,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-24,5.08,699.2,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-25,4.95,474.0,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-26,4.94,379.2,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-27,4.9,385.5,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-28,5.04,428.4,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-29,5.19,715.2,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-30,5.3,553.3,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-03-31,5.34,461.8,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-01,5.28,370.5,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-02,5.26,581.8,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-03,5.45,426.8,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-04,5.52,435.9,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-05,5.66,560.8,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-06,5.69,350.2,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-07,5.73,387.6,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-08,5.85,642.8,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-09,5.75,570.8,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-10,5.82,764.0,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-11,6.01,488.5,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-12,6.03,736.8,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-13,6.17,506.5,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-14,6.09,778.4,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-15,5.98,476.8,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-16,6.06,522.2,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-17,6.21,612.3,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-18,6.13,501.6,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-19,6.11,848.2,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-20,6.18,636.0,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-21,6.33,706.9,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-22,6.52,702.9,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-23,6.43,763.1,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-24,6.55,495.2,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-25,6.69,552.6,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-26,6.82,640.0,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-27,6.96,423.7,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-28,6.92,495.0,normal,9.1,8.2
+WB001,Hooghly,Palta,2024-04-29,6.8,762.5,normal,9.1,8.2
+WB002,Teesta,Teesta Bazar,2024-01-01,5.49,394.2,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-02,5.55,579.5,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-03,5.6,675.8,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-04,5.49,449.5,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-05,5.43,632.6,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-06,5.43,396.6,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-07,5.32,726.1,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-08,5.21,674.3,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-09,5.24,469.0,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-10,5.19,610.6,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-11,5.22,575.8,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-12,5.28,483.9,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-13,5.24,664.9,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-14,5.1,421.4,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-15,5.14,542.2,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-16,5.28,340.4,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-17,5.37,378.8,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-18,5.24,342.9,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-19,5.14,523.4,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-20,5.3,417.6,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-21,5.4,744.0,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-22,5.36,498.5,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-23,5.46,542.7,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-24,5.49,559.8,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-25,5.55,508.8,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-26,5.45,685.8,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-27,5.57,534.1,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-28,5.46,725.7,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-29,5.4,427.4,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-30,5.46,571.2,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-01-31,5.33,679.2,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-01,5.25,332.8,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-02,5.17,406.4,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-03,5.07,657.3,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-04,5.09,436.9,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-05,5.19,589.7,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-06,5.05,612.3,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-07,5.06,574.7,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-08,5.14,534.6,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-09,5.0,535.9,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-10,4.92,524.6,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-11,4.77,554.0,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-12,4.81,430.3,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-13,4.96,362.7,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-14,4.88,502.1,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-15,5.03,601.3,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-16,4.97,519.4,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-17,4.99,363.2,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-18,4.91,533.3,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-19,4.87,419.6,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-20,4.81,334.5,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-21,4.75,296.0,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-22,4.8,538.1,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-23,4.82,445.6,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-24,4.73,299.6,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-25,4.85,579.2,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-26,4.99,379.3,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-27,5.03,602.5,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-28,5.15,586.8,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-02-29,5.29,663.5,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-01,5.26,338.5,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-02,5.32,560.4,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-03,5.46,437.8,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-04,5.48,464.7,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-05,5.4,402.2,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-06,5.36,535.8,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-07,5.45,640.9,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-08,5.45,497.4,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-09,5.55,741.8,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-10,5.56,599.0,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-11,5.67,642.8,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-12,5.83,386.0,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-13,5.72,343.3,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-14,5.58,357.1,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-15,5.43,444.9,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-16,5.28,504.8,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-17,5.37,735.1,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-18,5.25,469.6,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-19,5.31,731.1,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-20,5.4,485.1,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-21,5.34,599.6,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-22,5.29,332.2,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-23,5.18,369.6,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-24,5.18,697.1,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-25,5.35,712.4,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-26,5.24,581.3,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-27,5.4,666.5,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-28,5.54,745.5,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-29,5.45,376.1,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-30,5.54,534.2,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-03-31,5.68,656.6,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-01,5.65,349.2,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-02,5.71,371.5,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-03,5.82,449.5,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-04,5.83,525.8,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-05,5.72,541.1,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-06,5.75,425.5,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-07,5.63,742.0,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-08,5.72,782.2,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-09,5.89,687.9,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-10,6.01,458.1,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-11,5.98,679.9,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-12,6.18,463.8,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-13,6.29,785.2,normal,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-14,6.5,412.9,alert,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-15,6.56,843.4,alert,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-16,6.62,769.5,alert,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-17,6.76,792.6,alert,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-18,6.88,570.5,alert,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-19,6.79,606.9,alert,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-20,6.94,718.8,alert,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-21,6.94,917.1,alert,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-22,7.06,729.0,alert,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-23,7.04,782.5,alert,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-24,7.05,750.2,alert,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-25,7.05,977.7,alert,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-26,7.18,515.6,alert,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-27,7.28,954.8,alert,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-28,7.38,683.6,warning,8.2,7.3
+WB002,Teesta,Teesta Bazar,2024-04-29,7.58,507.2,warning,8.2,7.3
