@@ -133,7 +133,7 @@ From the `backend` directory, run the test suite:
 cd backend
 pytest
 ```
-
+...
 ## License
 
 This project is licensed under the MIT License.
