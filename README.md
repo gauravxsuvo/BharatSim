@@ -75,6 +75,35 @@ Regenerate or extend the sample datasets at any time:
 python data/generate_sample_data.py
 ```
 
+## Deployment
+
+BharatSim is designed to host with zero required API keys — every capability has a keyless sample/demo fallback (see "Data and API modes" below).
+
+### Backend → Render
+
+A ready-made blueprint ships at `render.yaml`. In the Render dashboard: **New → Blueprint**, select this repository, and click **Apply**. It builds `backend/` with `requirements-lite.txt` and serves the API on SQLite, reseeding the sample data on every boot — no Postgres or Docker needed. Note the resulting service URL (e.g. `https://bharatsim-backend.onrender.com`).
+
+### Frontend → Vercel
+
+Import this repository into Vercel and set:
+
+- **Root Directory**: `frontend`
+- **Environment Variable**: `NEXT_PUBLIC_API_URL` = your Render backend URL
+
+Deploy to get a public URL for the app.
+
+### Connect the two
+
+Back in Render, set `CORS_ORIGINS` to a JSON array containing your Vercel URL:
+
+```
+["https://your-app.vercel.app"]
+```
+
+Both platforms auto-redeploy on every push to `main`.
+
+> Free-tier note: Render's free web services sleep after ~15 minutes of inactivity — the first request after a gap can take 20-50 seconds to wake up.
+
 ## Features
 
 | Feature | Description |
@@ -112,7 +141,7 @@ graph TD
 
 | Component | Technologies |
 |---|---|
-| Frontend | Next.js (App Router), TypeScript, Recharts, Mapbox GL JS (optional) |
+| Frontend | Next.js (App Router), TypeScript, Tailwind CSS 4, Recharts, Lucide icons, Mapbox GL JS (optional) |
 | Backend | FastAPI, Python, SQLAlchemy, GeoAlchemy2 |
 | Database | SQLite for local runs, or PostgreSQL with PostGIS and Redis for the full stack |
 | Machine learning | XGBoost, LightGBM, scikit-learn, PyTorch, pandas |
