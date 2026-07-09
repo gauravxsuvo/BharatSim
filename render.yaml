@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: bharatsim-backend
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements-lite.txt
+    startCommand: python -m app.seed && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      # Update this after the frontend is deployed — must list the exact
+      # Vercel origin(s) that will call this API (JSON array syntax).
+      - key: CORS_ORIGINS
+        value: '["http://localhost:3000"]'

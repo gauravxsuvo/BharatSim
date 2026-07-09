@@ -3,24 +3,31 @@
 interface LoadingSpinnerProps {
   label?: string;
   size?: 'sm' | 'md' | 'lg';
+  /** White-on-black variant for use on inverted (black) surfaces. */
+  inverted?: boolean;
 }
 
-export default function LoadingSpinner({ label, size = 'md' }: LoadingSpinnerProps) {
-  const sizes = { sm: 24, md: 40, lg: 64 };
-  const px = sizes[size];
+const SIZES = { sm: 24, md: 40, lg: 64 };
+
+export default function LoadingSpinner({ label, size = 'md', inverted = false }: LoadingSpinnerProps) {
+  const px = SIZES[size];
+  const trackColor = inverted ? 'rgba(255,255,255,0.25)' : 'var(--color-border)';
+  const spinColor = inverted ? '#FFFFFF' : 'var(--color-foreground)';
+  const labelColor = inverted ? 'text-white/70' : 'text-muted-foreground';
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
-      <div style={{
-        width: px,
-        height: px,
-        borderRadius: '50%',
-        border: `3px solid rgba(0,212,170,0.15)`,
-        borderTopColor: 'var(--accent-primary)',
-        animation: 'spin 0.8s linear infinite',
-      }} />
-      {label && <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{label}</span>}
-      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+    <div className="flex flex-col items-center justify-center gap-3">
+      <div
+        style={{
+          width: px,
+          height: px,
+          borderRadius: '50%',
+          border: `3px solid ${trackColor}`,
+          borderTopColor: spinColor,
+          animation: 'spin 0.8s linear infinite',
+        }}
+      />
+      {label && <span className={`text-sm font-mono uppercase tracking-widest ${labelColor}`}>{label}</span>}
     </div>
   );
 }

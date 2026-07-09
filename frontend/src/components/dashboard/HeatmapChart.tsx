@@ -39,7 +39,7 @@ function interpolateColor(value: number, min: number, max: number, colorMin: str
   return `rgb(${r},${g},${b})`;
 }
 
-export default function HeatmapChart({ title, data, colorMin = '#3b82f6', colorMax = '#ef4444' }: HeatmapChartProps) {
+export default function HeatmapChart({ title, data, colorMin = '#F5F5F5', colorMax = '#171717' }: HeatmapChartProps) {
   const rows = data && data.length > 0 ? data : DEMO_DATA;
   const [tooltip, setTooltip] = useState<{ text: string; x: number; y: number } | null>(null);
 
@@ -55,9 +55,9 @@ export default function HeatmapChart({ title, data, colorMin = '#3b82f6', colorM
         <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: 3, tableLayout: 'fixed' }}>
           <thead>
             <tr>
-              <th style={{ width: 100, textAlign: 'left', fontSize: '0.7rem', color: 'var(--text-muted)', padding: '4px 8px' }}>District</th>
+              <th style={{ width: 100, textAlign: 'left', fontFamily: 'var(--font-mono)', fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', padding: '4px 8px' }}>District</th>
               {cols.map(col => (
-                <th key={col} style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textAlign: 'center', padding: 4 }}>{col}</th>
+                <th key={col} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', textAlign: 'center', padding: 4 }}>{col}</th>
               ))}
             </tr>
           </thead>
@@ -72,11 +72,10 @@ export default function HeatmapChart({ title, data, colorMin = '#3b82f6', colorM
                     onMouseLeave={() => setTooltip(null)}
                     style={{
                       background: interpolateColor(cell.value, min, max, colorMin, colorMax),
-                      borderRadius: 4,
+                      border: '1px solid #000000',
                       height: 28,
                       cursor: 'pointer',
-                      opacity: 0.85,
-                      transition: 'opacity 0.2s',
+                      transition: 'opacity 0.1s',
                     }}
                   />
                 ))}
@@ -87,12 +86,12 @@ export default function HeatmapChart({ title, data, colorMin = '#3b82f6', colorM
       </div>
       {/* Legend */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 12 }}>
-        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{min}°C</span>
-        <div style={{ flex: 1, height: 6, borderRadius: 3, background: `linear-gradient(to right, ${colorMin}, ${colorMax})` }} />
-        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{max}°C</span>
+        <span className="font-mono" style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{min}°C</span>
+        <div style={{ flex: 1, height: 6, border: '1px solid #000000', background: `linear-gradient(to right, ${colorMin}, ${colorMax})` }} />
+        <span className="font-mono" style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{max}°C</span>
       </div>
       {tooltip && (
-        <div style={{ position: 'fixed', left: tooltip.x + 12, top: tooltip.y - 32, background: 'rgba(17,24,39,0.97)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 6, padding: '6px 10px', fontSize: '0.8rem', color: 'var(--text-primary)', pointerEvents: 'none', zIndex: 1000 }}>
+        <div style={{ position: 'fixed', left: tooltip.x + 12, top: tooltip.y - 32, background: '#FFFFFF', border: '1px solid #000000', padding: '6px 10px', fontSize: '0.8rem', color: '#000000', pointerEvents: 'none', zIndex: 1000 }}>
           {tooltip.text}
         </div>
       )}

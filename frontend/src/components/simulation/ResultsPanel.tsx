@@ -1,6 +1,7 @@
 'use client';
 
-import { SEVERITY_COLORS } from '@/lib/constants';
+import Button from '@/components/ui/Button';
+import SeverityBadge from '@/components/ui/SeverityBadge';
 
 export interface Result {
   district_id?: number;
@@ -40,31 +41,29 @@ export default function ResultsPanel({ results, simulationName, onReset }: Resul
       <div className="glass-card" style={{ marginBottom: 20, padding: '20px 28px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
           <div>
-            <h2 style={{ fontSize: '1.1rem', fontWeight: 600 }}>{simulationName || 'Simulation Results'}</h2>
+            <h2 className="font-display text-xl font-bold">{simulationName || 'Simulation Results'}</h2>
             <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: 2 }}>
               {results.length} district result{results.length !== 1 ? 's' : ''}
             </p>
           </div>
-          <button className="btn-secondary" onClick={onReset} style={{ padding: '8px 16px', fontSize: '0.85rem' }}>
+          <Button variant="secondary" size="sm" onClick={onReset}>
             ← New Simulation
-          </button>
+          </Button>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
           <div className="stat-card">
             <div className="stat-label">Avg Value</div>
-            <div className="stat-value" style={{ fontSize: '1.5rem', color: 'var(--accent-primary)' }}>{avgValue}</div>
+            <div className="stat-value" style={{ fontSize: '1.5rem' }}>{avgValue}</div>
           </div>
           <div className="stat-card">
             <div className="stat-label">Max Severity</div>
             <div style={{ marginTop: 4 }}>
-              <span className="badge" style={{ background: `${SEVERITY_COLORS[maxSeverity] ?? '#64748b'}25`, color: SEVERITY_COLORS[maxSeverity] ?? 'var(--text-muted)', fontSize: '0.9rem', padding: '6px 14px' }}>
-                {maxSeverity.charAt(0).toUpperCase() + maxSeverity.slice(1)}
-              </span>
+              <SeverityBadge severity={maxSeverity} className="!text-sm" />
             </div>
           </div>
           <div className="stat-card">
             <div className="stat-label">Avg Confidence</div>
-            <div className="stat-value" style={{ fontSize: '1.5rem', color: 'var(--accent-secondary)' }}>{avgConf}%</div>
+            <div className="stat-value" style={{ fontSize: '1.5rem' }}>{avgConf}%</div>
           </div>
         </div>
       </div>
@@ -85,31 +84,25 @@ export default function ResultsPanel({ results, simulationName, onReset }: Resul
           <tbody>
             {results.map((r, i) => {
               const name = r.district_name || (r.district_id ? DISTRICT_NAMES[r.district_id] : `District ${r.district_id}`);
-              const sev = r.severity_level?.toLowerCase() || 'low';
               const conf = r.confidence || 0.85;
               return (
                 <tr key={`${r.district_id}-${r.metric_name}-${i}`} className="animate-fadeIn" style={{ animationDelay: `${i * 50}ms` }}>
                   <td style={{ fontWeight: 500 }}>{name}</td>
                   <td style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{r.metric_name}</td>
-                  <td style={{ fontFamily: 'JetBrains Mono, monospace', color: 'var(--accent-primary)' }}>
+                  <td className="font-mono" style={{ color: 'var(--text-primary)' }}>
                     {Number(r.metric_value).toFixed(2)}
                   </td>
                   <td style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>{r.metric_unit || '—'}</td>
                   <td>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <div style={{ flex: 1, height: 4, borderRadius: 2, background: 'var(--bg-secondary)' }}>
-                        <div style={{ width: `${conf * 100}%`, height: '100%', borderRadius: 2, background: 'var(--accent-secondary)' }} />
+                      <div style={{ flex: 1, height: 4, border: '1px solid #000000', background: 'var(--bg-secondary)' }}>
+                        <div style={{ width: `${conf * 100}%`, height: '100%', background: '#000000' }} />
                       </div>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', width: 36 }}>{(conf * 100).toFixed(0)}%</span>
+                      <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--text-muted)', width: 36 }}>{(conf * 100).toFixed(0)}%</span>
                     </div>
                   </td>
                   <td>
-                    <span className="badge" style={{
-                      background: `${SEVERITY_COLORS[sev] ?? '#64748b'}20`,
-                      color: SEVERITY_COLORS[sev] ?? 'var(--text-muted)',
-                    }}>
-                      {sev.charAt(0).toUpperCase() + sev.slice(1)}
-                    </span>
+                    <SeverityBadge severity={r.severity_level} />
                   </td>
                 </tr>
               );

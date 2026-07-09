@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import { Bot } from 'lucide-react';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -27,31 +28,38 @@ export default function ChatWindow({ messages, loading }: ChatWindowProps) {
   return (
     <div id="chat-messages" className="chat-messages">
       {messages.length === 0 && (
-        <div style={{ textAlign: 'center', color: 'var(--text-muted)', marginTop: 60 }}>
-          <div style={{ fontSize: '3rem', marginBottom: 12 }}>🤖</div>
-          <p>Ask me anything about climate simulations, environmental data, or India&apos;s districts.</p>
+        <div className="mt-16 flex flex-col items-center gap-3 text-center text-muted-foreground">
+          <Bot size={40} strokeWidth={1.5} />
+          <p className="font-body max-w-sm text-base">
+            Ask me anything about climate simulations, environmental data, or India&apos;s districts.
+          </p>
         </div>
       )}
 
       {messages.map((msg, i) => (
         <div
           key={`${msg.role}-${i}-${msg.timestamp}`}
-          style={{ display: 'flex', flexDirection: 'column', alignItems: msg.role === 'user' ? 'flex-end' : 'flex-start' }}
-          className="animate-fadeIn"
+          className={`animate-fadeIn flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}
         >
-          <div
-            className={`message-bubble ${msg.role === 'user' ? 'message-user' : 'message-assistant'}`}
-            style={{ whiteSpace: 'pre-wrap' }}
-          >
-            {msg.content}
-          </div>
-          <div className={`message-time`}>{formatTime(msg.timestamp)}</div>
+          {msg.role === 'user' ? (
+            <div className="max-w-[70%] whitespace-pre-wrap border border-foreground bg-foreground px-5 py-3 font-body text-background">
+              {msg.content}
+            </div>
+          ) : (
+            <div className="relative max-w-[75%] border border-foreground bg-background px-6 pb-5 pt-8">
+              <span aria-hidden className="font-display pointer-events-none absolute left-3 top-0 text-6xl leading-none text-foreground/15">
+                &ldquo;
+              </span>
+              <div className="font-body whitespace-pre-wrap text-base leading-relaxed">{msg.content}</div>
+            </div>
+          )}
+          <div className="mt-1.5 font-mono text-xs text-muted-foreground">{formatTime(msg.timestamp)}</div>
         </div>
       ))}
 
       {loading && (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-          <div className="message-bubble message-assistant">
+        <div className="flex flex-col items-start">
+          <div className="border border-foreground bg-background px-6 py-4">
             <div className="typing-indicator">
               <div className="typing-dot" />
               <div className="typing-dot" />

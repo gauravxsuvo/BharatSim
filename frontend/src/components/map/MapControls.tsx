@@ -1,6 +1,9 @@
 'use client';
 
+import { MousePointer2, MousePointerClick, ZoomIn } from 'lucide-react';
 import { METRICS } from '@/lib/constants';
+import { METRIC_DOMAIN } from '@/lib/indiaData';
+import { Select } from '@/components/ui/Input';
 
 interface MapControlsProps {
   selectedMetric: string;
@@ -9,6 +12,8 @@ interface MapControlsProps {
 
 export default function MapControls({ selectedMetric, onMetricChange }: MapControlsProps) {
   const metric = METRICS.find(m => m.id === selectedMetric) || METRICS[0];
+  const [domainLow, domainHigh] = METRIC_DOMAIN[metric.id] || [0, 100];
+  const domainMid = Math.round((domainLow + domainHigh) / 2);
 
   return (
     <div style={{
@@ -23,43 +28,47 @@ export default function MapControls({ selectedMetric, onMetricChange }: MapContr
     }}>
       {/* Metric Selector */}
       <div className="glass-card" style={{ padding: '16px' }}>
-        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 8 }}>
+        <div className="mb-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
           Layer
         </div>
-        <select
+        <Select
           id="metric-selector"
-          className="input-field"
           value={selectedMetric}
           onChange={e => onMetricChange(e.target.value)}
-          style={{ marginBottom: 16 }}
+          className="mb-4"
         >
           {METRICS.map(m => (
             <option key={m.id} value={m.id}>{m.label}</option>
           ))}
-        </select>
+        </Select>
 
         {/* Color Legend */}
         <div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: 6 }}>Scale</div>
+          <div className="mb-1.5 font-mono text-xs text-muted-foreground">Scale</div>
           <div style={{
             height: 8,
-            borderRadius: 4,
             background: `linear-gradient(to right, ${metric.colorScale.join(', ')})`,
+            border: '1px solid #000000',
             marginBottom: 4,
           }} />
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: 'var(--text-muted)' }}>
-            <span>Low</span>
-            <span>High</span>
+          <div className="flex justify-between font-mono text-[0.65rem] text-muted-foreground">
+            <span>{domainLow}</span>
+            <span>{domainMid}</span>
+            <span>{domainHigh}</span>
           </div>
         </div>
       </div>
 
       {/* Instructions */}
-      <div className="glass-card" style={{ padding: '12px 16px' }}>
-        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
-          <div>🖱️ Hover to inspect</div>
-          <div>🖱️ Click to select district</div>
-          <div>🔍 Scroll to zoom</div>
+      <div className="glass-card flex flex-col gap-1.5" style={{ padding: '12px 16px' }}>
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <MousePointer2 size={14} strokeWidth={1.5} /> Hover to inspect
+        </div>
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <MousePointerClick size={14} strokeWidth={1.5} /> Click to select district
+        </div>
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <ZoomIn size={14} strokeWidth={1.5} /> Scroll to zoom
         </div>
       </div>
     </div>

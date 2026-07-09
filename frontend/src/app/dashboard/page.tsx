@@ -1,9 +1,14 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
+import { Map as MapIcon, Thermometer, Wind, Waves } from 'lucide-react';
 import StatsCard from '@/components/dashboard/StatsCard';
 import TimeSeriesChart from '@/components/dashboard/TimeSeriesChart';
 import HeatmapChart from '@/components/dashboard/HeatmapChart';
+import Header from '@/components/ui/Header';
+import Button from '@/components/ui/Button';
+import Divider from '@/components/ui/Divider';
+import { Select } from '@/components/ui/Input';
 import { loadIndiaDistricts, DistrictMetrics } from '@/lib/indiaData';
 import { SEVERITY_COLORS } from '@/lib/constants';
 
@@ -93,66 +98,66 @@ export default function DashboardPage() {
     : rankMetric === 'aqi' ? `${d.aqi} AQI`
     : `${d.temperature}°C`;
 
+  // Bar fill encodes severity by value/weight (grayscale), never hue —
+  // sourced from the same SEVERITY_COLORS table used for badges elsewhere.
   const rankColor = (d: DistrictMetrics) => {
     if (rankMetric === 'flood_risk') {
       const idx = Math.min(4, Math.floor(d.flood_risk * 5));
       return SEVERITY_COLORS[flood_order[idx]];
     }
-    if (rankMetric === 'aqi') return d.aqi > 300 ? '#7f1d1d' : d.aqi > 200 ? '#ef4444' : d.aqi > 100 ? '#f59e0b' : '#22c55e';
-    return d.temperature > 38 ? '#ef4444' : d.temperature > 30 ? '#f59e0b' : '#22c55e';
+    if (rankMetric === 'aqi') {
+      const key = d.aqi > 300 ? 'critical' : d.aqi > 200 ? 'severe' : d.aqi > 100 ? 'medium' : 'low';
+      return SEVERITY_COLORS[key];
+    }
+    const key = d.temperature > 38 ? 'critical' : d.temperature > 30 ? 'medium' : 'low';
+    return SEVERITY_COLORS[key];
   };
 
   return (
     <div className="animate-fadeIn">
-      {/* Header */}
-      <div className="page-header">
-        <div>
-          <h1 className="page-title">Dashboard</h1>
-          <p className="page-subtitle">Environmental analytics across {agg.count || '—'} Indian districts</p>
+      <Header title="Dashboard" subtitle={`Environmental analytics across ${agg.count || '—'} Indian districts`}>
+        <Select style={{ width: 170 }} value={selected} onChange={(e) => setSelected(e.target.value)}>
+          {options.map((d) => <option key={d} value={d}>{d}</option>)}
+        </Select>
+        <div className="flex gap-1">
+          {[7, 30, 90, 120].map((r) => (
+            <Button key={r} variant={range === r ? 'primary' : 'secondary'} size="sm" onClick={() => setRange(r)}>
+              {`${r}d`}
+            </Button>
+          ))}
         </div>
-        <div className="header-actions">
-          <select className="input-field" style={{ width: 170 }} value={selected} onChange={(e) => setSelected(e.target.value)}>
-            {options.map((d) => <option key={d} value={d}>{d}</option>)}
-          </select>
-          <div style={{ display: 'flex', gap: 4 }}>
-            {[7, 30, 90, 120].map((r) => (
-              <button key={r} className={range === r ? 'btn-primary' : 'btn-secondary'} style={{ padding: '8px 14px', fontSize: '0.8rem' }} onClick={() => setRange(r)}>
-                {`${r}d`}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
+      </Header>
 
       {/* KPI Row */}
       <div className="grid-4" style={{ marginBottom: 24 }}>
-        <StatsCard icon="🗺️" label="Districts Monitored" value={agg.count} loading={loading} />
-        <StatsCard icon="🌡️" label="Avg Temperature" value={agg.avgTemp} unit="°C" trend={2} color="var(--accent-warning)" loading={loading} />
-        <StatsCard icon="💨" label="Avg Air Quality" value={agg.avgAqi} unit="AQI" trend={-12} color="var(--accent-secondary)" loading={loading} />
-        <StatsCard icon="🌊" label="High Flood Risk" value={agg.highFlood} unit="districts" trend={5} color="var(--accent-danger)" loading={loading} />
+        <StatsCard icon={MapIcon} label="Districts Monitored" value={agg.count} loading={loading} />
+        <StatsCard icon={Thermometer} label="Avg Temperature" value={agg.avgTemp} unit="°C" trend={2} loading={loading} />
+        <StatsCard icon={Wind} label="Avg Air Quality" value={agg.avgAqi} unit="AQI" trend={-12} loading={loading} />
+        <StatsCard icon={Waves} label="High Flood Risk" value={agg.highFlood} unit="districts" trend={5} loading={loading} />
       </div>
 
       {/* Charts Row 1 */}
       <div className="grid-2" style={{ marginBottom: 24 }}>
-        <TimeSeriesChart data={tempSeries} title={`Temperature — ${selected}`} color="#f59e0b" type="area" unit="°C" />
-        <TimeSeriesChart data={rainSeries} title={`Rainfall — ${selected}`} color="#3b82f6" type="bar" unit="mm" />
+        <TimeSeriesChart data={tempSeries} title={`Temperature — ${selected}`} type="area" unit="°C" />
+        <TimeSeriesChart data={rainSeries} title={`Rainfall — ${selected}`} type="bar" unit="mm" />
       </div>
 
       {/* Charts Row 2 */}
       <div className="grid-2" style={{ marginBottom: 24 }}>
-        <TimeSeriesChart data={aqiSeries} title={`Air Quality Index — ${selected}`} color="#ef4444" type="area" unit="AQI" />
+        <TimeSeriesChart data={aqiSeries} title={`Air Quality Index — ${selected}`} type="area" unit="AQI" />
         <HeatmapChart title="Temperature Heatmap (Weekly)" />
       </div>
 
       {/* Top-risk ranking */}
+      <Divider />
       <div className="glass-card">
         <div className="chart-title" style={{ marginBottom: 16 }}>
           <span>Top Districts by Risk</span>
-          <div style={{ display: 'flex', gap: 4 }}>
+          <div className="flex gap-1">
             {([['flood_risk', 'Flood'], ['aqi', 'AQI'], ['temperature', 'Heat']] as const).map(([m, label]) => (
-              <button key={m} className={rankMetric === m ? 'btn-primary' : 'btn-secondary'} style={{ padding: '5px 12px', fontSize: '0.75rem' }} onClick={() => setRankMetric(m)}>
+              <Button key={m} variant={rankMetric === m ? 'primary' : 'secondary'} size="sm" onClick={() => setRankMetric(m)}>
                 {label}
-              </button>
+              </Button>
             ))}
           </div>
         </div>
@@ -164,13 +169,15 @@ export default function DashboardPage() {
               const val = rankMetric === 'flood_risk' ? d.flood_risk : rankMetric === 'aqi' ? d.aqi / 350 : d.temperature / 44;
               return (
                 <div key={d.name + i} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <span style={{ width: 20, color: 'var(--text-muted)', fontSize: '0.8rem', fontFamily: 'JetBrains Mono, monospace' }}>{i + 1}</span>
+                  <span className="font-mono" style={{ width: 20, color: 'var(--text-muted)', fontSize: '0.8rem' }}>{i + 1}</span>
                   <span style={{ width: 130, fontSize: '0.85rem', fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{d.name}</span>
                   <span style={{ width: 120, fontSize: '0.72rem', color: 'var(--text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{d.state_name}</span>
-                  <div style={{ flex: 1, height: 8, borderRadius: 4, background: 'var(--bg-secondary)', overflow: 'hidden' }}>
-                    <div style={{ width: `${Math.min(100, Math.max(4, val * 100))}%`, height: '100%', background: rankColor(d), borderRadius: 4, transition: 'width 0.4s' }} />
+                  <div style={{ flex: 1, height: 8, border: '1px solid #000000', background: 'var(--bg-secondary)', overflow: 'hidden' }}>
+                    <div style={{ width: `${Math.min(100, Math.max(4, val * 100))}%`, height: '100%', background: rankColor(d), transition: 'width 0.4s' }} />
                   </div>
-                  <span style={{ width: 64, textAlign: 'right', fontSize: '0.82rem', fontFamily: 'JetBrains Mono, monospace', color: rankColor(d) }}>{fmt(d)}</span>
+                  {/* Bar fill encodes severity; the number itself always stays
+                      readable foreground text, never tied to the fill color. */}
+                  <span className="font-mono" style={{ width: 64, textAlign: 'right', fontSize: '0.82rem', color: 'var(--text-primary)' }}>{fmt(d)}</span>
                 </div>
               );
             })}

@@ -1,8 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import { Zap } from 'lucide-react';
 import { SIMULATION_TYPES } from '@/lib/constants';
 import { SimulationParams } from '@/lib/types';
+import Button from '@/components/ui/Button';
+import Input from '@/components/ui/Input';
 
 interface SimulationFormProps {
   simulationType: typeof SIMULATION_TYPES[number];
@@ -45,37 +48,39 @@ export default function SimulationForm({ simulationType, onSubmit, onCancel, loa
     });
   };
 
+  const Icon = simulationType.icon;
+
   return (
     <form onSubmit={handleSubmit} className="glass-card animate-slideUp" style={{ padding: 28 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-        <h2 style={{ fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ fontSize: '1.8rem' }}>{simulationType.icon}</span>
+        <h2 className="font-display flex items-center gap-3 text-2xl font-bold">
+          <Icon size={28} strokeWidth={1.5} />
           {simulationType.label}
         </h2>
-        <button type="button" className="btn-secondary" onClick={onCancel} style={{ padding: '6px 14px' }}>
+        <Button type="button" variant="secondary" size="sm" onClick={onCancel}>
           Cancel
-        </button>
+        </Button>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 24 }}>
         {/* Name */}
         <div>
           <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: 6 }}>Simulation Name</label>
-          <input id="sim-name" className="input-field" value={name} onChange={e => setName(e.target.value)} required />
+          <Input id="sim-name" value={name} onChange={e => setName(e.target.value)} required />
         </div>
         {/* Description */}
         <div>
           <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: 6 }}>Description (optional)</label>
-          <input id="sim-desc" className="input-field" value={description} onChange={e => setDescription(e.target.value)} />
+          <Input id="sim-desc" value={description} onChange={e => setDescription(e.target.value)} />
         </div>
         {/* Date range */}
         <div>
           <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: 6 }}>Start Date</label>
-          <input id="sim-date-start" type="date" className="input-field" value={dateStart} onChange={e => setDateStart(e.target.value)} required />
+          <Input id="sim-date-start" type="date" value={dateStart} onChange={e => setDateStart(e.target.value)} required />
         </div>
         <div>
           <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: 6 }}>End Date</label>
-          <input id="sim-date-end" type="date" className="input-field" value={dateEnd} onChange={e => setDateEnd(e.target.value)} required />
+          <Input id="sim-date-end" type="date" value={dateEnd} onChange={e => setDateEnd(e.target.value)} required />
         </div>
       </div>
 
@@ -112,33 +117,35 @@ export default function SimulationForm({ simulationType, onSubmit, onCancel, loa
           Districts ({selectedDistricts.length} selected)
         </h3>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
-          {DEMO_DISTRICTS.map(d => (
-            <label
-              key={d.id}
-              style={{
-                display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer',
-                padding: '8px 10px', borderRadius: 8,
-                border: `1px solid ${selectedDistricts.includes(d.id) ? 'var(--accent-primary)' : 'var(--glass-border)'}`,
-                background: selectedDistricts.includes(d.id) ? 'rgba(0,212,170,0.08)' : 'transparent',
-                fontSize: '0.8rem', color: selectedDistricts.includes(d.id) ? 'var(--accent-primary)' : 'var(--text-secondary)',
-                transition: 'all 0.2s',
-              }}
-            >
-              <input
-                type="checkbox"
-                checked={selectedDistricts.includes(d.id)}
-                onChange={() => toggleDistrict(d.id)}
-                style={{ accentColor: 'var(--accent-primary)' }}
-              />
-              {d.name}
-            </label>
-          ))}
+          {DEMO_DISTRICTS.map(d => {
+            const active = selectedDistricts.includes(d.id);
+            return (
+              <label
+                key={d.id}
+                className="flex cursor-pointer items-center gap-2 border px-2.5 py-2 text-sm transition-colors duration-100"
+                style={{
+                  borderColor: '#000000',
+                  background: active ? '#000000' : 'transparent',
+                  color: active ? '#FFFFFF' : 'var(--text-secondary)',
+                }}
+              >
+                <input
+                  type="checkbox"
+                  checked={active}
+                  onChange={() => toggleDistrict(d.id)}
+                  style={{ accentColor: '#000000' }}
+                />
+                {d.name}
+              </label>
+            );
+          })}
         </div>
       </div>
 
-      <button type="submit" className="btn-primary" disabled={loading} style={{ width: '100%', padding: '12px' }}>
-        {loading ? 'Running Simulation...' : '⚡ Run Simulation'}
-      </button>
+      <Button type="submit" disabled={loading} className="w-full">
+        <Zap size={16} strokeWidth={1.5} />
+        {loading ? 'Running Simulation...' : 'Run Simulation'}
+      </Button>
     </form>
   );
 }

@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { SIMULATION_TYPES } from '@/lib/constants';
 import SimulationForm from '@/components/simulation/SimulationForm';
 import ResultsPanel, { Result } from '@/components/simulation/ResultsPanel';
+import Header from '@/components/ui/Header';
+import Button from '@/components/ui/Button';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import { SimulationParams } from '@/lib/types';
 
 type Phase = 'idle' | 'configuring' | 'running' | 'results';
@@ -75,18 +78,13 @@ export default function SimulationPage() {
 
   return (
     <div className="animate-fadeIn">
-      {/* Header */}
-      <div className="page-header">
-        <div>
-          <h1 className="page-title">Simulation Engine</h1>
-          <p className="page-subtitle">Model environmental impacts across Indian districts</p>
-        </div>
+      <Header title="Simulation Engine" subtitle="Model environmental impacts across Indian districts">
         {phase !== 'idle' && (
-          <button className="btn-secondary" onClick={() => { setPhase('idle'); setSelectedType(null); }}>
+          <Button variant="secondary" size="sm" onClick={() => { setPhase('idle'); setSelectedType(null); }}>
             ← Back
-          </button>
+          </Button>
         )}
-      </div>
+      </Header>
 
       {/* Phase: idle — type selection */}
       {phase === 'idle' && (
@@ -95,27 +93,34 @@ export default function SimulationPage() {
             Select a simulation type to get started.
           </p>
           <div className="sim-types-grid">
-            {SIMULATION_TYPES.map(type => (
-              <div
-                key={type.id}
-                id={`sim-type-${type.id}`}
-                className="glass-card sim-card"
-                onClick={() => handleTypeSelect(type)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={e => e.key === 'Enter' && handleTypeSelect(type)}
-                style={{ borderTop: `3px solid ${type.color}` }}
-              >
-                <div className="sim-card-icon">{type.icon}</div>
-                <div className="sim-card-title" style={{ color: type.color }}>{type.label}</div>
-                <div className="sim-card-desc">{type.description}</div>
-                <div style={{ marginTop: 16, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                  {type.params.map(p => (
-                    <span key={p.key} className="badge badge-info" style={{ fontSize: '0.65rem' }}>{p.label}</span>
-                  ))}
+            {SIMULATION_TYPES.map(type => {
+              const Icon = type.icon;
+              return (
+                <div
+                  key={type.id}
+                  id={`sim-type-${type.id}`}
+                  className="glass-card sim-card p-6"
+                  onClick={() => handleTypeSelect(type)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={e => e.key === 'Enter' && handleTypeSelect(type)}
+                >
+                  <div className="mb-3 flex items-center justify-between">
+                    <span className="font-mono text-xs tracking-widest opacity-60">{type.number}</span>
+                    <Icon size={26} strokeWidth={1.5} />
+                  </div>
+                  <div className="sim-card-title">{type.label}</div>
+                  <div className="sim-card-desc">{type.description}</div>
+                  <div style={{ marginTop: 16, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                    {type.params.map(p => (
+                      <span key={p.key} className="border border-current px-2 py-0.5 font-mono text-[0.6rem] uppercase tracking-wider opacity-70">
+                        {p.label}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
@@ -133,17 +138,11 @@ export default function SimulationPage() {
       {/* Phase: running */}
       {phase === 'running' && (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 300, gap: 24 }}>
-          <div style={{
-            width: 72, height: 72, borderRadius: '50%',
-            border: '4px solid rgba(0,212,170,0.15)',
-            borderTopColor: 'var(--accent-primary)',
-            animation: 'spin 0.8s linear infinite',
-          }} />
+          <LoadingSpinner size="lg" />
           <div style={{ textAlign: 'center' }}>
-            <h2 style={{ color: 'var(--accent-primary)', marginBottom: 8 }}>Running Simulation</h2>
+            <h2 className="font-display mb-2 text-2xl font-bold">Running Simulation</h2>
             <p style={{ color: 'var(--text-muted)' }}>Processing {selectedType?.label} model...</p>
           </div>
-          <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
         </div>
       )}
 

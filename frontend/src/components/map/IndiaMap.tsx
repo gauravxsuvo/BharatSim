@@ -11,15 +11,23 @@ import IndiaChoropleth from './IndiaChoropleth';
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
 const HAS_TOKEN = !!MAPBOX_TOKEN && MAPBOX_TOKEN.startsWith('pk.') && !MAPBOX_TOKEN.includes('placeholder');
 
-function getColorExpression(metric: string): any {
-  const expressions: Record<string, any> = {
-    temperature: ['interpolate', ['linear'], ['get', 'temperature'], 6, '#3b82f6', 20, '#22c55e', 30, '#f59e0b', 42, '#ef4444'],
-    rainfall: ['interpolate', ['linear'], ['get', 'rainfall'], 0, '#dbeafe', 30, '#60a5fa', 80, '#2563eb', 150, '#1e3a8a'],
-    flood_risk: ['interpolate', ['linear'], ['get', 'flood_risk'], 0, '#22c55e', 0.3, '#f59e0b', 0.6, '#ef4444', 1, '#991b1b'],
-    aqi: ['interpolate', ['linear'], ['get', 'aqi'], 0, '#22c55e', 100, '#f59e0b', 200, '#ef4444', 350, '#7f1d1d'],
-    population: ['interpolate', ['linear'], ['get', 'population'], 0, '#ddd6fe', 3000, '#a78bfa', 10000, '#7c3aed', 22000, '#4c1d95'],
-  };
-  return expressions[metric] || expressions.temperature;
+// Non-linear breakpoints per metric (domain knowledge, not color data).
+// Colors always come from METRICS[].colorScale in constants.ts — the
+// single source of truth for the grayscale ramp — so this table never
+// duplicates a color value, only the stop positions.
+const METRIC_STOPS: Record<string, [number, number, number, number]> = {
+  temperature: [6, 20, 30, 42],
+  rainfall: [0, 30, 80, 150],
+  flood_risk: [0, 0.3, 0.6, 1],
+  aqi: [0, 100, 200, 350],
+  population: [0, 3000, 10000, 22000],
+};
+
+function getColorExpression(metricId: string): any {
+  const metric = METRICS.find((m) => m.id === metricId) || METRICS[0];
+  const stops = METRIC_STOPS[metric.id] || METRIC_STOPS.temperature;
+  const [c0, c1, c2, c3] = metric.colorScale;
+  return ['interpolate', ['linear'], ['get', metric.id], stops[0], c0, stops[1], c1, stops[2], c2, stops[3], c3];
 }
 
 export default function IndiaMap({
@@ -76,13 +84,19 @@ function MapboxView({
   }, [onDistrictClick]);
 
   return (
+    // This path only renders when a user supplies their own Mapbox token
+    // (opt-in "live" upgrade — see README's data/API modes table). Mapbox's
+    // hosted basemap styles/controls are outside our styling control, so
+    // "light-v11" plus the .mapboxgl-ctrl override in globals.css is a
+    // documented, accepted best-effort rather than a fully custom
+    // monochrome Mapbox Studio style.
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       <Map
         ref={mapRef}
         mapboxAccessToken={MAPBOX_TOKEN}
         initialViewState={{ longitude: INDIA_CENTER[0], latitude: INDIA_CENTER[1], zoom: DEFAULT_ZOOM }}
         style={{ width: '100%', height: '100%' }}
-        mapStyle="mapbox://styles/mapbox/dark-v11"
+        mapStyle="mapbox://styles/mapbox/light-v11"
         interactiveLayerIds={['districts-fill']}
         onMouseMove={onMouseMove}
         onMouseLeave={onMouseLeave}
@@ -104,7 +118,7 @@ function MapboxView({
               id="districts-line"
               type="line"
               paint={{
-                'line-color': ['case', ['==', ['get', 'id'], hoveredId ?? -1], '#00d4aa', 'rgba(255,255,255,0.18)'],
+                'line-color': ['case', ['==', ['get', 'id'], hoveredId ?? -1], '#000000', 'rgba(0,0,0,0.25)'],
                 'line-width': ['case', ['==', ['get', 'id'], hoveredId ?? -1], 2, 0.4],
               }}
             />
@@ -114,9 +128,9 @@ function MapboxView({
       {tooltip && (
         <div style={{
           position: 'absolute', left: tooltip.x + 12, top: tooltip.y - 8,
-          background: 'rgba(17,24,39,0.95)', border: '1px solid rgba(255,255,255,0.1)',
-          borderRadius: 8, padding: '8px 12px', fontSize: '0.8rem', color: 'var(--text-primary)',
-          pointerEvents: 'none', zIndex: 20, maxWidth: 260, backdropFilter: 'blur(12px)',
+          background: '#FFFFFF', border: '1px solid #000000',
+          padding: '8px 12px', fontSize: '0.8rem', color: '#000000', fontFamily: 'var(--font-body)',
+          pointerEvents: 'none', zIndex: 20, maxWidth: 260,
         }}>
           {tooltip.text}
         </div>

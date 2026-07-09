@@ -1,18 +1,18 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { LucideIcon } from 'lucide-react';
 
 interface StatsCardProps {
-  icon: string;
+  icon: LucideIcon;
   label: string;
   value: number;
   unit?: string;
   trend?: number;
-  color?: string;
   loading?: boolean;
 }
 
-export default function StatsCard({ icon, label, value, unit = '', trend, color = 'var(--accent-primary)', loading = false }: StatsCardProps) {
+export default function StatsCard({ icon: Icon, label, value, unit = '', trend, loading = false }: StatsCardProps) {
   const [displayed, setDisplayed] = useState(0);
   const rafRef = useRef<number | null>(null);
 
@@ -48,14 +48,14 @@ export default function StatsCard({ icon, label, value, unit = '', trend, color 
 
   return (
     <div className="glass-card stat-card animate-slideUp">
-      <div className="stat-icon">{icon}</div>
-      <div className="stat-value" style={{ color }}>
+      <Icon size={22} strokeWidth={1.5} className="mb-1 text-foreground" />
+      <div className="stat-value">
         {displayed.toLocaleString()}
         {unit && <span style={{ fontSize: '1rem', fontWeight: 400, color: 'var(--text-muted)', marginLeft: 4 }}>{unit}</span>}
       </div>
       <div className="stat-label">{label}</div>
       {trend !== undefined && (
-        <div className={`stat-trend ${trend >= 0 ? 'trend-up' : 'trend-down'}`}>
+        <div className="stat-trend">
           {trend >= 0 ? '▲' : '▼'} {Math.abs(trend)}%
           <span style={{ color: 'var(--text-muted)', fontWeight: 400 }}> vs last month</span>
         </div>

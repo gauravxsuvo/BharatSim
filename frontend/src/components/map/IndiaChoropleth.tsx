@@ -2,6 +2,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
+import { MapPinOff, RotateCcw } from 'lucide-react';
 import { METRICS } from '@/lib/constants';
 import {
   loadIndiaDistricts,
@@ -10,6 +11,7 @@ import {
   EnrichedGeoJSON,
   DistrictMetrics,
 } from '@/lib/indiaData';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
 interface Props {
   selectedMetric: string;
@@ -74,10 +76,15 @@ export default function IndiaChoropleth({ selectedMetric, onDistrictClick }: Pro
   );
 
   const metric = METRICS.find((m) => m.id === selectedMetric) || METRICS[0];
+  // This canvas is inverted (black background, "photographic negative"),
+  // so the scale is reversed from its canonical light-canvas orientation
+  // in constants.ts: high values render light/white to stand out against
+  // black, low values recede toward black instead of disappearing into it.
+  const invertedScale = useMemo(() => [...metric.colorScale].reverse(), [metric]);
   const colors = useMemo(() => {
     const domain = METRIC_DOMAIN[metric.id] || [0, 100];
-    return paths.map((p) => colorForValue((p.props as any)[metric.id] ?? 0, metric.colorScale, domain));
-  }, [paths, metric]);
+    return paths.map((p) => colorForValue((p.props as any)[metric.id] ?? 0, invertedScale, domain));
+  }, [paths, metric, invertedScale]);
 
   // ---- Pan / zoom via SVG viewBox ----
   const [view, setView] = useState({ x: 0, y: 0, w: PW, h: PH });
@@ -143,6 +150,7 @@ export default function IndiaChoropleth({ selectedMetric, onDistrictClick }: Pro
   const metricLabel = metric.label;
 
   // Base district mesh — memoised so hover/pan don't re-render 759 paths.
+  // A white hairline stroke, not dark-on-dark, since the canvas is black.
   const mesh = useMemo(() => (
     <g>
       {paths.map((p, i) => (
@@ -150,7 +158,7 @@ export default function IndiaChoropleth({ selectedMetric, onDistrictClick }: Pro
           key={i}
           d={p.d}
           fill={colors[i]}
-          stroke="rgba(10,15,28,0.55)"
+          stroke="rgba(255,255,255,0.3)"
           strokeWidth={0.4}
           vectorEffect="non-scaling-stroke"
           onMouseEnter={() => setHoverId(i)}
@@ -164,17 +172,15 @@ export default function IndiaChoropleth({ selectedMetric, onDistrictClick }: Pro
   if (failed) {
     return (
       <div style={fallbackWrap}>
-        <div style={{ fontSize: '2.5rem' }}>🗺️</div>
-        <p style={{ color: 'var(--text-secondary)' }}>Could not load map geometry.</p>
+        <MapPinOff size={40} strokeWidth={1.5} color="#FFFFFF" />
+        <p className="font-body text-white/70">Could not load map geometry.</p>
       </div>
     );
   }
   if (!geojson) {
     return (
       <div style={fallbackWrap}>
-        <div style={{ width: 56, height: 56, borderRadius: '50%', border: '4px solid rgba(0,212,170,0.15)', borderTopColor: 'var(--accent-primary)', animation: 'spin 0.8s linear infinite' }} />
-        <p style={{ color: 'var(--text-muted)', marginTop: 8 }}>Rendering {`India`}…</p>
-        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+        <LoadingSpinner label="Rendering India" inverted />
       </div>
     );
   }
@@ -185,7 +191,7 @@ export default function IndiaChoropleth({ selectedMetric, onDistrictClick }: Pro
     : `${val}${metric.unit ? ' ' + metric.unit : ''}`;
 
   return (
-    <div ref={containerRef} style={{ position: 'relative', width: '100%', height: '100%', background: 'radial-gradient(1200px 800px at 60% 15%, #0d1626 0%, #070b14 70%)', overflow: 'hidden' }}>
+    <div ref={containerRef} className="relative h-full w-full overflow-hidden" style={{ background: 'radial-gradient(1200px 800px at 60% 15%, #0a0a0a 0%, #000000 70%)' }}>
       <svg
         ref={svgRef}
         viewBox={`${view.x} ${view.y} ${view.w} ${view.h}`}
@@ -197,28 +203,20 @@ export default function IndiaChoropleth({ selectedMetric, onDistrictClick }: Pro
         onMouseLeave={() => { setHoverId(null); setMouse(null); endDrag(); }}
         style={{ display: 'block', cursor: isDragging ? 'grabbing' : 'grab' }}
       >
-        <defs>
-          <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="2.2" result="b" />
-            <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
-          </filter>
-        </defs>
         {mesh}
         {hoveredPath && (
-          <path d={hoveredPath.d} fill="rgba(0,212,170,0.12)" stroke="#00d4aa" strokeWidth={1.4} vectorEffect="non-scaling-stroke" filter="url(#glow)" style={{ pointerEvents: 'none' }} />
+          <path d={hoveredPath.d} fill="rgba(255,255,255,0.15)" stroke="#FFFFFF" strokeWidth={1.4} vectorEffect="non-scaling-stroke" style={{ pointerEvents: 'none' }} />
         )}
       </svg>
 
       {hoveredPath && mouse && (
-        <div style={{
-          position: 'absolute', left: Math.min(mouse.x + 14, containerWidth - 220),
-          top: mouse.y + 12, background: 'rgba(10,15,28,0.95)', border: '1px solid var(--glass-border)',
-          borderRadius: 8, padding: '9px 13px', fontSize: '0.82rem', color: 'var(--text-primary)',
-          pointerEvents: 'none', zIndex: 20, backdropFilter: 'blur(10px)', boxShadow: '0 6px 20px rgba(0,0,0,0.4)',
-        }}>
-          <div style={{ fontWeight: 700 }}>{hoveredPath.props.name}</div>
-          <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: 4 }}>{hoveredPath.props.state_name}</div>
-          <div style={{ color: 'var(--accent-primary)', fontFamily: 'JetBrains Mono, monospace' }}>{metricLabel}: {displayVal}</div>
+        <div
+          className="absolute z-20 border border-foreground bg-background px-3.5 py-2.5 text-card-foreground"
+          style={{ left: Math.min(mouse.x + 14, containerWidth - 220), top: mouse.y + 12, pointerEvents: 'none' }}
+        >
+          <div className="font-display text-base font-bold">{hoveredPath.props.name}</div>
+          <div className="mb-1 text-xs text-muted-foreground">{hoveredPath.props.state_name}</div>
+          <div className="font-mono text-sm">{metricLabel}: {displayVal}</div>
         </div>
       )}
 
@@ -226,17 +224,15 @@ export default function IndiaChoropleth({ selectedMetric, onDistrictClick }: Pro
       <button
         onClick={() => setView({ x: 0, y: 0, w: PW, h: PH })}
         title="Reset view"
-        style={{
-          position: 'absolute', bottom: 16, right: 16, zIndex: 15, width: 40, height: 40,
-          borderRadius: 10, border: '1px solid var(--glass-border)', background: 'rgba(17,24,39,0.9)',
-          color: 'var(--text-primary)', cursor: 'pointer', fontSize: '1.1rem', backdropFilter: 'blur(8px)',
-        }}
-      >⟲</button>
+        className="absolute bottom-4 right-4 z-[15] flex h-10 w-10 items-center justify-center border border-background bg-white text-black"
+      >
+        <RotateCcw size={18} strokeWidth={1.5} />
+      </button>
 
       {/* Offline / self-contained badge */}
-      <div style={{ position: 'absolute', top: 16, left: 16, zIndex: 15, fontSize: '0.68rem', color: 'var(--text-muted)', background: 'rgba(17,24,39,0.75)', padding: '5px 11px', borderRadius: 999, border: '1px solid var(--glass-border)', display: 'flex', alignItems: 'center', gap: 6 }}>
-        <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent-primary)', boxShadow: '0 0 6px var(--accent-primary)' }} />
-        {geojson.features.length} districts · interactive vector map · drag & scroll to zoom
+      <div className="absolute top-4 left-4 z-[15] flex items-center gap-2 border border-white/40 px-3 py-1.5 font-mono text-xs uppercase tracking-widest text-white">
+        <span className="h-1.5 w-1.5 bg-white animate-pulse" />
+        {geojson.features.length} districts · drag &amp; scroll to zoom
       </div>
     </div>
   );
@@ -244,6 +240,6 @@ export default function IndiaChoropleth({ selectedMetric, onDistrictClick }: Pro
 
 const fallbackWrap: React.CSSProperties = {
   width: '100%', height: '100%', display: 'flex', flexDirection: 'column',
-  alignItems: 'center', justifyContent: 'center', gap: 8,
-  background: 'radial-gradient(1000px 700px at 60% 20%, #0d1626 0%, #070b14 70%)',
+  alignItems: 'center', justifyContent: 'center', gap: 12,
+  background: '#000000',
 };

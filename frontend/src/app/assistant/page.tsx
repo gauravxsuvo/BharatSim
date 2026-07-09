@@ -2,6 +2,9 @@
 
 import { useState, useRef } from 'react';
 import ChatWindow from '@/components/assistant/ChatWindow';
+import Header from '@/components/ui/Header';
+import Button from '@/components/ui/Button';
+import Input from '@/components/ui/Input';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -72,23 +75,20 @@ export default function AssistantPage() {
   };
 
   return (
-    <div className="animate-fadeIn" style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 64px)', margin: '-32px' }}>
-      {/* Header */}
-      <div style={{ padding: '20px 32px', borderBottom: '1px solid var(--border-color)', background: 'var(--bg-secondary)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div>
-          <h1 style={{ fontSize: '1.4rem', fontWeight: 700 }}>AI Assistant</h1>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: 2 }}>Powered by GPT-4o — specialized in Indian climate data</p>
-        </div>
-        {messages.length > 0 && (
-          <button className="btn-secondary" style={{ fontSize: '0.8rem', padding: '6px 14px' }} onClick={() => setMessages([])}>
-            Clear chat
-          </button>
-        )}
+    <div className="animate-fadeIn flex flex-col" style={{ height: 'calc(100vh - 64px)', margin: '-32px' }}>
+      <div style={{ padding: '24px 32px 0' }}>
+        <Header title="AI Assistant" subtitle="Powered by GPT-4o — specialized in Indian climate data">
+          {messages.length > 0 && (
+            <Button variant="secondary" size="sm" onClick={() => setMessages([])}>
+              Clear chat
+            </Button>
+          )}
+        </Header>
       </div>
 
       {/* Suggested questions */}
       {messages.length === 0 && (
-        <div className="suggested-chips" style={{ padding: '20px 32px' }}>
+        <div className="suggested-chips" style={{ padding: '0 32px 20px' }}>
           {SUGGESTED_QUESTIONS.map((q, i) => (
             <button key={i} className="chip" id={`chip-${i}`} onClick={() => sendMessage(q)}>
               {q}
@@ -104,10 +104,9 @@ export default function AssistantPage() {
 
       {/* Input bar */}
       <div className="chat-input-bar" style={{ padding: '16px 32px' }}>
-        <input
+        <Input
           id="chat-input"
           ref={inputRef}
-          className="input-field"
           type="text"
           placeholder="Ask about climate data, simulations, or districts..."
           value={input}
@@ -116,15 +115,14 @@ export default function AssistantPage() {
           disabled={loading}
           style={{ flex: 1 }}
         />
-        <button
+        <Button
           id="chat-send"
-          className="btn-primary"
+          size="sm"
           onClick={() => sendMessage(input)}
           disabled={loading || !input.trim()}
-          style={{ padding: '10px 20px', whiteSpace: 'nowrap' }}
         >
           {loading ? '...' : 'Send →'}
-        </button>
+        </Button>
       </div>
     </div>
   );

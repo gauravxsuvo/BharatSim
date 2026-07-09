@@ -4,16 +4,14 @@ import dynamic from 'next/dynamic';
 import { useState, useCallback } from 'react';
 import MapControls from '@/components/map/MapControls';
 import DistrictPopup from '@/components/map/DistrictPopup';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import { DistrictMetrics } from '@/lib/indiaData';
 
 const IndiaMap = dynamic(() => import('@/components/map/IndiaMap'), {
   ssr: false,
   loading: () => (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', background: 'var(--bg-primary)' }}>
-      <div style={{ textAlign: 'center' }}>
-        <div style={{ fontSize: '3rem', marginBottom: 16 }}>🗺️</div>
-        <p style={{ color: 'var(--text-muted)' }}>Loading map...</p>
-      </div>
+    <div className="flex h-full items-center justify-center" style={{ background: '#000000' }}>
+      <LoadingSpinner label="Loading map" inverted />
     </div>
   ),
 });
