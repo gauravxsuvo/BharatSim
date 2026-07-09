@@ -23,8 +23,19 @@ export function useMapData() {
   }, []);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    (async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await api.districts.geojson();
+        setGeojson(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load map data');
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
 
   return { geojson, loading, error, refetch: fetchData };
 }

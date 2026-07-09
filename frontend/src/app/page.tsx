@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import { useState, useCallback } from 'react';
 import MapControls from '@/components/map/MapControls';
 import DistrictPopup from '@/components/map/DistrictPopup';
+import { DistrictMetrics } from '@/lib/indiaData';
 
 const IndiaMap = dynamic(() => import('@/components/map/IndiaMap'), {
   ssr: false,
@@ -19,8 +20,8 @@ const IndiaMap = dynamic(() => import('@/components/map/IndiaMap'), {
 
 export default function MapPage() {
   const [selectedMetric, setSelectedMetric] = useState('temperature');
-  const [selectedDistrict, setSelectedDistrict] = useState<any>(null);
-  const handleDistrictClick = useCallback((district: any) => setSelectedDistrict(district), []);
+  const [selectedDistrict, setSelectedDistrict] = useState<DistrictMetrics | null>(null);
+  const handleDistrictClick = useCallback((district: DistrictMetrics) => setSelectedDistrict(district), []);
 
   return (
     <div style={{ position: 'relative', height: 'calc(100vh - 64px)', margin: '-32px', overflow: 'hidden' }}>

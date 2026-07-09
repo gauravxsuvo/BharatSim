@@ -1,3 +1,17 @@
+import {
+  District,
+  DistrictGeoJSON,
+  DistrictListResponse,
+  DashboardStats,
+  HeatmapDataPoint,
+  TimeSeriesPoint,
+  SimulationParams,
+  SimulationRun,
+  SimulationComparison,
+  ModelListResponse,
+  ChatResponse,
+} from './types';
+
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 async function fetchAPI<T>(endpoint: string, options?: RequestInit): Promise<T> {
@@ -15,39 +29,39 @@ async function fetchAPI<T>(endpoint: string, options?: RequestInit): Promise<T> 
 export const api = {
   districts: {
     list: (state?: string) =>
-      fetchAPI<any[]>(`/api/districts${state ? `?state=${state}` : ''}`),
-    geojson: () => fetchAPI<any>('/api/districts/geojson'),
-    get: (id: number) => fetchAPI<any>(`/api/districts/${id}`),
+      fetchAPI<DistrictListResponse>(`/api/districts/${state ? `?state=${state}` : ''}`),
+    geojson: () => fetchAPI<DistrictGeoJSON>('/api/districts/geojson'),
+    get: (id: number) => fetchAPI<District>(`/api/districts/${id}`),
   },
   dashboard: {
     heatmap: (metric: string) =>
-      fetchAPI<any[]>(`/api/dashboard/heatmap?metric=${metric}`),
+      fetchAPI<HeatmapDataPoint[]>(`/api/dashboard/heatmap?metric=${metric}`),
     timeseries: (districtId: number, metric: string, dateFrom: string, dateTo: string) =>
-      fetchAPI<any[]>(
+      fetchAPI<TimeSeriesPoint[]>(
         `/api/dashboard/timeseries?district_id=${districtId}&metric=${metric}&date_from=${dateFrom}&date_to=${dateTo}`
       ),
-    stats: () => fetchAPI<any>('/api/dashboard/stats'),
+    stats: () => fetchAPI<DashboardStats>('/api/dashboard/stats'),
   },
   simulations: {
-    run: (params: any) =>
-      fetchAPI<any>('/api/simulations', {
+    run: (params: SimulationParams) =>
+      fetchAPI<SimulationRun>('/api/simulations/', {
         method: 'POST',
         body: JSON.stringify(params),
       }),
-    list: () => fetchAPI<any[]>('/api/simulations'),
-    get: (id: number) => fetchAPI<any>(`/api/simulations/${id}`),
+    list: () => fetchAPI<SimulationRun[]>('/api/simulations/'),
+    get: (id: number) => fetchAPI<SimulationRun>(`/api/simulations/${id}`),
     compare: (ids: number[]) =>
-      fetchAPI<any>('/api/simulations/compare', {
+      fetchAPI<SimulationComparison>('/api/simulations/compare', {
         method: 'POST',
         body: JSON.stringify({ simulation_ids: ids }),
       }),
   },
   models: {
-    list: () => fetchAPI<any[]>('/api/models'),
+    list: () => fetchAPI<ModelListResponse>('/api/models/'),
   },
   assistant: {
-    chat: (message: string, context?: any) =>
-      fetchAPI<any>('/api/assistant/chat', {
+    chat: (message: string, context?: Record<string, unknown>) =>
+      fetchAPI<ChatResponse>('/api/assistant/chat', {
         method: 'POST',
         body: JSON.stringify({ message, context }),
       }),

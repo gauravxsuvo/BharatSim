@@ -3,12 +3,13 @@
 import { useState } from 'react';
 import { SIMULATION_TYPES } from '@/lib/constants';
 import SimulationForm from '@/components/simulation/SimulationForm';
-import ResultsPanel from '@/components/simulation/ResultsPanel';
+import ResultsPanel, { Result } from '@/components/simulation/ResultsPanel';
+import { SimulationParams } from '@/lib/types';
 
 type Phase = 'idle' | 'configuring' | 'running' | 'results';
 
 // Generate demo results when API not available
-function generateDemoResults(simType: string, districtIds: number[]) {
+function generateDemoResults(simType: string, districtIds: number[]): Result[] {
   const DISTRICT_NAMES: Record<number, string> = {
     1: 'Mumbai', 2: 'Pune', 3: 'Chennai', 4: 'Coimbatore',
     5: 'Lucknow', 6: 'Varanasi', 7: 'Jaipur', 8: 'Jodhpur', 9: 'Kolkata', 10: 'Darjeeling',
@@ -35,7 +36,7 @@ function generateDemoResults(simType: string, districtIds: number[]) {
 export default function SimulationPage() {
   const [phase, setPhase] = useState<Phase>('idle');
   const [selectedType, setSelectedType] = useState<typeof SIMULATION_TYPES[number] | null>(null);
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<Result[]>([]);
   const [simName, setSimName] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -44,7 +45,7 @@ export default function SimulationPage() {
     setPhase('configuring');
   };
 
-  const handleSubmit = async (formData: any) => {
+  const handleSubmit = async (formData: SimulationParams) => {
     setLoading(true);
     setPhase('running');
     setSimName(formData.name);

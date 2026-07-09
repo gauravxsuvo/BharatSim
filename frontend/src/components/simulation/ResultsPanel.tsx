@@ -2,7 +2,7 @@
 
 import { SEVERITY_COLORS } from '@/lib/constants';
 
-interface Result {
+export interface Result {
   district_id?: number;
   metric_name: string;
   metric_value: number;
@@ -24,7 +24,7 @@ const DISTRICT_NAMES: Record<number, string> = {
   5: 'Lucknow', 6: 'Varanasi', 7: 'Jaipur', 8: 'Jodhpur', 9: 'Kolkata', 10: 'Darjeeling',
 };
 
-export default function ResultsPanel({ results, simulationName, simulationType, onReset }: ResultsPanelProps) {
+export default function ResultsPanel({ results, simulationName, onReset }: ResultsPanelProps) {
   const avgValue = results.length > 0 ? (results.reduce((s, r) => s + r.metric_value, 0) / results.length).toFixed(2) : '—';
   const maxSeverity = results.reduce((max, r) => {
     const order = ['low', 'medium', 'high', 'severe', 'critical'];

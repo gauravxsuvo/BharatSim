@@ -56,6 +56,7 @@ export default function IndiaChoropleth({ selectedMetric, onDistrictClick }: Pro
   const [failed, setFailed] = useState(false);
   const [hoverId, setHoverId] = useState<number | null>(null);
   const [mouse, setMouse] = useState<{ x: number; y: number } | null>(null);
+  const [containerWidth, setContainerWidth] = useState(9999);
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
@@ -80,7 +81,11 @@ export default function IndiaChoropleth({ selectedMetric, onDistrictClick }: Pro
 
   // ---- Pan / zoom via SVG viewBox ----
   const [view, setView] = useState({ x: 0, y: 0, w: PW, h: PH });
-  useEffect(() => { setView({ x: 0, y: 0, w: PW, h: PH }); }, [PH]);
+  const [prevPH, setPrevPH] = useState(PH);
+  if (PH !== prevPH) {
+    setPrevPH(PH);
+    setView({ x: 0, y: 0, w: PW, h: PH });
+  }
 
   const clampView = useCallback((v: { x: number; y: number; w: number; h: number }) => {
     const w = Math.max(PW * 0.12, Math.min(PW, v.w));
@@ -113,11 +118,16 @@ export default function IndiaChoropleth({ selectedMetric, onDistrictClick }: Pro
   }, [PH, clampView]);
 
   const drag = useRef<{ x: number; y: number } | null>(null);
-  const onMouseDown = (e: React.MouseEvent) => { drag.current = { x: e.clientX, y: e.clientY }; };
+  const [isDragging, setIsDragging] = useState(false);
+  const onMouseDown = (e: React.MouseEvent) => {
+    drag.current = { x: e.clientX, y: e.clientY };
+    setIsDragging(true);
+  };
   const onMouseMoveSvg = (e: React.MouseEvent) => {
     if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
       setMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+      setContainerWidth(rect.width);
     }
     if (drag.current && svgRef.current) {
       const rect = svgRef.current.getBoundingClientRect();
@@ -127,7 +137,7 @@ export default function IndiaChoropleth({ selectedMetric, onDistrictClick }: Pro
       setView((v) => clampView({ ...v, x: v.x - dx, y: v.y - dy }));
     }
   };
-  const endDrag = () => { drag.current = null; };
+  const endDrag = () => { drag.current = null; setIsDragging(false); };
 
   const hoveredPath = hoverId != null ? paths[hoverId] : null;
   const metricLabel = metric.label;
@@ -185,7 +195,7 @@ export default function IndiaChoropleth({ selectedMetric, onDistrictClick }: Pro
         onMouseDown={onMouseDown}
         onMouseUp={endDrag}
         onMouseLeave={() => { setHoverId(null); setMouse(null); endDrag(); }}
-        style={{ display: 'block', cursor: drag.current ? 'grabbing' : 'grab' }}
+        style={{ display: 'block', cursor: isDragging ? 'grabbing' : 'grab' }}
       >
         <defs>
           <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
@@ -201,7 +211,7 @@ export default function IndiaChoropleth({ selectedMetric, onDistrictClick }: Pro
 
       {hoveredPath && mouse && (
         <div style={{
-          position: 'absolute', left: Math.min(mouse.x + 14, (containerRef.current?.clientWidth || 9999) - 220),
+          position: 'absolute', left: Math.min(mouse.x + 14, containerWidth - 220),
           top: mouse.y + 12, background: 'rgba(10,15,28,0.95)', border: '1px solid var(--glass-border)',
           borderRadius: 8, padding: '9px 13px', fontSize: '0.82rem', color: 'var(--text-primary)',
           pointerEvents: 'none', zIndex: 20, backdropFilter: 'blur(10px)', boxShadow: '0 6px 20px rgba(0,0,0,0.4)',

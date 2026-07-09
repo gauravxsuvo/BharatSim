@@ -56,6 +56,6 @@ class ChatResponse(BaseModel):
     """
 
     message: str = Field(..., description="Assistant response")
-    sources: list[str] | None = Field(
-        None, description="Data sources referenced"
+    sources: list[dict[str, Any]] = Field(
+        default_factory=list, description="Data sources referenced"
     )

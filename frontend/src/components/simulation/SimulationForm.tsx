@@ -2,10 +2,11 @@
 
 import { useState } from 'react';
 import { SIMULATION_TYPES } from '@/lib/constants';
+import { SimulationParams } from '@/lib/types';
 
 interface SimulationFormProps {
   simulationType: typeof SIMULATION_TYPES[number];
-  onSubmit: (data: any) => void;
+  onSubmit: (data: SimulationParams) => void;
   onCancel: () => void;
   loading?: boolean;
 }

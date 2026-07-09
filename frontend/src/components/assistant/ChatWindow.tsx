@@ -29,7 +29,7 @@ export default function ChatWindow({ messages, loading }: ChatWindowProps) {
       {messages.length === 0 && (
         <div style={{ textAlign: 'center', color: 'var(--text-muted)', marginTop: 60 }}>
           <div style={{ fontSize: '3rem', marginBottom: 12 }}>🤖</div>
-          <p>Ask me anything about climate simulations, environmental data, or India's districts.</p>
+          <p>Ask me anything about climate simulations, environmental data, or India&apos;s districts.</p>
         </div>
       )}
 

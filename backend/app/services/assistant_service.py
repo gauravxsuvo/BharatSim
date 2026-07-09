@@ -19,6 +19,66 @@ from app.models import SimulationResult, SimulationRun
 
 logger = logging.getLogger(__name__)
 
+DEMO_RESPONSES: dict[str, str] = {
+    "flood": (
+        "Based on historical data and simulation models, the districts most vulnerable to "
+        "flooding in India are typically those near major river systems:\n\n"
+        "- Varanasi (Ganges) — consistently high flood risk during monsoon\n"
+        "- Kolkata (Hooghly) — urban flooding amplified by high population density\n"
+        "- Mumbai (coastal + Mithi River) — storm surge and urban drainage failures\n\n"
+        "Flood risk increases significantly when soil saturation exceeds 70% combined with "
+        "rainfall multipliers above 2x normal levels."
+    ),
+    "heatwave": (
+        "Heatwave severity in India is classified using IMD criteria: a departure of 4.5°C or "
+        "more above the normal maximum temperature (or an absolute maximum above 40°C on the "
+        "plains) sustained for multiple consecutive days. Urban heat island effects can add "
+        "2-5°C on top of the regional baseline, especially in dense metros."
+    ),
+    "crop_yield": (
+        "Temperature has a significant non-linear impact on crop yields in India:\n\n"
+        "- Below 25°C: optimal for most Rabi crops (wheat, mustard)\n"
+        "- 25-35°C: moderate stress, 5-15% yield reduction in heat-sensitive crops\n"
+        "- Above 35°C: severe heat stress, 20-40% yield reduction in rice and wheat\n\n"
+        "Combined with reduced rainfall, yield declines compound quickly — irrigation coverage "
+        "and fertilizer use are the two levers that offset the loss most effectively."
+    ),
+    "air_quality": (
+        "Air quality in Indian districts follows a stark seasonal and geographic pattern. The "
+        "Indo-Gangetic plain (Punjab through Bihar) sees the worst winter AQI, driven by stubble "
+        "burning, vehicle emissions, and low wind dispersion during winter fog conditions. "
+        "Coastal and hill districts generally see much better dispersion year-round."
+    ),
+    "default": (
+        "I'm BharatSim's built-in demo assistant. I can help you interpret flood, heatwave, crop "
+        "yield, and air quality simulation results, and explain the environmental factors behind "
+        "them. Set OPENAI_API_KEY in the backend .env to enable live, model-generated answers — "
+        "in the meantime, here's a demo response based on your question."
+    ),
+}
+
+
+def _demo_chat_response(message: str, sources: list[dict]) -> dict:
+    """Build a canned response when no live AI provider is configured.
+
+    Mirrors the frontend's own demo fallback so the API behaves the same
+    sample/demo-by-default way whether it's called from the bundled UI or
+    directly (e.g. via /docs or another client).
+    """
+    lower = message.lower()
+    if "flood" in lower:
+        text = DEMO_RESPONSES["flood"]
+    elif "heatwave" in lower or "heat wave" in lower or "temperature" in lower:
+        text = DEMO_RESPONSES["heatwave"]
+    elif "crop" in lower or "yield" in lower:
+        text = DEMO_RESPONSES["crop_yield"]
+    elif "air quality" in lower or "aqi" in lower or "pollution" in lower:
+        text = DEMO_RESPONSES["air_quality"]
+    else:
+        text = DEMO_RESPONSES["default"]
+    return {"message": text, "sources": sources}
+
+
 BHARATSIM_SYSTEM_PROMPT = """You are BharatSim AI Assistant, an expert in environmental \
 science, climate analysis, and geospatial data for India. You help users understand \
 simulation results, interpret environmental data, and provide insights about:
@@ -117,14 +177,8 @@ async def chat(
         Dictionary with 'message' (AI response) and 'sources' (data sources used).
 
     Raises:
-        HTTPException: On API errors or configuration issues.
+        HTTPException: On API errors.
     """
-    if not settings.OPENAI_API_KEY:
-        raise HTTPException(
-            status_code=500,
-            detail="OpenAI API key not configured. Set OPENAI_API_KEY in environment.",
-        )
-
     # Build messages list
     messages = [
         {"role": "system", "content": BHARATSIM_SYSTEM_PROMPT},
@@ -154,6 +208,10 @@ async def chat(
         "simulation" if sources else "none",
         message[:100],
     )
+
+    if not settings.OPENAI_API_KEY:
+        logger.info("OPENAI_API_KEY not configured; serving built-in demo response.")
+        return _demo_chat_response(message, sources)
 
     try:
         async with httpx.AsyncClient(timeout=60.0) as client:

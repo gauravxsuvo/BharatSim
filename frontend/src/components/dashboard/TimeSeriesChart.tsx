@@ -13,7 +13,14 @@ interface TimeSeriesChartProps {
   unit?: string;
 }
 
-const CustomTooltip = ({ active, payload, label, unit }: any) => {
+interface CustomTooltipProps {
+  active?: boolean;
+  payload?: { color?: string; value?: number | string }[];
+  label?: string;
+  unit?: string;
+}
+
+const CustomTooltip = ({ active, payload, label, unit }: CustomTooltipProps) => {
   if (!active || !payload?.length) return null;
   return (
     <div style={{

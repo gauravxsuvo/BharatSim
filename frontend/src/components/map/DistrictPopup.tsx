@@ -1,11 +1,19 @@
 'use client';
 
+import { DistrictMetrics } from '@/lib/indiaData';
+
 interface DistrictPopupProps {
-  district: Record<string, any>;
+  district: DistrictMetrics;
   onClose: () => void;
 }
 
-const METRIC_ROWS = [
+const METRIC_ROWS: {
+  key: keyof DistrictMetrics;
+  label: string;
+  unit: string;
+  icon: string;
+  format?: (v: number) => string;
+}[] = [
   { key: 'temperature', label: 'Temperature', unit: '°C', icon: '🌡️' },
   { key: 'rainfall', label: 'Rainfall', unit: 'mm', icon: '🌧️' },
   { key: 'aqi', label: 'Air Quality Index', unit: 'AQI', icon: '💨' },

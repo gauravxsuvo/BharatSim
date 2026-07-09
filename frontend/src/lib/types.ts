@@ -9,6 +9,11 @@ export interface District {
   centroid_lon: number;
 }
 
+export interface GeoJSONGeometry {
+  type: string;
+  coordinates: unknown;
+}
+
 export interface DistrictGeoJSON {
   type: 'FeatureCollection';
   features: Array<{
@@ -18,7 +23,7 @@ export interface DistrictGeoJSON {
       name: string;
       state_name: string;
     };
-    geometry: any;
+    geometry: GeoJSONGeometry;
   }>;
 }
 
@@ -56,10 +61,15 @@ export interface PopulationData {
   literacy_rate: number;
 }
 
+export interface DistrictListResponse {
+  districts: District[];
+  total: number;
+}
+
 export interface SimulationParams {
   simulation_type: string;
   name: string;
-  description: string;
+  description?: string;
   district_ids: number[];
   date_range_start: string;
   date_range_end: string;
@@ -121,4 +131,33 @@ export interface MLModel {
   version: string;
   accuracy: number | null;
   is_active: boolean;
+}
+
+export interface ModelListResponse {
+  models: MLModel[];
+  total: number;
+}
+
+export interface ChatSource {
+  type: string;
+  id: number;
+  description: string;
+}
+
+export interface ChatResponse {
+  message: string;
+  sources: ChatSource[];
+}
+
+export interface SimulationComparison {
+  simulations: Array<{
+    id: number;
+    name: string;
+    simulation_type: string;
+    status: string;
+    created_at: string | null;
+    results: SimulationResult[];
+  }>;
+  metrics: string[];
+  districts: number[];
 }

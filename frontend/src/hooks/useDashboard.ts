@@ -64,8 +64,25 @@ export function useDashboard() {
   }, []);
 
   useEffect(() => {
-    fetchStats();
-  }, [fetchStats]);
+    (async () => {
+      try {
+        setLoading(true);
+        const data = await api.dashboard.stats();
+        setStats(data);
+      } catch {
+        // Use fallback demo stats
+        setStats({
+          total_districts: 764,
+          total_weather_records: 125430,
+          total_river_records: 48720,
+          total_simulations: 23,
+          latest_data_date: '2026-06-27',
+        });
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
 
   return { stats, timeseries, heatmapData, loading, fetchStats, fetchTimeseries, fetchHeatmap };
 }

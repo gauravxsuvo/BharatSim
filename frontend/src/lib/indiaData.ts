@@ -131,7 +131,7 @@ export async function loadIndiaDistricts(): Promise<EnrichedGeoJSON> {
         const [lon, lat] = centroidOf(f.geometry);
         return {
           type: 'Feature',
-          properties: { id: i, ...deriveMetrics(name, state, lon != null ? lon : 79, lat != null ? lat : 22) },
+          properties: { id: i, ...deriveMetrics(name, state, lat != null ? lat : 22, lon != null ? lon : 79) },
           geometry: f.geometry,
         };
       });

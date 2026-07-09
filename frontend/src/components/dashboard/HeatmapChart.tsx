@@ -24,11 +24,18 @@ const DEMO_DATA: HeatmapRow[] = [
   { district: 'Kolkata', values: [{ label: 'Week 1', value: 21 }, { label: 'Week 2', value: 22 }, { label: 'Week 3', value: 23 }, { label: 'Week 4', value: 24 }] },
 ];
 
-function interpolateColor(value: number, min: number, max: number): string {
-  const t = Math.max(0, Math.min(1, (value - min) / (max - min)));
-  const r = Math.round(59 + t * (239 - 59));
-  const g = Math.round(130 - t * 100);
-  const b = Math.round(246 - t * 210);
+function hexToRgb(hex: string): [number, number, number] {
+  const h = hex.replace('#', '');
+  return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)];
+}
+
+function interpolateColor(value: number, min: number, max: number, colorMin: string, colorMax: string): string {
+  const t = Math.max(0, Math.min(1, (value - min) / (max - min || 1)));
+  const [r1, g1, b1] = hexToRgb(colorMin);
+  const [r2, g2, b2] = hexToRgb(colorMax);
+  const r = Math.round(r1 + t * (r2 - r1));
+  const g = Math.round(g1 + t * (g2 - g1));
+  const b = Math.round(b1 + t * (b2 - b1));
   return `rgb(${r},${g},${b})`;
 }
 
@@ -64,7 +71,7 @@ export default function HeatmapChart({ title, data, colorMin = '#3b82f6', colorM
                     onMouseEnter={(e) => setTooltip({ text: `${row.district} ${cell.label}: ${cell.value}`, x: e.clientX, y: e.clientY })}
                     onMouseLeave={() => setTooltip(null)}
                     style={{
-                      background: interpolateColor(cell.value, min, max),
+                      background: interpolateColor(cell.value, min, max, colorMin, colorMax),
                       borderRadius: 4,
                       height: 28,
                       cursor: 'pointer',
@@ -81,7 +88,7 @@ export default function HeatmapChart({ title, data, colorMin = '#3b82f6', colorM
       {/* Legend */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 12 }}>
         <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{min}°C</span>
-        <div style={{ flex: 1, height: 6, borderRadius: 3, background: `linear-gradient(to right, #3b82f6, #22c55e, #f59e0b, #ef4444)` }} />
+        <div style={{ flex: 1, height: 6, borderRadius: 3, background: `linear-gradient(to right, ${colorMin}, ${colorMax})` }} />
         <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{max}°C</span>
       </div>
       {tooltip && (
