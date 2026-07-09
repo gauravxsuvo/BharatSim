@@ -114,9 +114,9 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="animate-fadeIn">
+    <div className="page-shell animate-fadeIn">
       <Header title="Dashboard" subtitle={`Environmental analytics across ${agg.count || '—'} Indian districts`}>
-        <Select style={{ width: 170 }} value={selected} onChange={(e) => setSelected(e.target.value)}>
+        <Select className="w-full sm:w-[170px]" value={selected} onChange={(e) => setSelected(e.target.value)}>
           {options.map((d) => <option key={d} value={d}>{d}</option>)}
         </Select>
         <div className="flex gap-1">
@@ -168,16 +168,16 @@ export default function DashboardPage() {
             {ranked.map((d, i) => {
               const val = rankMetric === 'flood_risk' ? d.flood_risk : rankMetric === 'aqi' ? d.aqi / 350 : d.temperature / 44;
               return (
-                <div key={d.name + i} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <span className="font-mono" style={{ width: 20, color: 'var(--text-muted)', fontSize: '0.8rem' }}>{i + 1}</span>
-                  <span style={{ width: 130, fontSize: '0.85rem', fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{d.name}</span>
-                  <span style={{ width: 120, fontSize: '0.72rem', color: 'var(--text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{d.state_name}</span>
-                  <div style={{ flex: 1, height: 8, border: '1px solid #000000', background: 'var(--bg-secondary)', overflow: 'hidden' }}>
+                <div key={d.name + i} className="flex items-center gap-2 sm:gap-3">
+                  <span className="font-mono w-5 shrink-0 text-[0.8rem]" style={{ color: 'var(--text-muted)' }}>{i + 1}</span>
+                  <span className="w-20 shrink-0 truncate text-[0.85rem] font-medium sm:w-32">{d.name}</span>
+                  <span className="hidden w-28 shrink-0 truncate text-[0.72rem] sm:block" style={{ color: 'var(--text-muted)' }}>{d.state_name}</span>
+                  <div className="h-2 min-w-8 flex-1 overflow-hidden" style={{ border: '1px solid #000000', background: 'var(--bg-secondary)' }}>
                     <div style={{ width: `${Math.min(100, Math.max(4, val * 100))}%`, height: '100%', background: rankColor(d), transition: 'width 0.4s' }} />
                   </div>
                   {/* Bar fill encodes severity; the number itself always stays
                       readable foreground text, never tied to the fill color. */}
-                  <span className="font-mono" style={{ width: 64, textAlign: 'right', fontSize: '0.82rem', color: 'var(--text-primary)' }}>{fmt(d)}</span>
+                  <span className="font-mono w-12 shrink-0 text-right text-[0.82rem] sm:w-16" style={{ color: 'var(--text-primary)' }}>{fmt(d)}</span>
                 </div>
               );
             })}

@@ -16,16 +16,18 @@ export default function MapControls({ selectedMetric, onMetricChange }: MapContr
   const domainMid = Math.round((domainLow + domainHigh) / 2);
 
   return (
-    <div style={{
-      position: 'absolute',
-      top: 16,
-      right: 16,
-      zIndex: 10,
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 12,
-      minWidth: 220,
-    }}>
+    <div
+      className="w-[180px] sm:w-[220px]"
+      style={{
+        position: 'absolute',
+        top: 16,
+        right: 16,
+        zIndex: 10,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 12,
+      }}
+    >
       {/* Metric Selector */}
       <div className="glass-card" style={{ padding: '16px' }}>
         <div className="mb-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">

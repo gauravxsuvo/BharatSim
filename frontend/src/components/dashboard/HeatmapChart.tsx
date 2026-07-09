@@ -51,7 +51,7 @@ export default function HeatmapChart({ title, data, colorMin = '#F5F5F5', colorM
   return (
     <div className="chart-container" style={{ position: 'relative' }}>
       <div className="chart-title"><span>{title}</span></div>
-      <div style={{ overflowX: 'auto' }}>
+      <div className="table-scroll">
         <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: 3, tableLayout: 'fixed' }}>
           <thead>
             <tr>

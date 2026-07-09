@@ -102,6 +102,12 @@ export default function IndiaChoropleth({ selectedMetric, onDistrictClick }: Pro
     return { x, y, w, h };
   }, [PH]);
 
+  // Kept in sync with `view` so the native (non-passive) touch listeners
+  // below — registered once — always zoom/pan from the current viewBox
+  // instead of a stale closure.
+  const viewRef = useRef(view);
+  useEffect(() => { viewRef.current = view; }, [view]);
+
   // Native, non-passive wheel handler so we can preventDefault (no page scroll).
   useEffect(() => {
     const el = svgRef.current;
@@ -145,6 +151,84 @@ export default function IndiaChoropleth({ selectedMetric, onDistrictClick }: Pro
     }
   };
   const endDrag = () => { drag.current = null; setIsDragging(false); };
+
+  // Touch support: one finger pans, two fingers pinch-zoom anchored on the
+  // pinch midpoint (mirrors the wheel handler's pointer-anchored zoom).
+  // Registered as native, non-passive listeners — same reasoning as the
+  // wheel handler — so preventDefault reliably stops the page from
+  // scrolling/zooming under the gesture.
+  useEffect(() => {
+    const el = svgRef.current;
+    if (!el) return;
+
+    let mode: 'pan' | 'pinch' | null = null;
+    let lastTouch = { x: 0, y: 0 };
+    let startDist = 0;
+    let startView = viewRef.current;
+
+    const dist = (t: TouchList) => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+    const center = (t: TouchList, rect: DOMRect) => ({
+      x: (t[0].clientX + t[1].clientX) / 2 - rect.left,
+      y: (t[0].clientY + t[1].clientY) / 2 - rect.top,
+    });
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        mode = 'pan';
+        lastTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      } else if (e.touches.length === 2) {
+        mode = 'pinch';
+        startDist = dist(e.touches);
+        startView = viewRef.current;
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (!mode) return;
+      e.preventDefault();
+      const rect = el.getBoundingClientRect();
+
+      if (mode === 'pan' && e.touches.length === 1) {
+        const dx = ((e.touches[0].clientX - lastTouch.x) / rect.width) * viewRef.current.w;
+        const dy = ((e.touches[0].clientY - lastTouch.y) / rect.height) * viewRef.current.h;
+        lastTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        setView((v) => clampView({ ...v, x: v.x - dx, y: v.y - dy }));
+      } else if (mode === 'pinch' && e.touches.length === 2) {
+        const newDist = dist(e.touches);
+        if (newDist < 1) return;
+        const { x: cx, y: cy } = center(e.touches, rect);
+        const relX = cx / rect.width;
+        const relY = cy / rect.height;
+        const factor = startDist / newDist;
+        const nw = startView.w * factor;
+        const nh = nw * (PH / PW);
+        const pointerX = startView.x + relX * startView.w;
+        const pointerY = startView.y + relY * startView.h;
+        setView(clampView({ x: pointerX - relX * nw, y: pointerY - relY * nh, w: nw, h: nh }));
+      }
+    };
+
+    const onTouchEnd = (e: TouchEvent) => {
+      if (e.touches.length === 0) {
+        mode = null;
+      } else if (e.touches.length === 1) {
+        // Dropped from pinch to a single finger — resume as a pan from here.
+        mode = 'pan';
+        lastTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+    };
+
+    el.addEventListener('touchstart', onTouchStart, { passive: true });
+    el.addEventListener('touchmove', onTouchMove, { passive: false });
+    el.addEventListener('touchend', onTouchEnd);
+    el.addEventListener('touchcancel', onTouchEnd);
+    return () => {
+      el.removeEventListener('touchstart', onTouchStart);
+      el.removeEventListener('touchmove', onTouchMove);
+      el.removeEventListener('touchend', onTouchEnd);
+      el.removeEventListener('touchcancel', onTouchEnd);
+    };
+  }, [PH, clampView]);
 
   const hoveredPath = hoverId != null ? paths[hoverId] : null;
   const metricLabel = metric.label;
@@ -201,7 +285,7 @@ export default function IndiaChoropleth({ selectedMetric, onDistrictClick }: Pro
         onMouseDown={onMouseDown}
         onMouseUp={endDrag}
         onMouseLeave={() => { setHoverId(null); setMouse(null); endDrag(); }}
-        style={{ display: 'block', cursor: isDragging ? 'grabbing' : 'grab' }}
+        style={{ display: 'block', cursor: isDragging ? 'grabbing' : 'grab', touchAction: 'none' }}
       >
         {mesh}
         {hoveredPath && (
@@ -229,10 +313,13 @@ export default function IndiaChoropleth({ selectedMetric, onDistrictClick }: Pro
         <RotateCcw size={18} strokeWidth={1.5} />
       </button>
 
-      {/* Offline / self-contained badge */}
-      <div className="absolute top-4 left-4 z-[15] flex items-center gap-2 border border-white/40 px-3 py-1.5 font-mono text-xs uppercase tracking-widest text-white">
-        <span className="h-1.5 w-1.5 bg-white animate-pulse" />
-        {geojson.features.length} districts · drag &amp; scroll to zoom
+      {/* Offline / self-contained badge — pushed below the mobile hamburger
+          button (also anchored top-4 left-4, but viewport-fixed) so the two
+          don't stack on top of each other on small screens. */}
+      <div className="absolute top-16 left-4 z-[15] flex max-w-[160px] items-center gap-2 border border-white/40 px-3 py-1.5 font-mono text-xs uppercase tracking-widest text-white sm:max-w-none md:top-4">
+        <span className="h-1.5 w-1.5 shrink-0 bg-white animate-pulse" />
+        <span className="truncate">{geojson.features.length} districts</span>
+        <span className="hidden shrink-0 sm:inline">· drag/pinch to zoom</span>
       </div>
     </div>
   );

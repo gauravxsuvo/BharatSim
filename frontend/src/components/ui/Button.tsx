@@ -10,7 +10,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: Size;
 }
 
-const BASE = 'inline-flex items-center justify-center gap-2 font-mono uppercase tracking-widest transition-colors duration-100 disabled:opacity-40 disabled:cursor-not-allowed';
+const BASE = 'inline-flex items-center justify-center gap-2 font-mono uppercase tracking-widest transition-[background-color,color,transform] duration-150 ease-out active:scale-[0.97] disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100';
 
 const SIZES: Record<Size, string> = {
   sm: 'px-3.5 py-1.5 text-xs',

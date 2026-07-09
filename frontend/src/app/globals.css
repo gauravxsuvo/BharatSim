@@ -41,497 +41,637 @@
   --shadow-lg: none;
   --shadow-xl: none;
   --shadow-2xl: none;
+
+  --ease-editorial: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ========== Base ==========
+   Everything below lives inside Tailwind's own `base` layer. This matters:
+   unlayered CSS always wins the cascade over ANY @layer content regardless
+   of specificity or source order, so a bare `h1 { font-size: ... }` here
+   would silently defeat every `text-*`/`md:text-*` utility applied to an
+   <h1> anywhere in the app. Keeping element-selector defaults inside
+   @layer base lets a plain Tailwind class on the element override them,
+   same as Tailwind's own preflight is designed to work. */
 @layer base {
+  :root {
+    --bg-primary: var(--color-background);
+    --bg-secondary: var(--color-muted);
+    --bg-card: var(--color-card);
+    --bg-card-hover: var(--color-card);
+    --accent-primary: var(--color-foreground);
+    --accent-secondary: var(--color-foreground);
+    --accent-warning: var(--color-foreground);
+    --accent-danger: var(--color-foreground);
+    --accent-info: var(--color-foreground);
+    --text-primary: var(--color-foreground);
+    --text-secondary: var(--color-muted-foreground);
+    --text-muted: var(--color-muted-foreground);
+    --border-color: var(--color-border);
+    --glass-bg: var(--color-muted);
+    --glass-border: var(--color-foreground);
+    --shadow-glow: none;
+    --radius-sm: 0px;
+    --radius-md: 0px;
+    --radius-lg: 0px;
+    --sidebar-width: 260px;
+    --header-height: 64px;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    font-size: var(--text-4xl);
+    line-height: 1.1;
+  }
+  h2 {
+    font-size: var(--text-3xl);
+    line-height: 1.15;
+  }
+  h3 {
+    font-size: var(--text-2xl);
+    line-height: 1.2;
+  }
+  h4 {
+    font-size: var(--text-xl);
+    line-height: 1.3;
+  }
+
+  p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  small {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  code,
+  pre {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+
+  code {
+    background: var(--bg-secondary);
+    padding: 2px 6px;
+    color: var(--color-foreground);
+  }
+
+  pre {
+    background: var(--bg-secondary);
+    padding: 16px;
+    border: 1px solid var(--border-color);
+    overflow-x: auto;
+    line-height: 1.6;
+  }
+
+  a {
+    color: var(--color-foreground);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    transition: text-decoration-color 0.15s var(--ease-editorial);
+  }
+
+  a:hover {
+    text-decoration-color: currentColor;
+  }
+
   :focus-visible {
     outline: 2px solid var(--color-foreground);
     outline-offset: 2px;
   }
-}
-
-/* ========== Reset ========== */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-/* ========== Legacy token aliases ==========
-   The component classes below predate the Tailwind token system and are
-   kept deliberately (see rebrand plan, "Phase 1") — most of the app's
-   visual identity flows through these ~20 shared classes, so re-pointing
-   them at the tokens above re-themes every consumer without touching
-   its JSX. New work (Button/Card/Input/SeverityBadge/Sidebar/Header)
-   is written in plain Tailwind utilities instead of adding to this list. */
-:root {
-  --bg-primary: var(--color-background);
-  --bg-secondary: var(--color-muted);
-  --bg-card: var(--color-card);
-  --bg-card-hover: var(--color-card);
-  --accent-primary: var(--color-foreground);
-  --accent-secondary: var(--color-foreground);
-  --accent-warning: var(--color-foreground);
-  --accent-danger: var(--color-foreground);
-  --accent-info: var(--color-foreground);
-  --text-primary: var(--color-foreground);
-  --text-secondary: var(--color-muted-foreground);
-  --text-muted: var(--color-muted-foreground);
-  --border-color: var(--color-border);
-  --glass-bg: var(--color-muted);
-  --glass-border: var(--color-foreground);
-  --shadow-glow: none;
-  --radius-sm: 0px;
-  --radius-md: 0px;
-  --radius-lg: 0px;
-  --sidebar-width: 260px;
-  --header-height: 64px;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: var(--font-body);
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  line-height: 1.6;
-}
-
-/* ========== Typography ========== */
-h1, h2, h3, h4 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-h1 { font-size: var(--text-4xl); line-height: 1.1; }
-h2 { font-size: var(--text-3xl); line-height: 1.15; }
-h3 { font-size: var(--text-2xl); line-height: 1.2; }
-h4 { font-size: var(--text-xl); line-height: 1.3; }
-
-p {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-small {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-code, pre {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-}
-
-code {
-  background: var(--bg-secondary);
-  padding: 2px 6px;
-  color: var(--color-foreground);
-}
-
-pre {
-  background: var(--bg-secondary);
-  padding: 16px;
-  border: 1px solid var(--border-color);
-  overflow-x: auto;
-  line-height: 1.6;
-}
-
-a {
-  color: var(--color-foreground);
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  transition: text-decoration-color 0.1s ease;
-}
-
-a:hover {
-  text-decoration-color: currentColor;
-}
-
-/* ========== Glass Card (retained name, monochrome implementation) ========== */
-.glass-card {
-  background: var(--bg-card);
-  border: 1px solid var(--color-foreground);
-  padding: 24px;
-  transition: border-width 0.1s ease;
-}
-
-.glass-card:hover {
-  border-width: 2px;
-}
-
-/* ========== Layout ========== */
-/* .sidebar is position:fixed (viewport-relative), so it never
-   participates in .app-layout's box flow — the content pane is
-   offset with margin-left instead of a grid column. */
-.app-layout {
-  min-height: 100vh;
-}
-
-.main-content {
-  margin-left: var(--sidebar-width);
-  padding: 32px;
-  overflow-y: auto;
-  max-height: 100vh;
-}
-
-/* ========== Stat Cards ========== */
-.stat-card {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.stat-value {
-  font-family: var(--font-mono);
-  font-size: 2rem;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
-}
-
-.stat-label {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-}
-
-.stat-trend {
-  font-size: 0.8rem;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-weight: 600;
-  color: var(--color-foreground);
-}
-
-/* ========== Grids ========== */
-.grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.grid-4 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-
-/* ========== Tables ========== */
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.9rem;
-}
-
-.data-table th {
-  text-align: left;
-  padding: 12px 16px;
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-weight: 500;
-  border-bottom: 2px solid var(--color-foreground);
-  text-transform: uppercase;
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-}
-
-.data-table td {
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.data-table tbody tr:hover {
-  background: var(--bg-secondary);
-}
-
-/* ========== Charts ========== */
-.chart-container {
-  background: var(--bg-card);
-  border: 1px solid var(--color-foreground);
-  padding: 24px;
-  transition: border-width 0.1s ease;
-}
-
-.chart-container:hover {
-  border-width: 2px;
-}
-
-.chart-title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* ========== Scrollbar ========== */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--text-muted);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-foreground);
-}
-
-/* ========== Animations ========== */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200px 0; }
-  100% { background-position: calc(200px + 100%) 0; }
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.5s ease both;
-}
-
-.animate-slideUp {
-  animation: slideUp 0.5s ease both;
-}
-
-/* ========== Loading Skeleton ========== */
-.skeleton {
-  background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--color-border) 50%, var(--bg-secondary) 75%);
-  background-size: 200px 100%;
-  animation: shimmer 1.5s infinite;
-  height: 20px;
-}
-
-/* ========== Chat Styles ========== */
-.chat-messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.chat-input-bar {
-  display: flex;
-  gap: 12px;
-  padding: 20px;
-  border-top: 2px solid var(--color-foreground);
-  background: var(--bg-secondary);
-}
-
-.suggested-chips {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  padding: 16px 20px;
-}
-
-.chip {
-  padding: 8px 16px;
-  border: 1px solid var(--color-foreground);
-  background: var(--color-background);
-  color: var(--color-foreground);
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  cursor: pointer;
-  transition: background-color 0.1s ease, color 0.1s ease;
-  white-space: nowrap;
-}
-
-.chip:hover {
-  background: var(--color-foreground);
-  color: var(--color-background);
-}
-
-.typing-indicator {
-  display: flex;
-  gap: 4px;
-  padding: 4px 0;
-}
-
-.typing-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--color-foreground);
-  animation: typingBounce 1.4s infinite;
-}
-
-.typing-dot:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.typing-dot:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-@keyframes typingBounce {
-  0%, 60%, 100% { transform: translateY(0); }
-  30% { transform: translateY(-6px); }
-}
-
-/* ========== Simulation Styles ========== */
-.sim-types-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
-}
-
-.sim-card {
-  background: var(--color-background);
-  color: var(--color-foreground);
-  border: 1px solid var(--color-foreground);
-  cursor: pointer;
-  transition: background-color 0.1s ease, color 0.1s ease;
-}
-
-.sim-card:hover,
-.sim-card.selected {
-  background: var(--color-foreground);
-  color: var(--color-background);
-}
-
-.sim-card:hover .sim-card-desc,
-.sim-card.selected .sim-card-desc {
-  color: var(--color-background);
-}
-
-.sim-card-title {
-  font-family: var(--font-mono);
-  font-size: 1rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin-bottom: 4px;
-}
-
-.sim-card-desc {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  line-height: 1.4;
-  transition: color 0.1s ease;
-}
-
-.param-slider {
-  margin-bottom: 16px;
-}
-
-.param-label {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 6px;
-  font-size: 0.85rem;
-}
-
-.param-value {
-  color: var(--color-foreground);
-  font-weight: 600;
-  font-family: var(--font-mono);
-}
-
-input[type='range'] {
-  width: 100%;
-  -webkit-appearance: none;
-  appearance: none;
-  height: 2px;
-  background: var(--color-border);
-  outline: none;
-}
-
-input[type='range']::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 14px;
-  height: 14px;
-  background: var(--color-foreground);
-  cursor: pointer;
-  transition: transform 0.1s ease;
-  border: none;
-}
-
-input[type='range']::-webkit-slider-thumb:hover {
-  transform: scale(1.3);
-}
-
-input[type='range']::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  background: var(--color-foreground);
-  cursor: pointer;
-  border: none;
-}
-
-/* ========== Mapbox GL opt-in path ==========
-   Only loaded when a user supplies their own NEXT_PUBLIC_MAPBOX_TOKEN.
-   Mapbox's shipped mapbox-gl.css hardcodes its own border-radii and an
-   #1da1f2 (Twitter blue) share-control color — this scoped override is
-   the accepted exception documented in the rebrand plan, since a fully
-   custom Mapbox Studio style is out of scope. */
-.mapboxgl-ctrl-group,
-.mapboxgl-ctrl-group button,
-.mapboxgl-popup-content,
-.mapboxgl-ctrl-attrib {
-  border-radius: 0 !important;
-}
-
-.mapboxgl-ctrl-group {
-  border: 1px solid var(--color-foreground) !important;
-  box-shadow: none !important;
-}
-
-.mapboxgl-ctrl-attrib-button,
-.mapboxgl-ctrl-attrib a {
-  color: var(--color-foreground) !important;
-}
 
-/* ========== Responsive ========== */
-@media (max-width: 1024px) {
-  .grid-4 {
-    grid-template-columns: repeat(2, 1fr);
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--text-muted);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-foreground);
+  }
+}
+
+/* ========== Components ==========
+   Legacy token aliases + the ~20 shared component classes the app's visual
+   identity flows through (see rebrand plan, "Phase 1"). New work
+   (Button/Card/Input/SeverityBadge/Sidebar/Header) is written in plain
+   Tailwind utilities instead of adding to this list. */
+@layer components {
+  /* ---------- Glass Card ---------- */
+  .glass-card {
+    background: var(--bg-card);
+    border: 1px solid var(--color-foreground);
+    padding: 24px;
+    transition: box-shadow 0.15s var(--ease-editorial);
+  }
+
+  /* An inset ring layered on top of the existing border reads as a
+     thicker border on hover, without animating `border-width` itself —
+     that would trigger layout on every frame and nudge inner content by
+     a pixel each way. box-shadow is paint-only, so nothing shifts. */
+  .glass-card:hover {
+    box-shadow: inset 0 0 0 1px var(--color-foreground);
+  }
+
+  @media (max-width: 767px) {
+    .glass-card {
+      padding: 18px;
+    }
+  }
+
+  /* ---------- Layout ----------
+     .sidebar is position:fixed (viewport-relative), so it never
+     participates in .app-layout's box flow — the content pane is offset
+     with margin-left instead of a grid column. Page padding lives on a
+     per-page shell (see .page-shell) rather than here, so full-bleed
+     pages (map, chat) don't need to fight it with negative margins. */
+  .app-layout {
+    min-height: 100vh;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+  }
+
+  .page-shell {
+    padding: 16px;
+    padding-top: 72px;
+  }
+
+  @media (min-width: 768px) {
+    .main-content {
+      margin-left: var(--sidebar-width);
+    }
+    .page-shell {
+      padding: 32px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .main-content {
+      margin-left: 0;
+    }
+  }
+
+  /* ---------- Stat Cards ---------- */
+  .stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .stat-value {
+    font-family: var(--font-mono);
+    font-size: clamp(1.5rem, 1.1rem + 1.5vw, 2rem);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .stat-trend {
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+    color: var(--color-foreground);
+  }
+
+  /* ---------- Grids ----------
+     auto-fit + minmax reflows continuously across every viewport width
+     instead of jumping between two or three fixed breakpoints, so
+     in-between sizes (foldables, split-screen tablets, small laptops)
+     get a sensible column count too. */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+    gap: 20px;
   }
 
   .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    gap: 20px;
+  }
+
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    gap: 20px;
+  }
+
+  @media (max-width: 767px) {
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+      gap: 14px;
+    }
+  }
+
+  /* ---------- Tables ---------- */
+  .table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  .data-table th {
+    text-align: left;
+    padding: 12px 16px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    border-bottom: 2px solid var(--color-foreground);
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  .data-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+  }
+
+  .data-table tbody tr {
+    transition: background-color 0.15s var(--ease-editorial);
+  }
+
+  .data-table tbody tr:hover {
+    background: var(--bg-secondary);
+  }
+
+  /* ---------- Charts ---------- */
+  .chart-container {
+    background: var(--bg-card);
+    border: 1px solid var(--color-foreground);
+    padding: 24px;
+    transition: box-shadow 0.15s var(--ease-editorial);
+  }
+
+  .chart-container:hover {
+    box-shadow: inset 0 0 0 1px var(--color-foreground);
+  }
+
+  @media (max-width: 767px) {
+    .chart-container {
+      padding: 16px;
+    }
+  }
+
+  .chart-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* ---------- Animations ---------- */
+  .animate-fadeIn {
+    animation: fadeIn 0.4s var(--ease-editorial) both;
+  }
+
+  .animate-slideUp {
+    animation: slideUp 0.4s var(--ease-editorial) both;
+  }
+
+  /* ---------- Loading Skeleton ---------- */
+  .skeleton {
+    background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--color-border) 50%, var(--bg-secondary) 75%);
+    background-size: 200px 100%;
+    animation: shimmer 1.5s infinite;
+    height: 20px;
+  }
+
+  /* ---------- Chat Styles ---------- */
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .chat-input-bar {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    border-top: 2px solid var(--color-foreground);
+    background: var(--bg-secondary);
+  }
+
+  @media (min-width: 768px) {
+    .chat-input-bar {
+      padding: 20px 32px;
+    }
+  }
+
+  .suggested-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .suggested-chips {
+      padding: 16px 32px 20px;
+    }
+  }
+
+  .chip {
+    padding: 8px 16px;
+    border: 1px solid var(--color-foreground);
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: background-color 0.15s var(--ease-editorial), color 0.15s var(--ease-editorial), transform 0.1s var(--ease-editorial);
+    /* Full sentences (suggested questions) need to wrap on narrow
+       viewports — nowrap here would make a single chip wider than the
+       screen, which flex-wrap on the parent can't fix since the
+       overflow is the item's own min-content width, not the row's. */
+    white-space: normal;
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .chip:hover {
+    background: var(--color-foreground);
+    color: var(--color-background);
+  }
+
+  .chip:active {
+    transform: scale(0.96);
+  }
+
+  .typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 4px 0;
+  }
+
+  .typing-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--color-foreground);
+    animation: typingBounce 1.4s infinite;
+  }
+
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  /* ---------- Simulation Styles ---------- */
+  .sim-types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+    gap: 16px;
+  }
+
+  .sim-card {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    border: 1px solid var(--color-foreground);
+    cursor: pointer;
+    transition: background-color 0.15s var(--ease-editorial), color 0.15s var(--ease-editorial);
+  }
+
+  .sim-card:hover,
+  .sim-card.selected {
+    background: var(--color-foreground);
+    color: var(--color-background);
+  }
+
+  .sim-card:active {
+    transform: scale(0.99);
+  }
+
+  .sim-card:hover .sim-card-desc,
+  .sim-card.selected .sim-card-desc {
+    color: var(--color-background);
+  }
+
+  .sim-card-title {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  .sim-card-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    transition: color 0.15s var(--ease-editorial);
+  }
+
+  .param-slider {
+    margin-bottom: 16px;
+  }
+
+  .param-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+  }
+
+  .param-value {
+    color: var(--color-foreground);
+    font-weight: 600;
+    font-family: var(--font-mono);
+  }
+
+  input[type='range'] {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 2px;
+    background: var(--color-border);
+    outline: none;
+    touch-action: pan-y;
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-foreground);
+    cursor: pointer;
+    transition: transform 0.15s var(--ease-editorial);
+    border: none;
+  }
+
+  input[type='range']::-webkit-slider-thumb:hover,
+  input[type='range']::-webkit-slider-thumb:active {
+    transform: scale(1.3);
+  }
+
+  input[type='range']::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-foreground);
+    cursor: pointer;
+    border: none;
+    transition: transform 0.15s var(--ease-editorial);
+  }
+
+  input[type='range']::-moz-range-thumb:hover,
+  input[type='range']::-moz-range-thumb:active {
+    transform: scale(1.3);
+  }
+
+  /* ---------- Mapbox GL opt-in path ----------
+     Only loaded when a user supplies their own NEXT_PUBLIC_MAPBOX_TOKEN.
+     Mapbox's shipped mapbox-gl.css hardcodes its own border-radii and an
+     #1da1f2 (Twitter blue) share-control color — this scoped override is
+     the accepted exception documented in the rebrand plan, since a fully
+     custom Mapbox Studio style is out of scope. */
+  .mapboxgl-ctrl-group,
+  .mapboxgl-ctrl-group button,
+  .mapboxgl-popup-content,
+  .mapboxgl-ctrl-attrib {
+    border-radius: 0 !important;
+  }
+
+  .mapboxgl-ctrl-group {
+    border: 1px solid var(--color-foreground) !important;
+    box-shadow: none !important;
+  }
+
+  .mapboxgl-ctrl-attrib-button,
+  .mapboxgl-ctrl-attrib a {
+    color: var(--color-foreground) !important;
   }
 }
 
-@media (max-width: 768px) {
-  .main-content {
-    margin-left: 0;
-    padding: 16px;
-    padding-top: 64px;
+/* ========== Keyframes ========== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
+  to {
+    opacity: 1;
+  }
+}
 
-  .grid-2,
-  .grid-3,
-  .grid-4 {
-    grid-template-columns: 1fr;
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes typingBounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-6px);
   }
 }

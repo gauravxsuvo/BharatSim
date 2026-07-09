@@ -38,8 +38,8 @@ export default function ResultsPanel({ results, simulationName, onReset }: Resul
   return (
     <div className="animate-slideUp">
       {/* Summary bar */}
-      <div className="glass-card" style={{ marginBottom: 20, padding: '20px 28px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+      <div className="glass-card mb-5 flex flex-col gap-4 p-5 sm:p-7">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h2 className="font-display text-xl font-bold">{simulationName || 'Simulation Results'}</h2>
             <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: 2 }}>
@@ -50,7 +50,7 @@ export default function ResultsPanel({ results, simulationName, onReset }: Resul
             ← New Simulation
           </Button>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
           <div className="stat-card">
             <div className="stat-label">Avg Value</div>
             <div className="stat-value" style={{ fontSize: '1.5rem' }}>{avgValue}</div>
@@ -69,7 +69,7 @@ export default function ResultsPanel({ results, simulationName, onReset }: Resul
       </div>
 
       {/* Results table */}
-      <div className="glass-card" style={{ overflow: 'auto' }}>
+      <div className="glass-card table-scroll">
         <table className="data-table">
           <thead>
             <tr>

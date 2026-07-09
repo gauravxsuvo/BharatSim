@@ -68,16 +68,24 @@ Tests run against an in-memory SQLite engine (`tests/conftest.py`), independent 
 
 **Config**: `app/config.py` is a single pydantic-settings `Settings` object reading `backend/.env` (see that file for the full annotated list of sample-vs-live toggles: `DATABASE_URL`, `OPENAI_API_KEY`, `USE_LIVE_DATA`/`OPENWEATHER_API_KEY`, `MAPBOX_TOKEN`, `ML_MODELS_DIR`, `CORS_ORIGINS`).
 
+**`CORS_ORIGINS` is deliberately typed `str`, not `list[str]`.** pydantic-settings parses env vars for a `list[str]` field as strict JSON and hard-fails startup on anything else — but dashboards like Render's store env vars as plain text, so a value like `https://foo.vercel.app` (no brackets/quotes) would crash the app rather than just failing to match. `settings.cors_origins_list` parses either JSON-array or comma-separated form; use that property, never `settings.CORS_ORIGINS` directly, when passing origins to `CORSMiddleware`. Separately, `app/main.py` also sets `allow_origin_regex=r"https://.*\.vercel\.app"` so any Vercel preview/production origin works even if `CORS_ORIGINS` was never updated after a frontend redeploy — don't remove this without giving deploys another way to stay in sync, since forgetting to update `CORS_ORIGINS` after connecting a new frontend URL is exactly what breaks simulations in production (manifests as `OPTIONS ... 400 Bad Request` in the Render logs).
+
 **Migrations**: Alembic is set up (`backend/alembic/`), but `app/database.py`'s `init_db()` currently just does `Base.metadata.create_all(checkfirst=True)` on startup for dev bootstrapping — use Alembic migrations for anything production-bound.
 
 ## Frontend architecture
 
 - `src/app/` — route pages: `/` (map/home), `/dashboard`, `/simulation`, `/assistant`.
 - `src/components/{map,dashboard,simulation,assistant,ui}/` — feature-grouped components (e.g. `map/IndiaChoropleth.tsx`, `map/IndiaMap.tsx` for the offline vector map vs. Mapbox GL upgrade path).
-- `src/hooks/` — data-fetching hooks (`useDashboard`, `useMapData`, `useSimulation`) wrapping `src/lib/api.ts`.
+- `src/hooks/` — data-fetching hooks (`useDashboard`, `useMapData`, `useSimulation`) wrapping `src/lib/api.ts`. **Not currently wired into any page** — Dashboard/Simulation/Assistant each call `fetch`/`loadIndiaDistricts` inline with their own demo-data fallback instead. Don't assume editing a hook affects the UI; grep for actual usage first.
 - `src/lib/api.ts` — single `api` object with typed methods per backend resource (`districts`, `dashboard`, `simulations`, `models`, `assistant`); all requests go through one `fetchAPI` helper hitting `NEXT_PUBLIC_API_URL` (default `http://localhost:8000`). Add new backend endpoints here rather than calling `fetch` ad hoc from components.
 - `src/lib/constants.ts` — the four simulation types and their tunable parameter schemas (`SIMULATION_TYPES`), dashboard `METRICS`, and `SEVERITY_COLORS`. This is the frontend's mirror of each simulator's `parameter_schema` on the backend — keep them in sync when a simulation module's parameters change.
 - Map basemap and AI assistant both have hardcoded/offline fallbacks and upgrade to live services purely based on env vars (`NEXT_PUBLIC_MAPBOX_TOKEN`, backend's `OPENAI_API_KEY`) — see README's mode table.
+
+### `globals.css` cascade layers — do not add unlayered rules
+Every custom rule in `src/app/globals.css` lives inside `@layer base` or `@layer components`. This is load-bearing, not stylistic: per the CSS cascade-layers spec, styles written *outside* any `@layer` always win over *any* `@layer` content — including Tailwind's own utilities — regardless of specificity or source order. A bare `h1 { font-size: ... }` added outside a layer would silently defeat every `text-*`/`md:text-*` class applied to an `<h1>` anywhere in the app (this exact bug shipped for a while — headings/paragraphs across the site were stuck at one size no matter what Tailwind class was written on them). When adding any bare element-selector or `.class` rule to this file, put it inside the appropriate `@layer` block, or a plain Tailwind utility applied in JSX will mysteriously do nothing.
+
+### Full-bleed vs. padded pages
+`.main-content` (in `layout.tsx`) carries no padding of its own — only `margin-left` for the fixed sidebar. Pages that want the standard padded look add the `page-shell` class to their root element (see `dashboard/page.tsx`, `simulation/page.tsx`). Pages that need to fill the viewport edge-to-edge (`/` map, `/assistant` chat) skip `page-shell` and size themselves with `h-dvh` instead. Don't reintroduce manual `margin: -32px` / `calc(100vh - 64px)` full-bleed hacks on a page — they assumed padding/header values that drift out of sync with the mobile breakpoint and were a real source of horizontal overflow on phones.
 
 ### Important: non-standard Next.js version
 `frontend/AGENTS.md` (loaded as `frontend/CLAUDE.md`) flags that this project's Next.js version has breaking changes vs. training data — **check `node_modules/next/dist/docs/` for the relevant guide before writing Next.js code**, and heed deprecation notices. Package versions of note: Next.js 16.2.9, React 19.2.4, Tailwind 4.

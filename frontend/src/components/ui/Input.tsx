@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, SelectHTMLAttributes, Ref } from 'react';
 
-const FIELD_CLASSES = 'w-full bg-transparent border-0 border-b-2 border-foreground py-2 font-body text-base text-foreground focus:border-b-4 focus:outline-none transition-[border-width] duration-100';
+const FIELD_CLASSES = 'w-full bg-transparent border-0 border-b-2 border-foreground py-2 font-body text-base text-foreground focus:border-b-4 focus:outline-none transition-[border-width] duration-150 ease-out';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   ref?: Ref<HTMLInputElement>;

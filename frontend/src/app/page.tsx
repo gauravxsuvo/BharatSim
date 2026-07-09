@@ -22,7 +22,7 @@ export default function MapPage() {
   const handleDistrictClick = useCallback((district: DistrictMetrics) => setSelectedDistrict(district), []);
 
   return (
-    <div style={{ position: 'relative', height: 'calc(100vh - 64px)', margin: '-32px', overflow: 'hidden' }}>
+    <div className="relative h-dvh w-full overflow-hidden">
       <IndiaMap
         selectedMetric={selectedMetric}
         onDistrictClick={handleDistrictClick}

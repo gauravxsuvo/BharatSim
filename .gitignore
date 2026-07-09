@@ -34,3 +34,5 @@ Thumbs.db
 
 # Node (frontend has its own .gitignore too)
 node_modules/
+
+CLAUDE.md

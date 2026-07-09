@@ -94,11 +94,13 @@ Deploy to get a public URL for the app.
 
 ### Connect the two
 
-Back in Render, set `CORS_ORIGINS` to a JSON array containing your Vercel URL:
+The backend already allows any `*.vercel.app` origin (production and PR previews) automatically, so simulations work out of the box even before you touch `CORS_ORIGINS`. If you later attach a custom domain to the frontend, add it in Render as a plain value or comma-separated list:
 
 ```
-["https://your-app.vercel.app"]
+CORS_ORIGINS=https://your-app.vercel.app,https://your-custom-domain.com
 ```
+
+(A JSON array like `["https://your-app.vercel.app"]` also still works.)
 
 Both platforms auto-redeploy on every push to `main`.
 

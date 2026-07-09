@@ -32,7 +32,12 @@ app = FastAPI(
 # ---------------------------------------------------------------------------
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,
+    allow_origins=settings.cors_origins_list,
+    # Safety net: any Vercel deployment (production or per-branch preview)
+    # is allowed automatically, so forgetting to update CORS_ORIGINS after
+    # a redeploy — or a preview URL that only exists for one PR — doesn't
+    # take the API down for the frontend.
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

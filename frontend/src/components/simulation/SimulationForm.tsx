@@ -51,8 +51,8 @@ export default function SimulationForm({ simulationType, onSubmit, onCancel, loa
   const Icon = simulationType.icon;
 
   return (
-    <form onSubmit={handleSubmit} className="glass-card animate-slideUp" style={{ padding: 28 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+    <form onSubmit={handleSubmit} className="glass-card animate-slideUp p-5 sm:p-7">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <h2 className="font-display flex items-center gap-3 text-2xl font-bold">
           <Icon size={28} strokeWidth={1.5} />
           {simulationType.label}
@@ -62,7 +62,7 @@ export default function SimulationForm({ simulationType, onSubmit, onCancel, loa
         </Button>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 24 }}>
+      <div className="mb-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
         {/* Name */}
         <div>
           <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: 6 }}>Simulation Name</label>
@@ -87,7 +87,7 @@ export default function SimulationForm({ simulationType, onSubmit, onCancel, loa
       {/* Parameters */}
       <div style={{ marginBottom: 24 }}>
         <h3 style={{ fontSize: '0.95rem', marginBottom: 16, color: 'var(--text-secondary)' }}>Simulation Parameters</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           {simulationType.params.map(param => (
             <div key={param.key} className="param-slider">
               <div className="param-label">
@@ -116,13 +116,13 @@ export default function SimulationForm({ simulationType, onSubmit, onCancel, loa
         <h3 style={{ fontSize: '0.95rem', marginBottom: 12, color: 'var(--text-secondary)' }}>
           Districts ({selectedDistricts.length} selected)
         </h3>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-5">
           {DEMO_DISTRICTS.map(d => {
             const active = selectedDistricts.includes(d.id);
             return (
               <label
                 key={d.id}
-                className="flex cursor-pointer items-center gap-2 border px-2.5 py-2 text-sm transition-colors duration-100"
+                className="flex cursor-pointer items-center gap-2 border px-2.5 py-2 text-sm transition-colors duration-150"
                 style={{
                   borderColor: '#000000',
                   background: active ? '#000000' : 'transparent',

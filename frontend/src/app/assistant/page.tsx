@@ -75,8 +75,8 @@ export default function AssistantPage() {
   };
 
   return (
-    <div className="animate-fadeIn flex flex-col" style={{ height: 'calc(100vh - 64px)', margin: '-32px' }}>
-      <div style={{ padding: '24px 32px 0' }}>
+    <div className="animate-fadeIn flex h-dvh flex-col">
+      <div className="px-4 pt-16 pb-0 md:px-8 md:pt-8">
         <Header title="AI Assistant" subtitle="Powered by GPT-4o — specialized in Indian climate data">
           {messages.length > 0 && (
             <Button variant="secondary" size="sm" onClick={() => setMessages([])}>
@@ -88,7 +88,7 @@ export default function AssistantPage() {
 
       {/* Suggested questions */}
       {messages.length === 0 && (
-        <div className="suggested-chips" style={{ padding: '0 32px 20px' }}>
+        <div className="suggested-chips md:px-8">
           {SUGGESTED_QUESTIONS.map((q, i) => (
             <button key={i} className="chip" id={`chip-${i}`} onClick={() => sendMessage(q)}>
               {q}
@@ -98,12 +98,12 @@ export default function AssistantPage() {
       )}
 
       {/* Chat window */}
-      <div style={{ flex: 1, overflow: 'hidden', padding: '0 12px' }}>
+      <div className="min-h-0 flex-1 overflow-hidden px-1 sm:px-3">
         <ChatWindow messages={messages} loading={loading} />
       </div>
 
       {/* Input bar */}
-      <div className="chat-input-bar" style={{ padding: '16px 32px' }}>
+      <div className="chat-input-bar">
         <Input
           id="chat-input"
           ref={inputRef}

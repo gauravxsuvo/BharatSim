@@ -9,7 +9,9 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.7
-      # Update this after the frontend is deployed — must list the exact
-      # Vercel origin(s) that will call this API (JSON array syntax).
+      # Any *.vercel.app origin (production + PR previews) is allowed
+      # automatically as a fallback, so this only needs updating if you
+      # attach a custom domain to the frontend. Comma-separated or a JSON
+      # array both work.
       - key: CORS_ORIGINS
-        value: '["http://localhost:3000"]'
+        value: "http://localhost:3000"

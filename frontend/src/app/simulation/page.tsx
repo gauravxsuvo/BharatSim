@@ -77,7 +77,7 @@ export default function SimulationPage() {
   };
 
   return (
-    <div className="animate-fadeIn">
+    <div className="page-shell animate-fadeIn">
       <Header title="Simulation Engine" subtitle="Model environmental impacts across Indian districts">
         {phase !== 'idle' && (
           <Button variant="secondary" size="sm" onClick={() => { setPhase('idle'); setSelectedType(null); }}>

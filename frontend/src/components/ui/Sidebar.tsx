@@ -42,7 +42,7 @@ export default function Sidebar() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className={`flex items-center gap-3 px-3 py-2.5 text-sm transition-colors duration-100 ${
+                  className={`flex items-center gap-3 px-3 py-2.5 text-sm transition-colors duration-150 ease-out active:scale-[0.98] ${
                     active ? 'bg-foreground text-background' : 'text-foreground hover:bg-muted'
                   }`}
                 >
